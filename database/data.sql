@@ -2,15 +2,14 @@
 -- This script contains INSERT statements for populating tables with seed data
 -- *****************************************************************************
 
-BEGIN;
 
 -- TEST 
 
 -- flyer_users -- 
-INSERT INTO flyer_user (first_name, last_name, password, salt, user_id, email) VALUES ('Hayden', 'Thompson', 'byXr2Bu18+NoGlGHT3AczA==', 'YnrgCxHq3NS8RQ79qZP6h5vYu+wkyIFqRQ2mCC4zxjHdlAPoh+cJiMECMv7q95pRW8pTbe/LPv8EtVj6W5eUN//YKTICZ1MA6IKkdDlt16x5uyAubpH0CjAOUIJV8WaxYQKze9acfD6pZaQPr6NC7pgYfMWFqODCK+x2c9CcbhI=', 'mhaydent', 'hayden@techelevator.com');
-INSERT INTO flyer_user (first_name, last_name, password, salt, user_id, email) VALUES ('Kevin', 'Glick', 'byXr2Bu18+NoGlGHT3AczA==', 'YnrgCxHq3NS8RQ79qZP6h5vYu+wkyIFqRQ2mCC4zxjHdlAPoh+cJiMECMv7q95pRW8pTbe/LPv8EtVj6W5eUN//YKTICZ1MA6IKkdDlt16x5uyAubpH0CjAOUIJV8WaxYQKze9acfD6pZaQPr6NC7pgYfMWFqODCK+x2c9CcbhI=', 'keving', 'kevin@techelevator.com');
-INSERT INTO flyer_user (first_name, last_name, password, salt, user_id, email) VALUES ('Jonathan', 'Funk', 'byXr2Bu18+NoGlGHT3AczA==', 'YnrgCxHq3NS8RQ79qZP6h5vYu+wkyIFqRQ2mCC4zxjHdlAPoh+cJiMECMv7q95pRW8pTbe/LPv8EtVj6W5eUN//YKTICZ1MA6IKkdDlt16x5uyAubpH0CjAOUIJV8WaxYQKze9acfD6pZaQPr6NC7pgYfMWFqODCK+x2c9CcbhI=', 'jfunk', 'funk@techelevator.com');
-INSERT INTO flyer_user (first_name, last_name, password, salt, user_id, email) VALUES ('Sean', 'Jenkins', 'byXr2Bu18+NoGlGHT3AczA==', 'YnrgCxHq3NS8RQ79qZP6h5vYu+wkyIFqRQ2mCC4zxjHdlAPoh+cJiMECMv7q95pRW8pTbe/LPv8EtVj6W5eUN//YKTICZ1MA6IKkdDlt16x5uyAubpH0CjAOUIJV8WaxYQKze9acfD6pZaQPr6NC7pgYfMWFqODCK+x2c9CcbhI=', 'sjenkins', 'sean@techelevator.com');
+INSERT INTO flyer_user (first_name, last_name, password, salt, user_name, email) VALUES ('Hayden', 'Thompson', 'byXr2Bu18+NoGlGHT3AczA==', 'YnrgCxHq3NS8RQ79qZP6h5vYu+wkyIFqRQ2mCC4zxjHdlAPoh+cJiMECMv7q95pRW8pTbe/LPv8EtVj6W5eUN//YKTICZ1MA6IKkdDlt16x5uyAubpH0CjAOUIJV8WaxYQKze9acfD6pZaQPr6NC7pgYfMWFqODCK+x2c9CcbhI=', 'mhaydent', 'hayden@techelevator.com');
+INSERT INTO flyer_user (first_name, last_name, password, salt, user_name, email) VALUES ('Kevin', 'Glick', 'byXr2Bu18+NoGlGHT3AczA==', 'YnrgCxHq3NS8RQ79qZP6h5vYu+wkyIFqRQ2mCC4zxjHdlAPoh+cJiMECMv7q95pRW8pTbe/LPv8EtVj6W5eUN//YKTICZ1MA6IKkdDlt16x5uyAubpH0CjAOUIJV8WaxYQKze9acfD6pZaQPr6NC7pgYfMWFqODCK+x2c9CcbhI=', 'keving', 'kevin@techelevator.com');
+INSERT INTO flyer_user (first_name, last_name, password, salt, user_name, email) VALUES ('Jonathan', 'Funk', 'byXr2Bu18+NoGlGHT3AczA==', 'YnrgCxHq3NS8RQ79qZP6h5vYu+wkyIFqRQ2mCC4zxjHdlAPoh+cJiMECMv7q95pRW8pTbe/LPv8EtVj6W5eUN//YKTICZ1MA6IKkdDlt16x5uyAubpH0CjAOUIJV8WaxYQKze9acfD6pZaQPr6NC7pgYfMWFqODCK+x2c9CcbhI=', 'jfunk', 'funk@techelevator.com');
+INSERT INTO flyer_user (first_name, last_name, password, salt, user_name, email) VALUES ('Sean', 'Jenkins', 'byXr2Bu18+NoGlGHT3AczA==', 'YnrgCxHq3NS8RQ79qZP6h5vYu+wkyIFqRQ2mCC4zxjHdlAPoh+cJiMECMv7q95pRW8pTbe/LPv8EtVj6W5eUN//YKTICZ1MA6IKkdDlt16x5uyAubpH0CjAOUIJV8WaxYQKze9acfD6pZaQPr6NC7pgYfMWFqODCK+x2c9CcbhI=', 'sjenkins', 'sean@techelevator.com');
 
 -- flyer --
 INSERT INTO flyer (company, flyer_id, user_name, flyer_name, start_date, end_date, num_tabs, flyer_info) VALUES ('TECH ELEVATOR', '1','keving', 'Car Wash', '2016-01-01' , '2016-30-01','4', 'free car wash! redeem tab');
@@ -20,11 +19,10 @@ INSERT INTO flyer (company, flyer_id, user_name, flyer_name, start_date, end_dat
 
 -- tab -- 
 
-INSERT INTO tab (flyer_id, user_id) VALUES ('1','keving');
-INSERT INTO tab (flyer_id, user_id) VALUES ('2','mhaydent');
-INSERT INTO tab (flyer_id, user_id) VALUES ('3','jfunk');
-INSERT INTO tab (flyer_id, user_id) VALUES ('4','sjenkins');
+INSERT INTO tab (flyer_id, user_name) VALUES ('1','keving');
+INSERT INTO tab (flyer_id, user_name) VALUES ('2','mhaydent');
+INSERT INTO tab (flyer_id, user_name) VALUES ('3','jfunk');
+INSERT INTO tab (flyer_id, user_name) VALUES ('4','sjenkins');
 
 
 
-COMMIT;
