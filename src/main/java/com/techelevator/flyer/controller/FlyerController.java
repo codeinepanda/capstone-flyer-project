@@ -20,49 +20,14 @@ public class FlyerController {
 		private FlyerDAO flyerDAO;
 		
 	@Autowired
-	public FlyerController(UserDAO userDAO, FlyerDAO flyerDAO) {
+	public FlyerController(UserDAO userDAO) {
 			this.userDAO = userDAO;
 			this.flyerDAO = flyerDAO;
-		}
-		@RequestMapping(path="/login", method=RequestMethod.GET)
-		public String displayLoginForm() {
-			return "login";
-		}
-		@RequestMapping(path="/login", method=RequestMethod.POST)
-		public String login(Map<String, Object> model, 
-								@RequestParam String userName, 
-								@RequestParam String password,
-								HttpSession session) {
-			
-				if(userDAO.searchForUsernameAndPassword(userName, password)) {
-					session.invalidate();
-					model.put("currentUser", userName);
-					return "redirect:/users/"+userName;
-				} else {
-					return "redirect:/login";
-				}
-		}
-		@RequestMapping(path="/registration", method=RequestMethod.GET)
-		public String displayNewUserForm() {
-				return "register";
-		}
-		@RequestMapping(path="/completeRegistration", method=RequestMethod.POST)
-		public String createUser(@RequestParam String firstName, @RequestParam String lastName, 
-								 @RequestParam String password, @RequestParam String userName,
-								 @RequestParam String email) {
-				userDAO.saveUser(firstName, lastName, password, userName, email);
-				return "redirect:/login";
-		}
-		@RequestMapping(path="/logout", method=RequestMethod.POST)
-		public String logout(Map<String, Object> model, HttpSession session) {
-				model.remove("currentUser");
-				session.removeAttribute("currentUser");
-				return "redirect:/";
-		}
+	}
 		
 		@RequestMapping(path="/", method=RequestMethod.GET)
 		public String showHomePage(Map<String, Object> model) {
-				model.put("flyer", flyerDAO.getFeaturedFlyers());
+	//			model.put("flyer", flyerDAO.getFeaturedFlyers());
 				return "index";
 		}
 	}

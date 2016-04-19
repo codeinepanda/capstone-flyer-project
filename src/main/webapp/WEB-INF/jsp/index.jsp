@@ -11,33 +11,31 @@
     <body>
         <div class="container-fluid"
             ><div class="row"
-                ><div class="col-xs-2 logo"></div
-                ><div class="col-xs-4 title"></div
+                ><div class="col-xs-2 logo"
+                	><img src=""
+                ></div
+                ><div class="col-xs-4 title"
+                	><h1>FLYERS CORNER</h1
+                ></div
                 ><div class="col-xs-2 register alerts"
-                	><c:if test="${not empty user}"
-                		><c:set var="buttonTxt" value="Alerts"
-                	/></c:if
-                	><c:if test="${empty user}"
-                		><c:set var="buttonTxt" value="Register"
-                	/></c:if
-                	><a class="btn btn-block btn-default" href=""><c:out value="${buttonTxt}"/></a
+                	><a class="btn btn-block btn-default" href="">Register</a
                 ></div
                 ><div class="col-xs-2 login"></div
             ></div
             ><div class="row"
                 ><div class="col-xs-6 featured-col"
                     ><c:forEach var="flyer" items="flyers_1" begin="0" step="1"
-                        ><c:url var="flyer-img" value="${flyer.img}"></c:url
+                        ><c:url var="flyer-img" value=""></c:url
                         ><div class="featured-flyer"
-                            ><img src="${flyer-img}"
+                            ><img src=""
                         ></div
                 ></c:forEach
             ></div
                 ><div class="col-xs-6 featured-col"
                     ><c:forEach var="flyer" items="flyers_2" begin="0" step="1"
-                        ><c:url var="flyer-img" value="${flyer.img}"></c:url
+                        ><c:url var="flyer-img" value=""></c:url
                         ><div class="featured-flyer"
-                            ><img src="${flyer-img}"
+                            ><img src=""
                         ></div
                 ></c:forEach
             ></div
