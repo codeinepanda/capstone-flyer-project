@@ -9,7 +9,7 @@
         <link rel="stylesheet" type="text/css" href="styles-home.css"/>
     </head>
     <body>
-        <div class="container-fluid">
+        <div class="container-fluid"
             ><div class="row"
                 ><div class="col-xs-2 logo"></div
                 ><div class="col-xs-4 title"></div
@@ -24,7 +24,7 @@
                             ><img src="${flyer-img}"
                         ></div
                 ></c:forEach
-            ></div>
+            ></div
                 ><div class="col-xs-6 featured-col"
                     ><c:forEach var="flyer" items="flyers_2" begin="0" step="1"
                         ><c:url var="flyer-img" value="${flyer.img}"></c:url
@@ -32,7 +32,7 @@
                             ><img src="${flyer-img}"
                         ></div
                 ></c:forEach
-            ></div>
+            ></div
             ></div
         ></div>
     </body>
