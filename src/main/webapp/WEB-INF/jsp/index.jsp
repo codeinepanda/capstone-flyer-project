@@ -13,7 +13,15 @@
             ><div class="row"
                 ><div class="col-xs-2 logo"></div
                 ><div class="col-xs-4 title"></div
-                ><div class="col-xs-2 register alerts"></div
+                ><div class="col-xs-2 register alerts"
+                	><c:if test="${not empty user}"
+                		><c:set var="buttonTxt" value="Alerts"
+                	/></c:if
+                	><c:if test="${empty user}"
+                		><c:set var="buttonTxt" value="Register"
+                	/></c:if
+                	><a class="btn btn-block btn-default" href=""><c:out value="${buttonTxt}"/></a
+                ></div
                 ><div class="col-xs-2 login"></div
             ></div
             ><div class="row"
