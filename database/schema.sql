@@ -10,7 +10,7 @@ DROP TABLE IF EXISTS user;
 DROP SEQUENCE flyer_flyer_id_seq;
 
 
-CREATE TABLE user (
+CREATE TABLE flyer_user (
   first_name varchar(256) NOT NULL,   										 -- First Name
   last_name varchar(256) NOT NULL 	 										 -- Last Name
   password varchar(32) NOT NULL,     										 -- Password (in plain-text)
@@ -35,7 +35,7 @@ CREATE TABLE flyer (
 	end_date date NOT NULL, 																	-- number of tabs a flyer has
 	num_tabs integer,																			-- number of tabs on flyer
 	flyer_info varchar(1000),																	-- User created
-    CONSTRAINT fk_user_userid FOREIGN (user_id) REFERENCES user(user_id),
+    CONSTRAINT fk_user_userid FOREIGN (user_id) REFERENCES flyer_user(user_id),
 	CONSTRAINT pk_flyer_flyer_id PRIMARY KEY (flyer_id)
 );
 
@@ -43,7 +43,7 @@ CREATE TABLE tab
 	flyer_id integer,
 	user_name varchar(256),
 	CONSTRAINT fk_flyer_flyer_id FOREIGN KEY (flyer_id) REFERENCES flyer(flyer_id),
-	CONSTRAINT fk_user_userid FOREIGN KEY (user_id) REFERENCES user(user_id)
+	CONSTRAINT fk_user_userid FOREIGN KEY (user_id) REFERENCES flyer_user(user_id)
 );
 
 
