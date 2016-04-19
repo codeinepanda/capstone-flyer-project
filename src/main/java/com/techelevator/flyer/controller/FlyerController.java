@@ -1,8 +1,5 @@
 package com.techelevator.flyer.controller;
 
-
-package com.techelevator.flyer.controller;
-
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -43,6 +40,7 @@ public class FlyerController {
 					return "redirect:/users/"+userName;
 				} else {
 					return "redirect:/login";
+				}
 		}
 		@RequestMapping(path="/users/register", method=RequestMethod.GET)
 		public String displayNewUserForm() {
