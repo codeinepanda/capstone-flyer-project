@@ -2,7 +2,7 @@ package com.techelevator.model;
 
 public interface UserDAO {
 	
-	public void saveUser(String firstName, String lastName, String password, String userName, String email);
+	public void createUser(User newUser);
 
 	public boolean searchForUsernameAndPassword(String userName, String password);
 

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.techelevator.model.FlyerDAO;
+import com.techelevator.model.User;
 import com.techelevator.model.UserDAO;
 
 @Controller
@@ -22,7 +23,6 @@ public class FlyerController {
 	@Autowired
 	public FlyerController(UserDAO userDAO) {
 			this.userDAO = userDAO;
-			this.flyerDAO = flyerDAO;
 	}
 		
 		@RequestMapping(path="/", method=RequestMethod.GET)
@@ -33,6 +33,17 @@ public class FlyerController {
 		
 		@RequestMapping(path="/registration", method=RequestMethod.GET)
 		public String showRegistrationPage() {
+			return "register";
+		}
+		
+		@RequestMapping(path="/createUser", method=RequestMethod.POST)
+		public String showRegistrationConfirmation(Map<String, Object> model, @RequestParam("firstName") String first,
+																			  @RequestParam("lastName") String last,
+																			  @RequestParam("username") String display,
+																			  @RequestParam("email") String Email,
+																			  @RequestParam("password") String pwd) {
+			User newUser = new User(first, last, display, Email, pwd);
+			userDAO.createUser(newUser);
 			return "register";
 		}
 	}
