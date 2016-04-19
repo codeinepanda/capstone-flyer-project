@@ -5,7 +5,7 @@
 BEGIN;
 
 DROP TABLE IF EXISTS flyer;
-DROP TABLE IF EXISTS user;
+DROP TABLE IF EXISTS flyer_user;
 
 DROP SEQUENCE flyer_flyer_id_seq;
 
