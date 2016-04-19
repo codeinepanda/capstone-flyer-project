@@ -18,8 +18,10 @@
              ></div
              ><div class="row form"
                    ><div class="col-xs-12 form">
-                        <div id="form_box">
-                            <form id="reg_form" method="POST" action="createUser">
+                        <div id="form_box"
+                       ><c:choose
+             		   	><c:when test="${empty user}"
+                            ><form id="reg_form" method="POST" action="createUser">
                                 <label>First Name: </label> <input type="text" name="firstName" id="firstName"/>
                                 <br>
                                 <br>
@@ -39,7 +41,14 @@
                                 <br>
                                 <br>
                                 <input class="btn btn-primary" id="submit" type="submit">
-                            </form>
+                            </form
+                        ></c:when
+             			><c:otherwise
+             				><h1>Congratulations! You've Been Successfully Registered!</h1
+             				><c:url var="toLogin" value="/loginPage"
+             				/><a href="${toLogin}"><h3>Click Here To Login To Your Account</h3></a
+             		    ></c:otherwise
+             		></c:choose>
                         </div
                    ></div
              ></div

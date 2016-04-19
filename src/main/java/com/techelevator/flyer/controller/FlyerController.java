@@ -42,8 +42,15 @@ public class FlyerController {
 																			  @RequestParam("username") String display,
 																			  @RequestParam("email") String Email,
 																			  @RequestParam("password") String pwd) {
+			
 			User newUser = new User(first, last, display, Email, pwd);
 			userDAO.createUser(newUser);
+			model.put("user", newUser);
 			return "register";
+		}
+		
+		@RequestMapping(path="/loginPage", method=RequestMethod.GET)
+		public String showLoginPage() {
+			return "login";
 		}
 	}
