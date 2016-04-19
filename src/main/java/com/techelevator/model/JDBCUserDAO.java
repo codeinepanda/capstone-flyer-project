@@ -28,7 +28,7 @@ public class JDBCUserDAO implements UserDAO {
 			byte[] salt = passwordHasher.generateRandomSalt();
 			String hashedPassword = passwordHasher.computeHash(password, salt);
 			String saltString = new String(Base64.encode(salt));
-			jdbcTemplate.update("INSERT INTO flyer_user(first_name, last_name, password, salt, user_id, email) VALUES ('"+firstName+"','"+lastName+"', '"+hashedPassword+"', '"+saltString+"','"+userID+"', '"+email+"')");
+			jdbcTemplate.update("INSERT INTO user(first_name, last_name, password, salt, user_id, email) VALUES ('"+firstName+"','"+lastName+"', '"+hashedPassword+"', '"+saltString+"','"+userID+"', '"+email+"')");
 		}
 
 		@Override

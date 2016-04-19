@@ -20,7 +20,7 @@ public class FlyerController {
 		private FlyerDAO flyerDAO;
 		
 	@Autowired
-	public FlyerController(UserDAO userDAO, FlyerDAO messageDAO) {
+	public FlyerController(UserDAO userDAO, FlyerDAO flyerDAO) {
 			this.userDAO = userDAO;
 			this.flyerDAO = flyerDAO;
 		}
@@ -42,11 +42,11 @@ public class FlyerController {
 					return "redirect:/login";
 				}
 		}
-		@RequestMapping(path="/users/register", method=RequestMethod.GET)
+		@RequestMapping(path="/registration", method=RequestMethod.GET)
 		public String displayNewUserForm() {
 				return "register";
 		}
-		@RequestMapping(path="/users", method=RequestMethod.POST)
+		@RequestMapping(path="/completeRegistration", method=RequestMethod.POST)
 		public String createUser(@RequestParam String userName, @RequestParam String password) {
 				userDAO.saveUser(userName, password);
 				return "redirect:/login";

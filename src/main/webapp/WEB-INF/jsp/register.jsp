@@ -19,7 +19,7 @@
              ><div class="row form"
                    ><div class="col-xs-12 form">
                         <div id="form_box">
-                            <form id="reg_form">
+                            <form id="reg_form" method="POST" action="completeRegistration">
                                 <label>First Name: </label> <input type="text" name="firstName" id="firstName"/>
                                 <br>
                                 <br>
