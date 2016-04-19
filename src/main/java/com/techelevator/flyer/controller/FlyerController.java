@@ -20,7 +20,7 @@ public class FlyerController {
 		private FlyerDAO flyerDAO;
 		
 	@Autowired
-	public FlyerController(UserDAO userDAO, FlyerDAO messageDAO, FlyerDAO flyerDAO) {
+	public FlyerController(UserDAO userDAO, FlyerDAO flyerDAO) {
 			this.userDAO = userDAO;
 			this.flyerDAO = flyerDAO;
 		}
