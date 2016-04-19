@@ -2,42 +2,26 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Register New User</title>
+        <title>Registration Complete</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="css/register.css">
+        <script src=""></script>
+        <script src=""></script>
     </head>
     
     <body>
         <div class="container-fluid"
              ><div class="row header"
                    ><div class="col-xs-12 header"
-                         ><h1>Register With Flyers Corner</h1
+                         ><h1>Flyers Corner</h1
                    ></div
              ></div
              ><div class="row form"
                    ><div class="col-xs-12 form">
                         <div id="form_box"
-                            ><form id="reg_form" action="createUser" method="POST">
-                                <label>First Name: </label> <input type="text" name="firstName" id="firstName"/>
-                                <br>
-                                <br>
-                                <label>Last Name: </label> <input type="text" name="lastName" id="lastName"/>
-                                <br>
-                                <br>
-                                <label>Username: </label> <input type="text" name="username" id="username"/>
-                                <br>
-                                <br>
-                                <label>Your Email: </label> <input type="email" name="email" id="email"/>
-                                <br>
-                                <br>
-                                <label>Password: </label> <input type="password" name="password" id="password"/>
-                                <br>
-                                <br>
-                                <label>Confirm Password: </label> <input type="password" name="confirm" id="confirm"/>
-                                <br>
-                                <br>
-                                <input class="btn btn-primary" type="submit" value="Submit">
-                            </form
+             				><h1>Congratulations! You've Been Successfully Registered!</h1
+             				><c:url var="toLogin" value="/loginPage"
+             				/><a href="${toLogin}"><h3>Click Here To Login To Your Account</h3></a
                         ></div
                    ></div
              ></div

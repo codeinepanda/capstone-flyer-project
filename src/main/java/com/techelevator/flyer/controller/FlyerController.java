@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,6 +17,7 @@ import com.techelevator.model.User;
 import com.techelevator.model.UserDAO;
 
 @Controller
+@Transactional
 public class FlyerController {
 		private UserDAO userDAO;
 		private FlyerDAO flyerDAO;
@@ -37,16 +39,15 @@ public class FlyerController {
 		}
 		
 		@RequestMapping(path="/createUser", method=RequestMethod.POST)
-		public String showRegistrationConfirmation(Map<String, Object> model, @RequestParam("firstName") String first,
-																			  @RequestParam("lastName") String last,
-																			  @RequestParam("username") String display,
-																			  @RequestParam("email") String Email,
-																			  @RequestParam("password") String pwd) {
+		public String showRegistrationConfirmation(@RequestParam("firstName") String first,
+												   @RequestParam("lastName") String last,
+												   @RequestParam("username") String display,
+												   @RequestParam("email") String Email,
+												   @RequestParam("password") String pwd) {
 			
 			User newUser = new User(first, last, display, Email, pwd);
 			userDAO.createUser(newUser);
-			model.put("user", newUser);
-			return "register";
+			return "registrationComplete";
 		}
 		
 		@RequestMapping(path="/loginPage", method=RequestMethod.GET)
