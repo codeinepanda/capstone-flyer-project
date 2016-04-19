@@ -30,4 +30,9 @@ public class FlyerController {
 	//			model.put("flyer", flyerDAO.getFeaturedFlyers());
 				return "index";
 		}
+		
+		@RequestMapping(path="/registration", method=RequestMethod.GET)
+		public String showRegistrationPage() {
+			return "register";
+		}
 	}

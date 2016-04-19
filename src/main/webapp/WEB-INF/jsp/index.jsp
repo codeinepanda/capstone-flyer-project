@@ -18,7 +18,8 @@
                 	><h1>FLYERS CORNER</h1
                 ></div
                 ><div class="col-xs-2 register alerts"
-                	><a class="btn btn-block btn-default" href="">Register</a
+                	><c:url var="toRegistration" value="/registration"
+                	/><a class="btn btn-block btn-default" href="${toRegistration}">Register</a
                 ></div
                 ><div class="col-xs-2 login"></div
             ></div
