@@ -48,9 +48,9 @@ public class FlyerController {
 		}
 		@RequestMapping(path="/completeRegistration", method=RequestMethod.POST)
 		public String createUser(@RequestParam String firstName, @RequestParam String lastName, 
-								 @RequestParam String password, @RequestParam int userID,
+								 @RequestParam String password, @RequestParam String username,
 								 @RequestParam String email) {
-				userDAO.saveUser(firstName, lastName, password, userID, email);
+				userDAO.saveUser(firstName, lastName, password, username, email);
 				return "redirect:/login";
 		}
 		@RequestMapping(path="/logout", method=RequestMethod.POST)
