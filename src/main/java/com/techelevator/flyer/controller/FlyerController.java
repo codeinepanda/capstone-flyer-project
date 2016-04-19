@@ -62,7 +62,7 @@ public class FlyerController {
 		
 		@RequestMapping(path="/", method=RequestMethod.GET)
 		public String showHomePage(Map<String, Object> model) {
-				model.put("flyer", flyerDAO.getAllFlyersToDisplayOnHomepage(??));
+				model.put("flyer", flyerDAO.getFeaturedFlyers());
 				return "home";
 		}
 	}
