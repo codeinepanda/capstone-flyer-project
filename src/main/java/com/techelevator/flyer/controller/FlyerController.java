@@ -47,8 +47,10 @@ public class FlyerController {
 				return "register";
 		}
 		@RequestMapping(path="/completeRegistration", method=RequestMethod.POST)
-		public String createUser(@RequestParam String userName, @RequestParam String password) {
-				userDAO.saveUser(userName, password);
+		public String createUser(@RequestParam String firstName, @RequestParam String lastName, 
+								 @RequestParam String password, @RequestParam int userID,
+								 @RequestParam String email) {
+				userDAO.saveUser(firstName, lastName, password, userID, email);
 				return "redirect:/login";
 		}
 		@RequestMapping(path="/logout", method=RequestMethod.POST)
@@ -60,7 +62,7 @@ public class FlyerController {
 		
 		@RequestMapping(path="/", method=RequestMethod.GET)
 		public String showHomePage(Map<String, Object> model) {
-				model.put("flyer", flyerDAO.getPublicMessages(10));
+				model.put("flyer", flyerDAO.getAllFlyersToDisplayOnHomepage(??));
 				return "home";
 		}
 	}
