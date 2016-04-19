@@ -43,5 +43,5 @@ $(document).ready(function() {
                 equalTo: "Your passwords don't match!"
             }
         }
-    });
+     });
 });
