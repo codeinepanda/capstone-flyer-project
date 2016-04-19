@@ -26,6 +26,9 @@
                                 <label>Last Name: </label> <input type="text" name="lastName" id="lastName"/>
                                 <br>
                                 <br>
+                                <label>Username: </label> <input type="text" name="username" id="username"/>
+                                <br>
+                                <br>
                                 <label>Your Email: </label> <input type="email" name="email" id="email"/>
                                 <br>
                                 <br>

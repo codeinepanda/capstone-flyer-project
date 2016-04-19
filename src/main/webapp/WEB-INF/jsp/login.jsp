@@ -20,7 +20,7 @@
                    ><div class="col-xs-12 form">
                         <div id="form_box">
                             <form id="login_form">
-                                <label>Email: </label> <input type="email" name="email" id="email"/>
+                                <label>Username: </label> <input type="text" name="username" id="username"/>
                                 <br>
                                 <br>
                                 <label>Password: </label> <input type="password" name="password" id="password"/>

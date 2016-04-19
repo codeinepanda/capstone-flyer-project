@@ -8,6 +8,10 @@ $(document).ready(function() {
             lastName: {
                 required: true
             },
+            username: {
+            	required: true,
+            	minlength: 3
+            },
             email: {
                 required: true,
                 email: true

@@ -2,9 +2,8 @@ $(document).ready(function() {
     $("#login_form").validate({
         debug: true,
         rules: {
-            email: {
+            username: {
                 required: true,
-                email: true
             },
             password: {
                 required: true,
@@ -12,9 +11,8 @@ $(document).ready(function() {
             }
         },
         messages: {
-            email: {
-                required: "A valid email is required",
-                email: "Please ensure that your email is valid"
+            username: {
+                required: "Your username is required for login"
             },
             password: {
                 required: "You must enter a password",
