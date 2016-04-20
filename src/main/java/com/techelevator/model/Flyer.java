@@ -1,14 +1,14 @@
 package com.techelevator.model;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class Flyer {
 
 	private int flyerID;
 	private String userName;
 	private String flyerName;
-	private LocalDateTime startDate;
-	private LocalDateTime endDate;
+	private LocalDate startDate;
+	private LocalDate endDate;
 	private int numberOfTabs;
 	private String flyerDescription;
 	
@@ -32,16 +32,16 @@ public class Flyer {
 	public void setFlyerName(String flyerName) {
 		this.flyerName = flyerName;
 	}
-	public LocalDateTime getStartDate() {
+	public LocalDate getStartDate() {
 		return startDate;
 	}
-	public void setStartDate(LocalDateTime startDate) {
+	public void setStartDate(LocalDate startDate) {
 		this.startDate = startDate;
 	}
-	public LocalDateTime getEndDate() {
+	public LocalDate getEndDate() {
 		return endDate;
 	}
-	public void setEndDate(LocalDateTime endDate) {
+	public void setEndDate(LocalDate endDate) {
 		this.endDate = endDate;
 	}
 	public int getNumberOfTabs() {

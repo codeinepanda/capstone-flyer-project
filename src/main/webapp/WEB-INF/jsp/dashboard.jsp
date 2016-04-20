@@ -26,7 +26,7 @@
                 	><c:url var="logout" value="/logout"
                 	/><form id="logout" method="POST" action="${logout}"
                 		><input type="submit" value="Logout" class="btn btn-block btn-danger"
-                /></div
+                /></form></div
                 ><div class="col-xs-2 profile"
                 	><c:url var="toProfile" value="/profilePage"
                 	/><a class="btn btn-block btn-primary" href="${toProfile}">Profile</a

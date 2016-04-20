@@ -81,6 +81,7 @@ public class FlyerController {
 			session.removeAttribute("currentUser");
 			return "redirect:/";
 		}
+		
 	}
 
 
