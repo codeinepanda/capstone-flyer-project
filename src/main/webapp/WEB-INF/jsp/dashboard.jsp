@@ -16,7 +16,7 @@
                 ></div
                 ><div class="col-xs-4 title"
                 	><h1>FLYERS CORNER</h1
-                	><h4>Welcome back, <c:out value="${user.firstName}"/>!</h4
+                	><h4>Welcome back, <c:out value="${currentUser.firstName}"/>!</h4
                 ></div
                 ><div class="col-xs-2 alerts"
                 	><c:url var="toAlerts" value="/alerts"
@@ -24,8 +24,9 @@
                 ></div
                 ><div class="col-xs-2 login"
                 	><c:url var="logout" value="/logout"
-                	/><a class="btn btn-block btn-danger" href="${logout}">Logout</a
-                ></div
+                	/><form id="logout" method="POST" action="${logout}"
+                		><input type="submit" value="Logout" class="btn btn-block btn-danger"
+                /></div
                 ><div class="col-xs-2 profile"
                 	><c:url var="toProfile" value="/profilePage"
                 	/><a class="btn btn-block btn-primary" href="${toProfile}">Profile</a

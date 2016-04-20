@@ -1,18 +1,26 @@
 * {
     border: 1px solid black;
-    min-height: 100%;
-    max-height: 100%;
 }
 
-.html, .container-fluid, body {
-	min-height: 100%;
+html {
 	max-height: 100%;
+	min-height: 100%;
 }
 
-.header {
+.container-fluid {
+	min-height: 100%;
+}
+
+body {
+	min-height: 100%;
+}
+
+#header-row {
+	min-height: 20%;
 	height: 20%;
 }
 
-.featured {
+#main-content {
+	min-height: 80%;
 	height: 80%;
 }

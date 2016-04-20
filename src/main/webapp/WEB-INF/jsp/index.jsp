@@ -10,7 +10,7 @@
     </head>
     <body>
         <div class="container-fluid"
-            ><div id="header-row"
+            ><div id="header-row" class="row"
                 ><div class="col-xs-2 logo"
                 	><img src=""
                 ></div
