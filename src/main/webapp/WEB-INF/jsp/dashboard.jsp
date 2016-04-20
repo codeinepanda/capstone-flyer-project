@@ -20,11 +20,15 @@
                 ></div
                 ><div class="col-xs-2 alerts"
                 	><c:url var="toAlerts" value="/alerts"
-                	/><a class="btn btn-block btn-default" href="${toAlerts}">Alerts</a
+                	/><a class="btn btn-block btn-warning" href="${toAlerts}">Alerts</a
                 ></div
                 ><div class="col-xs-2 login"
                 	><c:url var="logout" value="/logout"
-                	/><a class="btn btn-block btn-default" href="${logout}">Logout</a
+                	/><a class="btn btn-block btn-danger" href="${logout}">Logout</a
+                ></div
+                ><div class="col-xs-2 profile"
+                	><c:url var="toProfile" value="/profilePage"
+                	/><a class="btn btn-block btn-primary" href="${toProfile}">Profile</a
                 ></div
             ></div
             ><div class="row"
