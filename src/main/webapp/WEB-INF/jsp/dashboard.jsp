@@ -18,16 +18,20 @@
                 	><h1>FLYERS CORNER</h1
                 	><h4>Welcome back, <c:out value="${currentUser.firstName}"/>!</h4
                 ></div
-                ><div class="col-xs-2 alerts"
+                ><div class="col-xs-1 button alerts"
                 	><c:url var="toAlerts" value="/alerts"
                 	/><a class="btn btn-block btn-warning" href="${toAlerts}">Alerts</a
                 ></div
-                ><div class="col-xs-2 login"
+                ><div class="col-xs-1 button createFlyer"
+                	><c:url var="toFlyerForm" value="/flyerForm"
+                	/><a class="btn btn-block btn-warning" href="${toFlyerForm}">New Flyer</a
+                ></div
+                ><div class="col-xs-2 button login"
                 	><c:url var="logout" value="/logout"
                 	/><form id="logout" method="POST" action="${logout}"
                 		><input type="submit" value="Logout" class="btn btn-block btn-danger"
                 /></div
-                ><div class="col-xs-2 profile"
+                ><div class="col-xs-2 button profile"
                 	><c:url var="toProfile" value="/profilePage"
                 	/><a class="btn btn-block btn-primary" href="${toProfile}">Profile</a
                 ></div

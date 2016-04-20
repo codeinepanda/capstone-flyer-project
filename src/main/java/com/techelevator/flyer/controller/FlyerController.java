@@ -75,6 +75,16 @@ public class FlyerController {
 			return "login";
 		}
 		
+		@RequestMapping(path="/flyerForm", method=RequestMethod.GET)
+		public String showFlyerForm(Map<String, Object> model, HttpSession session) {
+			if(session.getAttribute("currentUser") != null) {
+				model.put("currentUser", session.getAttribute("currentUser"));
+				return "createFlyer";
+			} else {
+				return "redirect:/login";
+			}
+		}
+		
 		@RequestMapping(path="/logout", method=RequestMethod.POST)
 		public String logout(Map<String, Object> model, HttpSession session) {
 			model.remove("currentUser");
