@@ -1,5 +1,6 @@
 package com.techelevator.flyer.controller;
 
+import java.time.LocalDate;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.techelevator.model.Flyer;
 import com.techelevator.model.FlyerDAO;
 import com.techelevator.model.User;
 import com.techelevator.model.UserDAO;
@@ -25,8 +27,9 @@ public class FlyerController {
 		private FlyerDAO flyerDAO;
 		
 	@Autowired
-	public FlyerController(UserDAO userDAO) {
+	public FlyerController(UserDAO userDAO, FlyerDAO flyerDAO) {
 			this.userDAO = userDAO;
+			this.flyerDAO = flyerDAO;
 	}
 		
 		@RequestMapping(path="/", method=RequestMethod.GET)
@@ -73,6 +76,32 @@ public class FlyerController {
 			String error = "Sorry, but we didn't find any accounts that match your login details. Please ensure that the username and password you entered were correct and try again.";
 			model.put("error", error);
 			return "login";
+		}
+		
+		@RequestMapping(path="/flyerForm", method=RequestMethod.GET)
+		public String showFlyerForm(Map<String, Object> model, HttpSession session) {
+			if(session.getAttribute("currentUser") != null) {
+				model.put("currentUser", session.getAttribute("currentUser"));
+				return "createFlyer";
+			} else {
+				return "redirect:/login";
+			}
+		}
+		
+		@RequestMapping(path="/createFlyer", method=RequestMethod.POST)
+		public String showNewFlyerConfirmation(Map<String, Object> model, @RequestParam("flyerName") String flyer,
+																		  @RequestParam("companyName") String company,
+																		  @RequestParam("startDate") LocalDate start,
+																		  @RequestParam("expDate") LocalDate expire,
+																		  @RequestParam("numTabs") int tabs,
+																		  @RequestParam("category") String cat,
+																		  @RequestParam("description") String info,
+																		  HttpSession session) {
+			User currentUser = (User) session.getAttribute("currentUser");
+			Flyer newFlyer = new Flyer(currentUser.getUsername(), company, flyer, start, expire, tabs, cat, info);
+			flyerDAO.createFlyer(newFlyer);
+			model.put("currentFlyer", flyer);
+			return "newFlyerComplete";
 		}
 		
 		@RequestMapping(path="/logout", method=RequestMethod.POST)

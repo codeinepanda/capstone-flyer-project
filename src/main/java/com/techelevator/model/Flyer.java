@@ -1,19 +1,41 @@
 package com.techelevator.model;
 
 import java.time.LocalDate;
+<<<<<<< HEAD
+=======
+import java.time.LocalDateTime;
+>>>>>>> 66c39a6a13b5e6f9f0aa2fcf7451392f85f49911
 
 public class Flyer {
 
 	private int flyerID;
 	private String userName;
+	private String company;
 	private String flyerName;
 	private LocalDate startDate;
 	private LocalDate endDate;
 	private int numberOfTabs;
+	private String category;
 	private String flyerDescription;
 	
+	public Flyer(String userName, String company, String flyerName, LocalDate startDate, LocalDate endDate, int numTabs, String category, String flyerDescription) {
+		this.userName = userName;
+		this.company = company;
+		this.flyerName = flyerName;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.numberOfTabs = numTabs;
+		this.category = category;
+		this.flyerDescription = flyerDescription;
+	}
 	
 	
+	public String getCategory() {
+		return category;
+	}
+	public void setCategory(String category) {
+		this.category = category;
+	}
 	public int getFlyerID() {
 		return flyerID;
 	}
@@ -22,6 +44,16 @@ public class Flyer {
 	}
 	public String getUserName() {
 		return userName;
+	}
+	
+	public String getCompany() {
+		return company;
+	}
+	public void setCompany(String company) {
+		this.company = company;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 	public void setUserID(String userName) {
 		this.userName = userName;

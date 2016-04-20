@@ -13,9 +13,9 @@ CREATE TABLE flyer_user (
 );
 
 CREATE SEQUENCE flyer_flyer_id_seq
+  START WITH 5
   INCREMENT BY 1
   NO MAXVALUE
-  NO MINVALUE
   CACHE 1;
 
 CREATE TABLE flyer (
