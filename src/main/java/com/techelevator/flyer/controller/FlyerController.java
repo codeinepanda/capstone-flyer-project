@@ -11,12 +11,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.techelevator.model.FlyerDAO;
 import com.techelevator.model.User;
 import com.techelevator.model.UserDAO;
 
 @Controller
+@SessionAttributes("currentUser")
 @Transactional
 public class FlyerController {
 		private UserDAO userDAO;
@@ -57,9 +59,11 @@ public class FlyerController {
 		
 		@RequestMapping(path="/login", method=RequestMethod.POST)
 		public String showDashboard(Map<String, Object> model, @RequestParam("username") String display,
-															   @RequestParam("password") String pwd) {
+															   @RequestParam("password") String pwd,
+															   HttpSession session) {
 			System.out.println("Login controller reached");
 			if(userDAO.searchForUsernameAndPassword(display, pwd)) {
+				session.invalidate();
 				System.out.println("User Found");
 				User currentUser = userDAO.returnUserByUsername(display);
 				model.put("user", currentUser);
@@ -69,5 +73,11 @@ public class FlyerController {
 			String error = "Sorry, but we didn't find any accounts that match your login details. Please ensure that the username and password you entered were correct and try again.";
 			model.put("error", error);
 			return "login";
+		}
+		
+		@RequestMapping(path="/logout", method=RequestMethod.GET)
+		public String logout(Map<String, Object> model, HttpSession session) {
+			model.remove("currentUser");
+			return "redirect:/";
 		}
 	}
