@@ -4,9 +4,7 @@
     <head>
         <title>Login</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="register.css">
-        <script src=""></script>
-        <script src=""></script>
+        <link rel="stylesheet" type="text/css" href="css/register.css">
     </head>
     
     <body>
@@ -37,6 +35,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/additional-methods.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous">
   </script>
-  <script src="loginValid.js"></script>
+  <script src="js/loginValid.js"></script>
     </body>
 </html>

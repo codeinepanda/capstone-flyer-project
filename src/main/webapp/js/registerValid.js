@@ -1,6 +1,5 @@
 $(document).ready(function() {
     $("#reg_form").validate({
-        debug: true,
         rules: {
             firstName: {
                 required: true

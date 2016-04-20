@@ -32,7 +32,19 @@ public class JDBCUserDAO implements UserDAO {
 			String sqlCreateNewUser = "INSERT INTO flyer_user(first_name, last_name, password, salt, user_name, email) VALUES (?,?,?,?,?,?);";
 			jdbcTemplate.update(sqlCreateNewUser, params);
 		}
-
+		
+		public User returnUserByUsernameAndPassword(String userName, String password) {
+			byte[] salt = passwordHasher.generateRandomSalt();
+			String hashedPassword = passwordHasher.computeHash(password, salt);
+			Object[] params = {userName, hashedPassword};
+			String sqlSearchForUser = "SELECT * "+
+								      "FROM flyer_user "+
+								      "WHERE (user_name) = '?' AND password = '?';";
+			SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSearchForUser, params);
+			User currentUser = new User(results.getString(0), results.getString(1), results.getString(2), results.getString(3), results.getString(4));
+			return currentUser;
+		}
+		
 		@Override
 		public boolean searchForUsernameAndPassword(String userName, String password) {
 			String sqlSearchForUser = "SELECT * "+
