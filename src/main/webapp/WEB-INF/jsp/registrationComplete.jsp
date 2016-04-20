@@ -18,7 +18,7 @@
              ></div
              ><div class="row form"
                    ><div class="col-xs-12 form">
-                        <div id="form_box"
+                        <div id="success_box"
              				><h1>Congratulations! You've Been Successfully Registered!</h1
              				><c:url var="toLogin" value="/loginPage"
              				/><a href="${toLogin}"><h3>Click Here To Login To Your Account</h3></a

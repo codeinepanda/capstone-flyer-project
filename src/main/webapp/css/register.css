@@ -7,13 +7,17 @@ h1 {
     vertical-align: middle;
 }
 
-#form_box {
+#form_box, #success_box {
     margin: auto;
     padding: 5px;
     text-align: left;
     border: 1px solid black;
     max-width: 700px;
     max-height: 700px;
+}
+
+#success_box {
+	text-align: center;
 }
 
 #submit {
