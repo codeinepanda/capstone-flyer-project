@@ -1,3 +1,18 @@
 * {
     border: 1px solid black;
+    min-height: 100%;
+    max-height: 100%;
+}
+
+.html, .container-fluid, body {
+	min-height: 100%;
+	max-height: 100%;
+}
+
+.header {
+	height: 20%;
+}
+
+.featured {
+	height: 80%;
 }

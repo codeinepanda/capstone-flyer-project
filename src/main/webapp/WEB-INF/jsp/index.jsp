@@ -10,14 +10,14 @@
     </head>
     <body>
         <div class="container-fluid"
-            ><div class="row"
+            ><div id="header-row"
                 ><div class="col-xs-2 logo"
                 	><img src=""
                 ></div
                 ><div class="col-xs-4 title"
                 	><h1>FLYERS CORNER</h1
                 ></div
-                ><div class="col-xs-2 register alerts"
+                ><div class="col-xs-2 register"
                 	><c:url var="toRegistration" value="/registration"
                 	/><a class="btn btn-block btn-default" href="${toRegistration}">Register</a
                 ></div
@@ -26,8 +26,8 @@
                 	/><a class="btn btn-block btn-default" href="${toLogin}">Login</a
                 ></div
             ></div
-            ><div class="row"
-                ><div class="col-xs-6 featured-col"
+            ><div id="main-content" class="row featured"
+                ><div class="col-xs-6 featured"
                     ><c:forEach var="flyer" items="flyers_1" begin="0" step="1"
                         ><c:url var="flyer-img" value=""></c:url
                         ><div class="featured-flyer"
@@ -35,7 +35,7 @@
                         ></div
                 ></c:forEach
             ></div
-                ><div class="col-xs-6 featured-col"
+                ><div class="col-xs-6 featured"
                     ><c:forEach var="flyer" items="flyers_2" begin="0" step="1"
                         ><c:url var="flyer-img" value=""></c:url
                         ><div class="featured-flyer"
