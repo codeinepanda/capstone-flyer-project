@@ -66,7 +66,7 @@ public class FlyerController {
 				session.invalidate();
 				System.out.println("User Found");
 				User currentUser = userDAO.returnUserByUsername(display);
-				model.put("user", currentUser);
+				model.put("currentUser", currentUser);
 				return "dashboard";
 			}
 			System.out.println("User NOT Found!");
@@ -75,9 +75,19 @@ public class FlyerController {
 			return "login";
 		}
 		
-		@RequestMapping(path="/logout", method=RequestMethod.GET)
+		@RequestMapping(path="/logout", method=RequestMethod.POST)
 		public String logout(Map<String, Object> model, HttpSession session) {
 			model.remove("currentUser");
 			return "redirect:/";
 		}
 	}
+
+
+
+
+
+
+
+
+
+
