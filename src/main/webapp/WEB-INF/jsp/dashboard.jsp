@@ -30,13 +30,10 @@
                 	><c:url var="logout" value="/logout"
                 	/><form id="logout" method="POST" action="${logout}"
                 		><input type="submit" value="Logout" class="btn btn-block btn-danger"
-<<<<<<< HEAD
                 /></form></div
                 ><div class="col-xs-2 profile"
-=======
                 /></div
                 ><div class="col-xs-2 button profile"
->>>>>>> 66c39a6a13b5e6f9f0aa2fcf7451392f85f49911
                 	><c:url var="toProfile" value="/profilePage"
                 	/><a class="btn btn-block btn-primary" href="${toProfile}">Profile</a
                 ></div

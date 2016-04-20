@@ -1,10 +1,7 @@
 package com.techelevator.model;
 
 import java.time.LocalDate;
-<<<<<<< HEAD
-=======
-import java.time.LocalDateTime;
->>>>>>> 66c39a6a13b5e6f9f0aa2fcf7451392f85f49911
+
 
 public class Flyer {
 
