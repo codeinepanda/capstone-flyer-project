@@ -1,5 +1,6 @@
 package com.techelevator.flyer.controller;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Map;
 
@@ -91,14 +92,16 @@ public class FlyerController {
 		@RequestMapping(path="/createFlyer", method=RequestMethod.POST)
 		public String showNewFlyerConfirmation(Map<String, Object> model, @RequestParam("flyerName") String flyer,
 																		  @RequestParam("companyName") String company,
-																		  @RequestParam("startDate") LocalDate start,
-																		  @RequestParam("expDate") LocalDate expire,
+																		  @RequestParam("startDate") Date start,
+																		  @RequestParam("expDate") Date expire,
 																		  @RequestParam("numTabs") int tabs,
 																		  @RequestParam("category") String cat,
 																		  @RequestParam("description") String info,
 																		  HttpSession session) {
+			LocalDate startDate = start.toLocalDate();
+			LocalDate endDate = expire.toLocalDate();
 			User currentUser = (User) session.getAttribute("currentUser");
-			Flyer newFlyer = new Flyer(currentUser.getUsername(), company, flyer, start, expire, tabs, cat, info);
+			Flyer newFlyer = new Flyer(currentUser.getUsername(), company, flyer, startDate, endDate, tabs, cat, info);
 			flyerDAO.createFlyer(newFlyer);
 			model.put("currentFlyer", flyer);
 			return "newFlyerComplete";
