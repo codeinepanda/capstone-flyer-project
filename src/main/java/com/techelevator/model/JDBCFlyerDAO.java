@@ -36,8 +36,14 @@ public class JDBCFlyerDAO implements FlyerDAO {
 		Date startDate = Date.valueOf(newFlyer.getStartDate());
 		Date endDate = Date.valueOf(newFlyer.getEndDate());
 		Object[] params = {newFlyer.getCompany(), newFlyer.getUserName(), newFlyer.getFlyerName(), startDate, endDate, newFlyer.getNumberOfTabs(), newFlyer.getFlyerDescription(), newFlyer.getCategory()};
-		String sqlCreateNewFlyer = "INSERT INTO flyer(company, user_name, flyer_name, start_date, end_date, num_tabs, flyer_info, catagory) VALUES (?,?,?,?,?,?,?,?);";
+		String sqlCreateNewFlyer = "INSERT INTO flyer(company, user_name, flyer_name, start_date, end_date, num_tabs, flyer_info, category) VALUES (?,?,?,?,?,?,?,?);";
 		jdbcTemplate.update(sqlCreateNewFlyer, params);
+	}
+
+	@Override
+	public ArrayList<Flyer> getAllFlyersForUser() {
+		
+		return null;
 	}
 
 }
