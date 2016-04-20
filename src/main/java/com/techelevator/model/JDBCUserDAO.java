@@ -33,22 +33,22 @@ public class JDBCUserDAO implements UserDAO {
 			jdbcTemplate.update(sqlCreateNewUser, params);
 		}
 		
-		public User returnUserByUsernameAndPassword(String userName, String password) {
-			byte[] salt = passwordHasher.generateRandomSalt();
-			String hashedPassword = passwordHasher.computeHash(password, salt);
-			Object[] params = {userName, hashedPassword};
+		public User returnUserByUsername(String userName) {
 			String sqlSearchForUser = "SELECT * "+
 								      "FROM flyer_user "+
-								      "WHERE (user_name) = '?' AND password = '?';";
-			SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSearchForUser, params);
-			User currentUser = new User(results.getString(0), results.getString(1), results.getString(2), results.getString(3), results.getString(4));
-			return currentUser;
+								      "WHERE (user_name) = ?;";
+			SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSearchForUser, userName);
+			if(results.next()) {
+				User currentUser = new User(results.getString("first_name"), results.getString("last_name"), results.getString("user_name"), results.getString("email"));
+				return currentUser;
+			}
+			return null;
 		}
 		
 		@Override
 		public boolean searchForUsernameAndPassword(String userName, String password) {
 			String sqlSearchForUser = "SELECT * "+
-								      "FROM app_user "+
+								      "FROM flyer_user "+
 								      "WHERE UPPER(user_name) = '"+userName.toUpperCase()+"' ";
 			
 			SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSearchForUser);

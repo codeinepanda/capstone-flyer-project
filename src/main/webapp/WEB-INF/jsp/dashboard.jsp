@@ -16,14 +16,15 @@
                 ></div
                 ><div class="col-xs-4 title"
                 	><h1>FLYERS CORNER</h1
+                	><h4>Welcome back, <c:out value="${user.firstName}"/>!</h4
                 ></div
-                ><div class="col-xs-2 register alerts"
-                	><c:url var="toRegistration" value="/registration"
-                	/><a class="btn btn-block btn-default" href="${toRegistration}">Register</a
+                ><div class="col-xs-2 alerts"
+                	><c:url var="toAlerts" value="/alerts"
+                	/><a class="btn btn-block btn-default" href="${toAlerts}">Alerts</a
                 ></div
                 ><div class="col-xs-2 login"
-                	><c:url var="toLogin" value="/loginPage"
-                	/><a class="btn btn-block btn-default" href="${toLogin}">Login</a
+                	><c:url var="logout" value="/logout"
+                	/><a class="btn btn-block btn-default" href="${logout}">Logout</a
                 ></div
             ></div
             ><div class="row"

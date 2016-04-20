@@ -58,10 +58,14 @@ public class FlyerController {
 		@RequestMapping(path="/login", method=RequestMethod.POST)
 		public String showDashboard(Map<String, Object> model, @RequestParam("username") String display,
 															   @RequestParam("password") String pwd) {
+			System.out.println("Login controller reached");
 			if(userDAO.searchForUsernameAndPassword(display, pwd)) {
-				User currentUser = userDAO.returnUserByUsernameAndPassword(display, pwd);
-				return "index";
+				System.out.println("User Found");
+				User currentUser = userDAO.returnUserByUsername(display);
+				model.put("user", currentUser);
+				return "dashboard";
 			}
+			System.out.println("User NOT Found!");
 			String error = "Sorry, but we didn't find any accounts that match your login details. Please ensure that the username and password you entered were correct and try again.";
 			model.put("error", error);
 			return "login";

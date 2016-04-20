@@ -17,7 +17,7 @@
              ><div class="row form"
                    ><div class="col-xs-12 form">
                         <div id="form_box">
-                            <form id="login_form">
+                            <form id="login_form" method="POST" action="login">
                                 <label>Username: </label> <input type="text" name="username" id="username"/>
                                 <br>
                                 <br>

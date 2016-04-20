@@ -4,7 +4,7 @@ public interface UserDAO {
 	
 	public void createUser(User newUser);
 
-	public User returnUserByUsernameAndPassword(String userName, String password);
+	public User returnUserByUsername(String userName);
 	
 	public boolean searchForUsernameAndPassword(String userName, String password);
 
