@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 public class Flyer {
 
 	private int flyerID;
-	private int userID;
+	private String userName;
 	private String flyerName;
 	private LocalDateTime startDate;
 	private LocalDateTime endDate;
@@ -20,11 +20,11 @@ public class Flyer {
 	public void setFlyerID(int flyerID) {
 		this.flyerID = flyerID;
 	}
-	public int getUserID() {
-		return userID;
+	public String getUserName() {
+		return userName;
 	}
-	public void setUserID(int userID) {
-		this.userID = userID;
+	public void setUserID(String userName) {
+		this.userName = userName;
 	}
 	public String getFlyerName() {
 		return flyerName;
