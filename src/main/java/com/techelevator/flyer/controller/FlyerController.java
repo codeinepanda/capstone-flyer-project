@@ -3,6 +3,8 @@ package com.techelevator.flyer.controller;
 import java.sql.Date;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Map;
@@ -109,8 +111,10 @@ public class FlyerController {
 																		  HttpSession session) {
 			LocalDate startDate = start.toLocalDate();
 			LocalDate endDate = expire.toLocalDate();
+			LocalDateTime createDate = LocalDateTime.now();
 			User currentUser = (User) session.getAttribute("currentUser");
 			Flyer newFlyer = new Flyer(currentUser.getUsername(), company, flyer, startDate, endDate, tabs, cat, info);
+			newFlyer.setCreateDate(createDate);
 			flyerDAO.createFlyer(newFlyer);
 			session.putValue("newFlyer", newFlyer);
 			return "newFlyerComplete";
