@@ -34,9 +34,13 @@ public class FlyerController {
 	}
 		
 		@RequestMapping(path="/", method=RequestMethod.GET)
-		public String showHomePage(Map<String, Object> model) {
+		public String showHomePage(Map<String, Object> model, HttpSession session) {
+			if(session.getAttribute("currentUser") != null) {
+				return "dashboard";
+			} else {
 	//			model.put("flyer", flyerDAO.getFeaturedFlyers());
 				return "index";
+			}
 		}
 		
 		@RequestMapping(path="/registration", method=RequestMethod.GET)
