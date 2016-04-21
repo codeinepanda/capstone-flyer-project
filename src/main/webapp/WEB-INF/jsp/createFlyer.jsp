@@ -24,13 +24,13 @@
                                 <label>Company Name: </label> <input type="text" name="companyName" id="companyName"/>
                                 <br>
                                 <br>
-                                <label>Start Date: </label> <input type="date" name="startDate" id="startDate"/>
+                                <label>Start Date: </label> <input type="date" name="startDate" id="startDate"/> Please use the format YYYY-MM-DD
                                 <br>
                                 <br>
-                                <label>Expiration Date: </label> <input type="date" name="expDate" id="expDate"/>
+                                <label>Expiration Date: </label> <input type="date" name="expDate" id="expDate"/> Please use the format YYYY-MM-DD
                                 <br>
                                 <br>
-                                <label>Number of Tabs: </label> <input type="number" name="numTabs" id="numTabs"/>
+                                <label>Number of Tabs: </label> <input type="number" name="numTabs" id="numTabs" min="1"/>
                                 <br>
                                 <br>
                                 <label>Categories: </label>
