@@ -19,11 +19,11 @@
     --><div class="row header-buttons"
           ><div class="col-xs-3"
           ><c:url var="toHome" value="/"
-        /><a href="#" class="btn btn-primary btn-block fa fa-home"> Home</a
+        /><a href="${toHome}" class="btn btn-primary btn-block fa fa-home"> Home</a
           ></div
           ><div class="col-xs-3"
           ><c:url var="cancelPublish" value="/cancelPublish"
-        /><a href="${cancelPublish}" class="btn btn-primary btn-block fa fa-info-circle"> Edit Data</a
+        /><a href="${cancelPublish}" class="btn btn-primary btn-block fa fa-info-circle"> Don't Publish</a
           ></div
           ><div class="col-xs-3"
           ><c:url var="toProfile" value="/userProfile"
