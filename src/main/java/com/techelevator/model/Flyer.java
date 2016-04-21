@@ -61,9 +61,7 @@ public class Flyer {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	public void setUserID(String userName) {
-		this.userName = userName;
-	}
+	
 	public String getFlyerName() {
 		return flyerName;
 	}
