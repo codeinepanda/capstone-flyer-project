@@ -4,6 +4,7 @@ import java.sql.Date;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -68,7 +69,7 @@ public class FlyerController {
 		}
 		
 		@RequestMapping(path="/login", method=RequestMethod.POST)
-		public String showDashboard(Map<String, Object> model, @RequestParam("username") String display,
+		public String showDashboard(/*Map<String, Object> flyerModel,*/ Map<String, Object> model, @RequestParam("username") String display,
 															   @RequestParam("password") String pwd,
 															   HttpSession session) {
 			System.out.println("Login controller reached");
@@ -76,7 +77,9 @@ public class FlyerController {
 				session.invalidate();
 				System.out.println("User Found");
 				User currentUser = userDAO.returnUserByUsername(display);
+			//	List<Flyer> userFlyers = flyerDAO.getAllFlyersForUser(display);
 				model.put("currentUser", currentUser);
+			//	flyerModel.put("userFlyers", userFlyers);
 				return "dashboard";
 			}
 			System.out.println("User NOT Found!");

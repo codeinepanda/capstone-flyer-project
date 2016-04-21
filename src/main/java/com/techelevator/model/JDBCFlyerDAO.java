@@ -45,7 +45,7 @@ public class JDBCFlyerDAO implements FlyerDAO {
 
 	@Override
 	public List<Flyer> getAllFlyersForUser(String userName) {
-		ArrayList<Flyer> flyerUserList = new ArrayList<>();
+	ArrayList<Flyer> flyerUserList = new ArrayList<>();
 	String sqlSelectUserFlyers = "SELECT * FROM flyer WHERE user_name = ?";
 	
 	SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSelectUserFlyers, userName);
