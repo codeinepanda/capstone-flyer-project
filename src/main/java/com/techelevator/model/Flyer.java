@@ -1,6 +1,7 @@
 package com.techelevator.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 
 public class Flyer {
@@ -14,6 +15,7 @@ public class Flyer {
 	private int numberOfTabs;
 	private String category;
 	private String flyerDescription;
+	private LocalDateTime createDate;
 	
 	public Flyer(String userName, String company, String flyerName, LocalDate startDate, LocalDate endDate, int numTabs, String category, String flyerDescription) {
 		this.userName = userName;
@@ -27,6 +29,13 @@ public class Flyer {
 	}
 	
 	
+	
+	public LocalDateTime getCreateDate() {
+		return createDate;
+	}
+	public void setCreateDate(LocalDateTime createDate) {
+		this.createDate = createDate;
+	}
 	public String getCategory() {
 		return category;
 	}
