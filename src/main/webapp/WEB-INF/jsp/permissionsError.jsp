@@ -19,11 +19,9 @@
              ><div class="row form"
                    ><div class="col-xs-12 form">
                         <div id="success_box"
-             				><h1>Congratulations! Your Form Has Been Successfully Added To The Catalog!</h1
-             				><c:url var="toFlyer" value="/viewYourFlyer"
-             				/><c:url var="toHome" value="/returnHome"
-             				/><a href="${toFlyer}"><h3>Click Here To View Your Submission</h3></a
-             				><a href="${returnHome}"><h3>Return Home</h3></a
+             				><h1>Sorry, something went wrong with your request! It looks like you don't have permission to view the requested resource!</h1
+             				><c:url var="toHome" value="/"
+             				/><a href="${toHome}"><h3>Click Here To Return To Your Dashboard</h3></a
                         ></div
                    ></div
              ></div

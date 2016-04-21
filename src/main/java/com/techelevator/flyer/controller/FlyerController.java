@@ -1,7 +1,9 @@
 package com.techelevator.flyer.controller;
 
 import java.sql.Date;
+
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -107,8 +109,23 @@ public class FlyerController {
 			User currentUser = (User) session.getAttribute("currentUser");
 			Flyer newFlyer = new Flyer(currentUser.getUsername(), company, flyer, startDate, endDate, tabs, cat, info);
 			flyerDAO.createFlyer(newFlyer);
-			model.put("currentFlyer", flyer);
+			session.putValue("newFlyer", newFlyer);
 			return "newFlyerComplete";
+		}
+		
+		@RequestMapping(path="/viewYourFlyer", method=RequestMethod.GET)
+		public String previewNewFlyer(Map<String, Object> model, HttpSession session) {
+			User currentUser = (User) session.getAttribute("currentUser");
+			Flyer newFlyer = (Flyer) session.getAttribute("newFlyer");
+			int days = (int) ChronoUnit.DAYS.between(newFlyer.getStartDate(), newFlyer.getEndDate());
+			if(currentUser.getUsername().equals(newFlyer.getUserName())) {
+				System.out.println("Usernames match");
+				model.put("newFlyer", newFlyer);
+				model.put("days", days);
+				return "newFlyer";
+			} else {
+				return "permissionsError";
+			}
 		}
 		
 		@RequestMapping(path="/logout", method=RequestMethod.POST)
