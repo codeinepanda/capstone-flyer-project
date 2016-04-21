@@ -2,6 +2,7 @@ package com.techelevator.model;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,4 +63,33 @@ public class JDBCFlyerDAO implements FlyerDAO {
 	}
 	return flyerUserList;
 }
+
+	@Override
+	public ArrayList<Flyer> selectAllNotExpired(LocalDate endDate) {
+		String sqlSelectNotExpiredFlyers = "SELECT *"+
+										"FROM flyer;";
+
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSelectNotExpiredFlyers);
+		ArrayList<Flyer> activeFlyers = new ArrayList<Flyer>();
+
+			for(int i = 0; results.next(); i++) {
+				Flyer checkFlyer = (Flyer) results.getObject(i);
+				if(isActive(checkFlyer.getEndDate())) {
+					activeFlyers.add(checkFlyer);
+				}
+			}
+			return activeFlyers;
+	}
+
+	public boolean isActive(LocalDate endDate) {
+			LocalDate today = LocalDate.now();
+			int daysRemaining = (int)ChronoUnit.DAYS.between(today, endDate);
+				if(daysRemaining > 0) {
+					return true;
+					} else {
+						return false;
+					}	
+		}
+	
+
 }
