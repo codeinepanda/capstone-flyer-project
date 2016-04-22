@@ -16,8 +16,10 @@ public class Flyer {
 	private String category;
 	private String flyerDescription;
 	private LocalDate createDate;
+	private int tabsTaken;
 	
-	public Flyer(String userName, String company, String flyerName, LocalDate startDate, LocalDate endDate, int numTabs, String category, String flyerDescription) {
+	
+	public Flyer(String userName, String company, String flyerName, LocalDate startDate, LocalDate endDate, int numTabs, String category, String flyerDescription, int tabsTaken) {
 		this.userName = userName;
 		this.company = company;
 		this.flyerName = flyerName;
@@ -26,16 +28,10 @@ public class Flyer {
 		this.numberOfTabs = numTabs;
 		this.category = category;
 		this.flyerDescription = flyerDescription;
+		this.tabsTaken = tabsTaken;
 	}
-	
-	
-	
 	public Flyer() {
-		// TODO Auto-generated constructor stub
 	}
-
-
-
 	public LocalDate getCreateDate() {
 		return createDate;
 	}
@@ -98,6 +94,13 @@ public class Flyer {
 	public void setFlyerDescription(String flyerDescription) {
 		this.flyerDescription = flyerDescription;
 	}
+	public int getTabsTaken() {
+		return tabsTaken;
+	}
+	public void setTabsTaken(int tabsTaken) {
+		this.tabsTaken = tabsTaken;
+	}
+
 	
 }
 	

@@ -12,4 +12,5 @@ public interface FlyerDAO {
 	public ArrayList<Flyer> selectAllNotExpired(LocalDate endDate);
 	public ArrayList<Flyer> getFlyersFiltered(String userName, String category, String flyerName, String company,
 			boolean mostPopular);
+	
 }
