@@ -54,6 +54,8 @@ public class FlyerController {
 				}
 			}
 			if(session.getAttribute("currentUser") != null) {
+				model.put("column1", column1);
+				model.put("column2", column2);
 				return "dashboard";
 			} else {
 				model.put("column1", column1);
