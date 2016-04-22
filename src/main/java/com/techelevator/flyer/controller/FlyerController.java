@@ -114,6 +114,17 @@ public class FlyerController {
 			return "selectedFlyer";
 		}
 		
+		@RequestMapping(path="/pullTab", method=RequestMethod.GET)
+		public String showFlyerMinusTab(Map<String, Object> model, HttpSession session) {
+			if(session.getAttribute("currentUser") != null) {
+				String message = flyerDAO.pullTab();
+				model.put("message", message);
+			} else {
+				return "permissionError";
+			}
+			return "/viewSelected";
+		}
+		
 		@RequestMapping(path="/registration", method=RequestMethod.GET)
 		public String showRegistrationPage() {
 			return "register";

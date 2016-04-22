@@ -11,4 +11,5 @@ public interface FlyerDAO {
 	public ArrayList<Flyer> getFilteredFlyers();
 	public List<Flyer> getAllFlyersByCreator(String userName);
 	ArrayList<Flyer> selectAllNotExpired(LocalDate endDate);
+	public String pullTab();
 }
