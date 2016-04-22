@@ -27,7 +27,7 @@ CREATE TABLE flyer (
 	start_date date NOT NULL,																	-- Year, Month, Day : 4 digits - 2 digit - 2 digit
 	end_date date NOT NULL, 																	-- number of tabs a flyer has
 	num_tabs integer,																			-- number of tabs on flyer
-	tabs_taken integer,
+	tabs_taken integer DEFAULT 0,
 	flyer_info varchar(1000),																	-- User created
 	category varchar(256) NOT NULL,
     CONSTRAINT fk_flyer_user_user_name FOREIGN KEY (user_name) REFERENCES flyer_user(user_name),
