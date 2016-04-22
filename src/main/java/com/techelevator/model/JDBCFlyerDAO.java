@@ -26,7 +26,7 @@ public class JDBCFlyerDAO implements FlyerDAO {
 	@Override
 	public ArrayList<Flyer> getFeaturedFlyers() {
 		ArrayList<Flyer> featuredFlyersList = new ArrayList<>();
-		String sqlSelectFeaturedFlyers = "SELECT * FROM flyer ORDER BY start_date LIMIT 6";
+		String sqlSelectFeaturedFlyers = "SELECT * FROM flyer ORDER BY create_date LIMIT 6";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSelectFeaturedFlyers);
 		
 		while (results.next()) {
@@ -59,8 +59,9 @@ public class JDBCFlyerDAO implements FlyerDAO {
 	public void createFlyer(Flyer newFlyer) {
 		Date startDate = Date.valueOf(newFlyer.getStartDate());
 		Date endDate = Date.valueOf(newFlyer.getEndDate());
-		Object[] params = {newFlyer.getCompany(), newFlyer.getUserName(), newFlyer.getFlyerName(), startDate, endDate, newFlyer.getNumberOfTabs(), newFlyer.getFlyerDescription(), newFlyer.getCategory()};
-		String sqlCreateNewFlyer = "INSERT INTO flyer(company, user_name, flyer_name, start_date, end_date, num_tabs, flyer_info, category) VALUES (?,?,?,?,?,?,?,?);";
+		Date createDate = Date.valueOf(newFlyer.getCreateDate());
+		Object[] params = {newFlyer.getCompany(), newFlyer.getUserName(), newFlyer.getFlyerName(), createDate, startDate, endDate, newFlyer.getNumberOfTabs(), newFlyer.getFlyerDescription(), newFlyer.getCategory()};
+		String sqlCreateNewFlyer = "INSERT INTO flyer(company, user_name, flyer_name, create_date, start_date, end_date, num_tabs, flyer_info, category) VALUES (?,?,?,?,?,?,?,?,?);";
 		jdbcTemplate.update(sqlCreateNewFlyer, params);
 	}
 
@@ -106,6 +107,7 @@ public class JDBCFlyerDAO implements FlyerDAO {
 	}
 	
 	private Flyer getFlyerFromDB(SqlRowSet results) {
+		LocalDate create = results.getDate("create_date").toLocalDate();
 		LocalDate start = results.getDate("start_date").toLocalDate();
 		LocalDate end = results.getDate("end_date").toLocalDate();
 		Flyer newFlyer = new Flyer();
@@ -113,6 +115,7 @@ public class JDBCFlyerDAO implements FlyerDAO {
 		newFlyer.setUserName(results.getString("user_name"));
 		newFlyer.setCompany(results.getString("company"));
 		newFlyer.setFlyerName(results.getString("flyer_name"));
+		newFlyer.setCreateDate(create);
 		newFlyer.setStartDate(start);
 		newFlyer.setEndDate(end);
 		newFlyer.setNumberOfTabs(results.getInt("num_tabs")); 

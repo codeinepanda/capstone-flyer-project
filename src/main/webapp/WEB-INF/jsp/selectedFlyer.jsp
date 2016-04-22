@@ -56,7 +56,7 @@
       --></div><!-- END FLYER BODY ROW
       --><div class="row" id="footer"
           ><div class="col-xs-6 creator"
-          ><p>Created by: <c:out value="${selectedFlyer.userName}"/> on <c:out value="${suggestedFlyer.createDate}"/></p
+          ><p>Created by: <c:out value="${selectedFlyer.userName}"/> on <c:out value="${selectedFlyer.createDate}"/></p
           ></div><!-- END CREATOR COLUMN
         --><div class="col-xs-6 expire"
             ><p>Offer Expires: <c:out value="${selectedFlyer.endDate}"/> so act fast!</p
