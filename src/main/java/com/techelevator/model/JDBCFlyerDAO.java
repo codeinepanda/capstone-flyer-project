@@ -25,13 +25,19 @@ public class JDBCFlyerDAO implements FlyerDAO {
 
 	@Override
 	public ArrayList<Flyer> getFeaturedFlyers() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Flyer> featuredFlyersList = new ArrayList<>();
+		String sqlSelectFeaturedFlyers = "SELECT * FROM flyer LIMIT 6";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSelectFeaturedFlyers);
+		
+		while (results.next()) {
+			createNewFlyer(featuredFlyersList, results);
+		}
+		return featuredFlyersList;
 	}
 
 	@Override
 	public ArrayList<Flyer> getFilteredFlyers() {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
@@ -53,16 +59,20 @@ public class JDBCFlyerDAO implements FlyerDAO {
 	
 	while (results.next())
 	{
+		createNewFlyer(flyerUserList, results);
+		
+	}
+	return flyerUserList;
+}
+
+	private void createNewFlyer(ArrayList<Flyer> flyerUserList, SqlRowSet results) {
 		LocalDate start = results.getDate("start_date").toLocalDate();
 		LocalDate end = results.getDate("end_date").toLocalDate();
 		Flyer newFlyer = new Flyer(results.getString("user_name"), results.getString("company"),
 								   results.getString("flyer_name"), start, end, results.getInt("num_tabs"), 
 								   results.getString("category"), results.getString("flyer_info"));
 		flyerUserList.add(newFlyer);
-		
 	}
-	return flyerUserList;
-}
 
 	@Override
 	public ArrayList<Flyer> selectAllNotExpired(LocalDate endDate) {
