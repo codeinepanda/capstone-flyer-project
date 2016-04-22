@@ -36,9 +36,23 @@ public class JDBCFlyerDAO implements FlyerDAO {
 	}
 
 	@Override
-	public ArrayList<Flyer> getFilteredFlyers() {
+	public ArrayList<Flyer> getFlyersFiltered(String userName,String category, String flyerName, String company, boolean mostPopular) {
+		ArrayList<Flyer> filteredFlyersList = new ArrayList<>();
 		
-		return null;
+		Object[] params = {userName, category, flyerName, company, userName, category, userName, flyerName, userName, company, flyerName, category, flyerName, company, category, company, 
+											userName, category, flyerName, userName, category, company, userName, flyerName, company, flyerName, category, company, userName, category, flyerName, company, mostPopular};
+		
+		
+		String sqlFilteredFlyersList = "SELECT * FROM flyer WHERE user_name = ? OR category = ? OR flyer_name = ? OR company = ?" 
+									+ " OR (user_name = ? AND category = ?) OR (user_name = ? AND flyer_name = ?) OR (user_name = ? AND company = ?) OR (flyer_name = ? AND category = ?) OR (flyer_name = ? AND company = ?) OR (category = ? AND company = ?)"
+									+ " OR (user_name = ? AND category = ? AND flyer_name = ?) OR (user_name = ? AND category AND company = ?) OR (user_name = ? AND flyer_name = ? AND company = ?) OR (flyer_name = ? AND category = ? AND company = ?)"	
+									+ " OR (user_name = ? AND category = ? AND flyer_name = ? AND company = ?) ORDER BY (SELECT COUNT(*) FROM tabs WHERE tab_flyer_id = flyer_flyer_id) DESC";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlFilteredFlyersList, params);
+		while (results.next())
+		{
+			filteredFlyersList.add(getFlyerFromDB(results));
+		}
+		return filteredFlyersList; 
 	}
 
 	@Override
@@ -95,6 +109,7 @@ public class JDBCFlyerDAO implements FlyerDAO {
 		LocalDate start = results.getDate("start_date").toLocalDate();
 		LocalDate end = results.getDate("end_date").toLocalDate();
 		Flyer newFlyer = new Flyer();
+		newFlyer.setTabsTaken(results.getInt("tabs_taken"));
 		newFlyer.setUserName(results.getString("user_name"));
 		newFlyer.setCompany(results.getString("company"));
 		newFlyer.setFlyerName(results.getString("flyer_name"));

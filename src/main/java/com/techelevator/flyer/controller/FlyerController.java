@@ -74,14 +74,15 @@ public class FlyerController {
 																  // @RequestParam("createDate") String create,
 																   @RequestParam("numTabs") int numTabs,
 																   @RequestParam("category") String category,
-																   @RequestParam("flyerInfo") String flyerDescription) {
+																   @RequestParam("flyerInfo") String flyerDescription,
+																   @RequestParam("tabsTaken") int tabsTaken) {
 
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 			LocalDate startDate = LocalDate.parse(start, formatter);
 			LocalDate endDate = LocalDate.parse(end, formatter);
 		//	LocalDate createDate = LocalDate.parse(create, formatter);
 			System.out.println("Inside show selected");
-			Flyer selectedFlyer = new Flyer(userName, company, flyerName, startDate, endDate, numTabs, category, flyerDescription);
+			Flyer selectedFlyer = new Flyer(userName, company, flyerName, startDate, endDate, numTabs, category, flyerDescription, tabsTaken);
 	//		selectedFlyer.setCreateDate(createDate);
 			System.out.println("Created selectedFlyer object");
 			model.put("selectedFlyer", selectedFlyer);
@@ -115,14 +116,15 @@ public class FlyerController {
 																  // @RequestParam("createDate") String create,
 																   @RequestParam("numTabs") int numTabs,
 																   @RequestParam("category") String category,
-																   @RequestParam("flyerInfo") String flyerDescription) {
+																   @RequestParam("flyerInfo") String flyerDescription,
+																   @RequestParam("tabsTaken") int tabsTaken) {
 
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 			LocalDate startDate = LocalDate.parse(start, formatter);
 			LocalDate endDate = LocalDate.parse(end, formatter);
 		//	LocalDate createDate = LocalDate.parse(create, formatter);
 			System.out.println("Inside show selected");
-			Flyer selectedFlyer = new Flyer(userName, company, flyerName, startDate, endDate, numTabs, category, flyerDescription);
+			Flyer selectedFlyer = new Flyer(userName, company, flyerName, startDate, endDate, numTabs, category, flyerDescription, tabsTaken);
 	//		selectedFlyer.setCreateDate(createDate);
 			System.out.println("Created selectedFlyer object");
 			model.put("selectedFlyer", selectedFlyer);
@@ -213,12 +215,13 @@ public class FlyerController {
 																		  @RequestParam("numTabs") int tabs,
 																		  @RequestParam("category") String cat,
 																		  @RequestParam("description") String info,
+																		  @RequestParam("tabsTaken") int tabsTaken,
 																		  HttpSession session) {
 			LocalDate startDate = start.toLocalDate();
 			LocalDate endDate = expire.toLocalDate();
 			LocalDate createDate = LocalDate.now();
 			User currentUser = (User) session.getAttribute("currentUser");
-			Flyer newFlyer = new Flyer(currentUser.getUsername(), company, flyer, startDate, endDate, tabs, cat, info);
+			Flyer newFlyer = new Flyer(currentUser.getUsername(), company, flyer, startDate, endDate, tabs, cat, info, tabsTaken);
 			newFlyer.setCreateDate(createDate);
 			session.putValue("newFlyer", newFlyer);
 			return "newFlyerComplete";

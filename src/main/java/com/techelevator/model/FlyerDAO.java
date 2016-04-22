@@ -8,8 +8,9 @@ import java.util.List;
 public interface FlyerDAO {
 	public void createFlyer(Flyer newflyer);
 	public ArrayList<Flyer> getFeaturedFlyers();
-	public ArrayList<Flyer> getFilteredFlyers();
 	public List<Flyer> getAllFlyersByCreator(String userName);
-	ArrayList<Flyer> selectAllNotExpired(LocalDate endDate);
+	public ArrayList<Flyer> selectAllNotExpired(LocalDate endDate);
+	public ArrayList<Flyer> getFlyersFiltered(String userName, String category, String flyerName, String company,
+			boolean mostPopular);
 	public String pullTab();
 }
