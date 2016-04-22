@@ -40,7 +40,9 @@
 	                	   		/><c:param name="numTabs" value="${flyer.numberOfTabs}"
 	                	   		/><c:param name="flyerInfo" value="${flyer.flyerDescription}"
 	                	   		/><c:param name="category" value="${flyer.category}"
-	                	   /></c:url><iframe src="${flyerPreview}" width="650" height="650"
+	                	   /></c:url
+	                	   ><a href="${flyerPreview}" class="btn btn-block btn-info">View This Flyer</a
+	                	   ><iframe src="${flyerPreview}" width="650" height="650"
 	                	   ></iframe
                 		></div
                    ></div
@@ -59,7 +61,9 @@
 	                	   		/><c:param name="numTabs" value="${flyer.numberOfTabs}"
 	                	   		/><c:param name="flyerInfo" value="${flyer.flyerDescription}"
 	                	   		/><c:param name="category" value="${flyer.category}"
-	                	   /></c:url><iframe src="${flyerPreview}" width="650" height="650"
+	                	   /></c:url
+	                	   ><a href="${flyerPreview}" class="btn btn-block btn-info">View This Flyer</a
+	                	   ><iframe src="${flyerPreview}" width="650" height="650"
 	                	   ></iframe
                 			></div
                 	   ></div
