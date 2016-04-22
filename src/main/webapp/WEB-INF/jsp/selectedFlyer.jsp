@@ -45,8 +45,13 @@
       	><p><c:out value="${selectedFlyer.flyerDescription}"/></p
       ></div><!-- END DESCRIPTION COLUMN
     --><div class="col-xs-12 takeTab"
-    ><c:url var="takeTab" value="/takeTab"
+    ><c:url var="takeTab" value="/pullTab"
         /><a href="${takeTab}" class="btn btn-default fa fa-ticket link"> <strong>Grab A Tab</strong><br>Only <c:out value="${selectedFlyer.numberOfTabs}"/> left!</a
+        ><c:if test="${not empty message}"
+        	><br
+        	><br
+        	><h5><c:out value="${message}"/></h5
+        ></c:if
       ></div><!-- END TAKE TAB COLUMN
       --></div><!-- END FLYER BODY ROW
       --><div class="row" id="footer"
