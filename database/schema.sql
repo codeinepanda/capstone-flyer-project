@@ -33,8 +33,10 @@ CREATE TABLE flyer (
 );
 
 CREATE TABLE tab (
+	isRedeemed BOOLEAN NOT NULL DEFAULT false,
 	flyer_id integer,
 	user_name varchar(256),
+	CONSTRAINT pk_flyer_user_flyer_flyer_id PRIMARY KEY (flyer_id, user_name),
 	CONSTRAINT fk_flyer_flyer_id FOREIGN KEY (flyer_id) REFERENCES flyer(flyer_id),
 	CONSTRAINT fk_flyer_user_user_name FOREIGN KEY (user_name) REFERENCES flyer_user(user_name)
 );
