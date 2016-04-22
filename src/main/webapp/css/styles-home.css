@@ -33,3 +33,11 @@ body {
 	min-height: 80%;
 	height: 80%;
 }
+
+iframe {
+	margin: 0;
+}
+
+.featured {
+	padding: 0;
+}
