@@ -96,6 +96,17 @@ public class JDBCFlyerDAO implements FlyerDAO {
 			return activeFlyers;
 	}
 
+	@Override
+	public ArrayList<Flyer> viewAllUnredeemedTabsByUser(String userName) {
+		ArrayList<Flyer> listOfUnredeemedTabs = new ArrayList<>();
+		String sqlListOfUnredeemedTabs = "SELECT * FROM flyer INNER JOIN tab ON flyer.flyer_id=tab.flyer_id WHERE isRedeemed = true AND tab.user_name = ?;";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlListOfUnredeemedTabs, userName);
+		while (results.next()) {
+		listOfUnredeemedTabs.add(getFlyerFromDB(results));	
+		}
+		return listOfUnredeemedTabs;
+		}
+	
 	public boolean isActive(LocalDate endDate) {
 		LocalDate today = LocalDate.now();
 		int daysRemaining = (int)ChronoUnit.DAYS.between(today, endDate);
@@ -123,12 +134,16 @@ public class JDBCFlyerDAO implements FlyerDAO {
 		newFlyer.setFlyerDescription(results.getString("flyer_info"));
 		return newFlyer;
 	}
+	
+	
 
 	@Override
 	public String pullTab() {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	
 	
 
 }
