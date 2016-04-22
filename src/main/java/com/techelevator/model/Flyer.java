@@ -19,7 +19,7 @@ public class Flyer {
 	private int tabsTaken;
 	
 	
-	public Flyer(String userName, String company, String flyerName, LocalDate startDate, LocalDate endDate, int numTabs, String category, String flyerDescription, int tabsTaken) {
+	public Flyer(String userName, String company, String flyerName, LocalDate startDate, LocalDate endDate, int numTabs, String category, String flyerDescription) {
 		this.userName = userName;
 		this.company = company;
 		this.flyerName = flyerName;
@@ -28,7 +28,6 @@ public class Flyer {
 		this.numberOfTabs = numTabs;
 		this.category = category;
 		this.flyerDescription = flyerDescription;
-		this.tabsTaken = tabsTaken;
 	}
 	public Flyer() {
 	}
