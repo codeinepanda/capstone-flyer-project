@@ -120,6 +120,12 @@ public class JDBCFlyerDAO implements FlyerDAO {
 		newFlyer.setFlyerDescription(results.getString("flyer_info"));
 		return newFlyer;
 	}
+
+	@Override
+	public String pullTab() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 
 }

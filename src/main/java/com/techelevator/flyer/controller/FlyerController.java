@@ -90,6 +90,23 @@ public class FlyerController {
 			return "selectedFlyer";
 		}
 		
+		@RequestMapping(path="/searchFlyers", method=RequestMethod.GET)
+		public String showFilterForm() {
+			return "filterForm";
+		}
+		
+		@RequestMapping(path="/filteredFlyers", method=RequestMethod.POST)
+		public String showFilteredFlyers(Map<String, Object> model, @RequestParam("company") String company,
+																	@RequestParam("flyerName") String flyerName,
+																	@RequestParam("userName") String userName,
+																	@RequestParam("numTabs") int numTabs,
+																	@RequestParam("category") String category,
+																	@RequestParam("orderBy") String orderBy) {
+			
+			
+			return "filteredFlyers";
+		}
+		
 		@RequestMapping(path="/viewSelected", method=RequestMethod.GET)
 		public String openSelectedFlyer(Map<String, Object> model, @RequestParam("flyerName") String flyerName,
 																   @RequestParam("userName") String userName,
@@ -114,6 +131,17 @@ public class FlyerController {
 			model.put("notPreview", true);
 			System.out.println("Put selectedFlyer into model.");
 			return "selectedFlyer";
+		}
+		
+		@RequestMapping(path="/pullTab", method=RequestMethod.GET)
+		public String showFlyerMinusTab(Map<String, Object> model, HttpSession session) {
+			if(session.getAttribute("currentUser") != null) {
+				String message = flyerDAO.pullTab();
+				model.put("message", message);
+			} else {
+				return "permissionError";
+			}
+			return "/viewSelected";
 		}
 		
 		@RequestMapping(path="/registration", method=RequestMethod.GET)
