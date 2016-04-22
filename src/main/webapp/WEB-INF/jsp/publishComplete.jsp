@@ -19,11 +19,11 @@
              ><div class="row form"
                    ><div class="col-xs-12 form">
                         <div id="success_box"
-             				><h1>Congratulations! Your Form Has Been Successfully Generated!</h1
-             				><c:url var="toFlyer" value="/viewYourFlyer"
-             				/><c:url var="cancel" value="/cancelPublish"
-             				/><a href="${toFlyer}"><h3>Click Here To View Your Submission And Publish</h3></a
-             				><a href="${cancel}"><h3>Cancel Publication</h3></a
+             				><h1>Congratulations! Your Form Has Been Successfully Published!</h1
+             				><c:url var="cancel" value="/"
+             				/><c:url var="createNew" value="/flyerForm"
+             				/><a href="${createNew}"><h3>Click Here To Create Another Form!</h3></a
+             				><a href="${cancel}"><h3>Return Home</h3></a
                         ></div
                    ></div
              ></div

@@ -26,12 +26,12 @@
         /><a href="${cancelPublish}" class="btn btn-primary btn-block fa fa-info-circle"> Don't Publish</a
           ></div
           ><div class="col-xs-3"
-          ><c:url var="toProfile" value="/userProfile"
-        /><a href="${toProfile}" class="btn btn-primary btn-block fa fa-folder-open"> Your Portfolio</a
+          ><c:url var="confirmPublish" value="/confirmPublish"
+        /><a href="${confirmPublish}" class="btn btn-primary btn-block fa fa-folder-open"> Publish Flyer</a
           ></div>
           <div class="col-xs-3"
           ><c:url var="publishNew" value="flyerForm"
-        /><a href="${publishNew}" class="btn btn-primary btn-block fa fa-envelope"> Publish Another</a
+        /><a href="${publishNew}" class="btn btn-primary btn-block fa fa-envelope"> Make Another</a
           ></div
       ></div><!-- END HEADER BUTTONS
     --><div class="row" id="flyer-body"

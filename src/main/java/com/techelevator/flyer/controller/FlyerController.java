@@ -115,7 +115,6 @@ public class FlyerController {
 			User currentUser = (User) session.getAttribute("currentUser");
 			Flyer newFlyer = new Flyer(currentUser.getUsername(), company, flyer, startDate, endDate, tabs, cat, info);
 			newFlyer.setCreateDate(createDate);
-			flyerDAO.createFlyer(newFlyer);
 			session.putValue("newFlyer", newFlyer);
 			return "newFlyerComplete";
 		}
@@ -130,6 +129,33 @@ public class FlyerController {
 				model.put("newFlyer", newFlyer);
 				model.put("days", days);
 				return "newFlyer";
+			} else {
+				return "permissionsError";
+			}
+		}
+		
+		@RequestMapping(path="/confirmPublish", method=RequestMethod.GET)
+		public String displayPublicationConfirmation(Map<String, Object> model, HttpSession session) {
+			User currentUser = (User) session.getAttribute("currentUser");
+			Flyer newFlyer = (Flyer) session.getAttribute("newFlyer");
+			if(currentUser.getUsername().equals(newFlyer.getUserName())) {
+				System.out.println("Usernames match");
+				flyerDAO.createFlyer(newFlyer);
+				return "publishComplete";
+			} else {
+				return "permissionsError";
+			}
+		}
+		
+		@RequestMapping(path="/cancelPublish", method=RequestMethod.GET)
+		public String returnHomeAfterCancellation(Map<String, Object> model, HttpSession session) {
+			User currentUser = (User) session.getAttribute("currentUser");
+			Flyer newFlyer = (Flyer) session.getAttribute("newFlyer");
+			if(currentUser.getUsername().equals(newFlyer.getUserName())) {
+				System.out.println("Usernames match");
+				session.removeAttribute("newFlyer");
+				model.remove("newFlyer");
+				return "redirect:/";
 			} else {
 				return "permissionsError";
 			}
