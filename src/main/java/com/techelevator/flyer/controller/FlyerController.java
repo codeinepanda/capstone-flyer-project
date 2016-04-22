@@ -89,6 +89,23 @@ public class FlyerController {
 			return "selectedFlyer";
 		}
 		
+		@RequestMapping(path="/searchFlyers", method=RequestMethod.GET)
+		public String showFilterForm() {
+			return "filterForm";
+		}
+		
+		@RequestMapping(path="/filteredFlyers", method=RequestMethod.POST)
+		public String showFilteredFlyers(Map<String, Object> model, @RequestParam("company") String company,
+																	@RequestParam("flyerName") String flyerName,
+																	@RequestParam("userName") String userName,
+																	@RequestParam("numTabs") int numTabs,
+																	@RequestParam("category") String category,
+																	@RequestParam("orderBy") String orderBy) {
+			
+			
+			return "filteredFlyers";
+		}
+		
 		@RequestMapping(path="/viewSelected", method=RequestMethod.GET)
 		public String openSelectedFlyer(Map<String, Object> model, @RequestParam("flyerName") String flyerName,
 																   @RequestParam("userName") String userName,
