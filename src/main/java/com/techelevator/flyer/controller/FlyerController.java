@@ -107,7 +107,7 @@ public class FlyerController {
 		}
 		
 		@RequestMapping(path="/login", method=RequestMethod.POST)
-		public String showDashboard(/*Map<String, Object> flyerModel,*/ Map<String, Object> model, @RequestParam("username") String display,
+		public String showDashboard(Map<String, Object> model, @RequestParam("username") String display,
 															   @RequestParam("password") String pwd,
 															   HttpSession session) {
 			System.out.println("Login controller reached");
@@ -116,8 +116,19 @@ public class FlyerController {
 				System.out.println("User Found");
 				User currentUser = userDAO.returnUserByUsername(display);
 			//	List<Flyer> userFlyers = flyerDAO.getAllFlyersForUser(display);
+				ArrayList<Flyer> featuredFlyers = flyerDAO.getFeaturedFlyers();
+				ArrayList<Flyer> column1 = new ArrayList();
+				ArrayList<Flyer> column2 = new ArrayList();
+				for(int i = 0; i < featuredFlyers.size(); i++) {
+					if(i < featuredFlyers.size()/2) {
+						column1.add(featuredFlyers.get(i));
+					} else {
+						column2.add(featuredFlyers.get(i));
+					}
+				}
 				model.put("currentUser", currentUser);
-			//	flyerModel.put("userFlyers", userFlyers);
+				model.put("column1", column1);
+				model.put("column2", column2);
 				return "dashboard";
 			}
 			System.out.println("User NOT Found!");

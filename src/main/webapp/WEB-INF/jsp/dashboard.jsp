@@ -40,22 +40,42 @@
             ></div
             ><div class="row"
                 ><div class="col-xs-6 featured-col"
-                    ><c:forEach var="flyer" items="flyers_1" begin="0" step="1"
-                        ><c:url var="flyer-img" value=""></c:url
-                        ><div class="featured-flyer"
-                            ><img src=""
-                        ></div
-                ></c:forEach
-            ></div
-                ><div class="col-xs-6 featured-col"
-                    ><c:forEach var="flyer" items="flyers_2" begin="0" step="1"
-                        ><c:url var="flyer-img" value=""></c:url
-                        ><div class="featured-flyer"
-                            ><img src=""
-                        ></div
-                ></c:forEach
-            ></div
-            ></div
+                    ><c:forEach var="flyer" items="${column1}" begin="0" step="1"
+                    ><div class="row featured"
+                    	><div class="col-xs-12 featured"
+	                	   ><c:url var="flyerPreview" value="/viewSelected"
+	                	   		><c:param name="flyerName" value="${flyer.flyerName}"
+	                	   		/><c:param name="company" value="${flyer.company}"
+	                	   		/><c:param name="userName" value="${flyer.userName}"
+	                	   		/><c:param name="startDate" value="${flyer.startDate}"
+	                	   		/><c:param name="endDate" value="${flyer.endDate}"
+	                	   		/><c:param name="numTabs" value="${flyer.numberOfTabs}"
+	                	   		/><c:param name="flyerInfo" value="${flyer.flyerDescription}"
+	                	   		/><c:param name="category" value="${flyer.category}"
+	                	   /></c:url><iframe src="${flyerPreview}" width="650" height="650"
+	                	   ></iframe
+                		></div
+                   ></div
+                   ></c:forEach
+             ></div
+             ><div class="col-xs-6 featured"
+             	><c:forEach var="flyer" items="${column2}" begin="0" step="1"
+                    ><div class="row featured"
+                    	><div class="column-xs-12 featured"
+		                	><c:url var="flyerPreview" value="/viewSelected"
+	                	   		><c:param name="flyerName" value="${flyer.flyerName}"
+	                	   		/><c:param name="company" value="${flyer.company}"
+	                	   		/><c:param name="userName" value="${flyer.userName}"
+	                	   		/><c:param name="startDate" value="${flyer.startDate}"
+	                	   		/><c:param name="endDate" value="${flyer.endDate}"
+	                	   		/><c:param name="numTabs" value="${flyer.numberOfTabs}"
+	                	   		/><c:param name="flyerInfo" value="${flyer.flyerDescription}"
+	                	   		/><c:param name="category" value="${flyer.category}"
+	                	  /></c:url><iframe src="${flyerPreview}" width="650" height="650"
+	                	   ></iframe
+            		></div
+            	></div
+            ></c:forEach
         ></div>
     </body>
 </html>
