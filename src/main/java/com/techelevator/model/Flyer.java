@@ -15,7 +15,7 @@ public class Flyer {
 	private int numberOfTabs;
 	private String category;
 	private String flyerDescription;
-	private LocalDateTime createDate;
+	private LocalDate createDate;
 	
 	public Flyer(String userName, String company, String flyerName, LocalDate startDate, LocalDate endDate, int numTabs, String category, String flyerDescription) {
 		this.userName = userName;
@@ -36,10 +36,10 @@ public class Flyer {
 
 
 
-	public LocalDateTime getCreateDate() {
+	public LocalDate getCreateDate() {
 		return createDate;
 	}
-	public void setCreateDate(LocalDateTime createDate) {
+	public void setCreateDate(LocalDate createDate) {
 		this.createDate = createDate;
 	}
 	public String getCategory() {

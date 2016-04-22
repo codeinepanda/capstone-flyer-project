@@ -30,20 +30,20 @@
                 ><div class="col-xs-6 featured"
                     ><c:forEach var="flyer" items="${column1}" begin="0" step="1"
                     ><div class="row"
-                    	><div class="col-xs-12"
-	                        ><c:out value="<strong>Flyer Name:</strong> ${flyer.flyerName}" escapeXml="false"
-	                       /><br
-	                       ><c:out value="<strong>Company:</strong> ${flyer.company}" escapeXml="false"
-	                       /><br
-	                       ><c:out value="<strong>Creator:</strong> ${flyer.userName}" escapeXml="false"
-	                       /><br
-	                       ><c:out value="<strong>Number of Tabs:</strong> ${flyer.numberOfTabs}" escapeXml="false"
-	                       /><br
-	                       ><c:out value="<strong>Offer Expires:</strong> ${flyer.endDate}" escapeXml="false"
-	                       /><br
-	                       ><c:out value="<strong>Description:</strong> ${flyer.flyerDescription}" escapeXml="false"
-	                	  /><br
-	                	   ><br
+                    	><div class="col-xs-12">
+	                	   <c:url var="flyerPreview" value="/viewSelected">
+	                	   		<c:param name="flyerName" value="${flyer.flyerName}"></c:param>
+	                	   		<c:param name="company" value="${flyer.company}"></c:param>
+	                	   		<c:param name="userName" value="${flyer.userName}"></c:param>
+	                	   		<c:param name="startDate" value="${flyer.startDate}"></c:param>
+	                	   		<c:param name="endDate" value="${flyer.endDate}"></c:param>
+	                	   		<c:param name="numTabs" value="${flyer.numberOfTabs}"></c:param>
+	                	   		<c:param name="flyerInfo" value="${flyer.flyerDescription}"></c:param>
+	                	   		<!--<c:param name="createDate" value="${flyer.createDate}"></c:param>-->
+	                	   		<c:param name="category" value="${flyer.category}"></c:param>
+	                	   </c:url>
+	                	   <iframe src="${flyerPreview}" width="650" height="650"
+	                	   ></iframe
                 		></div
                    ></div
                    ></c:forEach
@@ -52,19 +52,19 @@
                     ><c:forEach var="flyer" items="${column2}" begin="0" step="1"
                     	><div class="row"
                     		><div class="column-xs-12"
-		                        ><c:out value="<strong>Flyer Name:</strong> ${flyer.flyerName}" escapeXml="false"
-		                       /><br
-		                       ><c:out value="<strong>Company:</strong> ${flyer.company}" escapeXml="false"
-		                       /><br
-		                       ><c:out value="<strong>Creator:</strong> ${flyer.userName}" escapeXml="false"
-		                       /><br
-		                       ><c:out value="<strong>Number of Tabs:</strong> ${flyer.numberOfTabs}" escapeXml="false"
-		                       /><br
-		                       ><c:out value="<strong>Offer Expires:</strong> ${flyer.endDate}" escapeXml="false"
-		                       /><br
-		                       ><c:out value="<strong>Description:</strong> ${flyer.flyerDescription}" escapeXml="false"
-                			  /><br
-                			   ><br
+		                        ><c:url var="flyerPreview" value="/viewSelected">
+	                	   		<c:param name="flyerName" value="${flyer.flyerName}"></c:param>
+	                	   		<c:param name="company" value="${flyer.company}"></c:param>
+	                	   		<c:param name="userName" value="${flyer.userName}"></c:param>
+	                	   		<c:param name="startDate" value="${flyer.startDate}"></c:param>
+	                	   		<c:param name="endDate" value="${flyer.endDate}"></c:param>
+	                	   		<c:param name="numTabs" value="${flyer.numberOfTabs}"></c:param>
+	                	   		<c:param name="flyerInfo" value="${flyer.flyerDescription}"></c:param>
+	                	   		<!--<c:param name="createDate" value="${flyer.createDate}"></c:param>-->
+	                	   		<c:param name="category" value="${flyer.category}"></c:param>
+	                	   </c:url>
+	                	   <iframe src="${flyerPreview}" width="650" height="650"
+	                	   ></iframe
                 			></div
                 	   ></div
                 	></c:forEach

@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
@@ -58,6 +59,29 @@ public class FlyerController {
 				model.put("column2", column2);
 				return "index";
 			}
+		}
+		
+		@RequestMapping(path="/viewSelected", method=RequestMethod.GET)
+		public String showSelectedFlyer(Map<String, Object> model, @RequestParam("flyerName") String flyerName,
+																   @RequestParam("userName") String userName,
+																   @RequestParam("company") String company,
+																   @RequestParam("startDate") String start,
+																   @RequestParam("endDate") String end,
+																  // @RequestParam("createDate") String create,
+																   @RequestParam("numTabs") int numTabs,
+																   @RequestParam("category") String category,
+																   @RequestParam("flyerInfo") String flyerDescription) {
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			LocalDate startDate = LocalDate.parse(start, formatter);
+			LocalDate endDate = LocalDate.parse(end, formatter);
+		//	LocalDate createDate = LocalDate.parse(create, formatter);
+			System.out.println("Inside show selected");
+			Flyer selectedFlyer = new Flyer(userName, company, flyerName, startDate, endDate, numTabs, category, flyerDescription);
+	//		selectedFlyer.setCreateDate(createDate);
+			System.out.println("Created selectedFlyer object");
+			model.put("selectedFlyer", selectedFlyer);
+			System.out.println("Put selectedFlyer into model.");
+			return "selectedFlyer";
 		}
 		
 		@RequestMapping(path="/registration", method=RequestMethod.GET)
@@ -123,7 +147,7 @@ public class FlyerController {
 																		  HttpSession session) {
 			LocalDate startDate = start.toLocalDate();
 			LocalDate endDate = expire.toLocalDate();
-			LocalDateTime createDate = LocalDateTime.now();
+			LocalDate createDate = LocalDate.now();
 			User currentUser = (User) session.getAttribute("currentUser");
 			Flyer newFlyer = new Flyer(currentUser.getUsername(), company, flyer, startDate, endDate, tabs, cat, info);
 			newFlyer.setCreateDate(createDate);
