@@ -9,6 +9,6 @@ public interface FlyerDAO {
 	public void createFlyer(Flyer newflyer);
 	public ArrayList<Flyer> getFeaturedFlyers();
 	public ArrayList<Flyer> getFilteredFlyers();
-	public List<Flyer> getAllFlyersForUser(String userName);
+	public List<Flyer> getAllFlyersByCreator(String userName);
 	ArrayList<Flyer> selectAllNotExpired(LocalDate endDate);
 }

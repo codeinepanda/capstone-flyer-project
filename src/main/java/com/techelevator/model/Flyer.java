@@ -30,6 +30,12 @@ public class Flyer {
 	
 	
 	
+	public Flyer() {
+		// TODO Auto-generated constructor stub
+	}
+
+
+
 	public LocalDateTime getCreateDate() {
 		return createDate;
 	}

@@ -28,21 +28,47 @@
             ></div
             ><div id="main-content" class="row featured"
                 ><div class="col-xs-6 featured"
-                    ><c:forEach var="flyer" items="flyers_1" begin="0" step="1"
-                        ><c:url var="flyer-img" value=""></c:url
-                        ><div class="featured-flyer"
-                            ><img src=""
-                        ></div
-                ></c:forEach
-            ></div
+                    ><c:forEach var="flyer" items="${column1}" begin="0" step="1"
+                    ><div class="row"
+                    	><div class="col-xs-12"
+	                        ><c:out value="<strong>Flyer Name:</strong> ${flyer.flyerName}" escapeXml="false"
+	                       /><br
+	                       ><c:out value="<strong>Company:</strong> ${flyer.company}" escapeXml="false"
+	                       /><br
+	                       ><c:out value="<strong>Creator:</strong> ${flyer.userName}" escapeXml="false"
+	                       /><br
+	                       ><c:out value="<strong>Number of Tabs:</strong> ${flyer.numberOfTabs}" escapeXml="false"
+	                       /><br
+	                       ><c:out value="<strong>Offer Expires:</strong> ${flyer.endDate}" escapeXml="false"
+	                       /><br
+	                       ><c:out value="<strong>Description:</strong> ${flyer.flyerDescription}" escapeXml="false"
+	                	  /><br
+	                	   ><br
+                		></div
+                   ></div
+                   ></c:forEach
+             ></div
                 ><div class="col-xs-6 featured"
-                    ><c:forEach var="flyer" items="flyers_2" begin="0" step="1"
-                        ><c:url var="flyer-img" value=""></c:url
-                        ><div class="featured-flyer"
-                            ><img src=""
-                        ></div
-                ></c:forEach
-            ></div
+                    ><c:forEach var="flyer" items="${column2}" begin="0" step="1"
+                    	><div class="row"
+                    		><div class="column-xs-12"
+		                        ><c:out value="<strong>Flyer Name:</strong> ${flyer.flyerName}" escapeXml="false"
+		                       /><br
+		                       ><c:out value="<strong>Company:</strong> ${flyer.company}" escapeXml="false"
+		                       /><br
+		                       ><c:out value="<strong>Creator:</strong> ${flyer.userName}" escapeXml="false"
+		                       /><br
+		                       ><c:out value="<strong>Number of Tabs:</strong> ${flyer.numberOfTabs}" escapeXml="false"
+		                       /><br
+		                       ><c:out value="<strong>Offer Expires:</strong> ${flyer.endDate}" escapeXml="false"
+		                       /><br
+		                       ><c:out value="<strong>Description:</strong> ${flyer.flyerDescription}" escapeXml="false"
+                			  /><br
+                			   ><br
+                			></div
+                	   ></div
+                	></c:forEach
+              ></div
             ></div
         ></div>
     </body>

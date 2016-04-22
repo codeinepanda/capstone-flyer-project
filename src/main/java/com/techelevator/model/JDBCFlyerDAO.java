@@ -30,7 +30,7 @@ public class JDBCFlyerDAO implements FlyerDAO {
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSelectFeaturedFlyers);
 		
 		while (results.next()) {
-			createNewFlyer(featuredFlyersList, results);
+			featuredFlyersList.add(getFlyerFromDB(results));
 		}
 		return featuredFlyersList;
 	}
@@ -51,7 +51,7 @@ public class JDBCFlyerDAO implements FlyerDAO {
 	}
 
 	@Override
-	public List<Flyer> getAllFlyersForUser(String userName) {
+	public List<Flyer> getAllFlyersByCreator(String userName) {
 	ArrayList<Flyer> flyerUserList = new ArrayList<>();
 	String sqlSelectUserFlyers = "SELECT * FROM flyer WHERE user_name = ?";
 	
@@ -59,20 +59,10 @@ public class JDBCFlyerDAO implements FlyerDAO {
 	
 	while (results.next())
 	{
-		createNewFlyer(flyerUserList, results);
-		
+		flyerUserList.add(getFlyerFromDB(results));
 	}
 	return flyerUserList;
 }
-
-	private void createNewFlyer(ArrayList<Flyer> flyerUserList, SqlRowSet results) {
-		LocalDate start = results.getDate("start_date").toLocalDate();
-		LocalDate end = results.getDate("end_date").toLocalDate();
-		Flyer newFlyer = new Flyer(results.getString("user_name"), results.getString("company"),
-								   results.getString("flyer_name"), start, end, results.getInt("num_tabs"), 
-								   results.getString("category"), results.getString("flyer_info"));
-		flyerUserList.add(newFlyer);
-	}
 
 	@Override
 	public ArrayList<Flyer> selectAllNotExpired(LocalDate endDate) {
@@ -92,14 +82,29 @@ public class JDBCFlyerDAO implements FlyerDAO {
 	}
 
 	public boolean isActive(LocalDate endDate) {
-			LocalDate today = LocalDate.now();
-			int daysRemaining = (int)ChronoUnit.DAYS.between(today, endDate);
-				if(daysRemaining > 0) {
-					return true;
-					} else {
-						return false;
-					}	
+		LocalDate today = LocalDate.now();
+		int daysRemaining = (int)ChronoUnit.DAYS.between(today, endDate);
+		if(daysRemaining > 0) {
+			return true;
+		} else {
+			return false;
 		}
+	}
+	
+	private Flyer getFlyerFromDB(SqlRowSet results) {
+		LocalDate start = results.getDate("start_date").toLocalDate();
+		LocalDate end = results.getDate("end_date").toLocalDate();
+		Flyer newFlyer = new Flyer();
+		newFlyer.setUserName(results.getString("user_name"));
+		newFlyer.setCompany(results.getString("company"));
+		newFlyer.setFlyerName(results.getString("flyer_name"));
+		newFlyer.setStartDate(start);
+		newFlyer.setEndDate(end);
+		newFlyer.setNumberOfTabs(results.getInt("num_tabs")); 
+		newFlyer.setCategory(results.getString("category"));
+		newFlyer.setFlyerDescription(results.getString("flyer_info"));
+		return newFlyer;
+	}
 	
 
 }

@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -40,10 +41,21 @@ public class FlyerController {
 		
 		@RequestMapping(path="/", method=RequestMethod.GET)
 		public String showHomePage(Map<String, Object> model, HttpSession session) {
+			ArrayList<Flyer> featuredFlyers = flyerDAO.getFeaturedFlyers();
+			ArrayList<Flyer> column1 = new ArrayList();
+			ArrayList<Flyer> column2 = new ArrayList();
+			for(int i = 0; i < featuredFlyers.size(); i++) {
+				if(i < featuredFlyers.size()/2) {
+					column1.add(featuredFlyers.get(i));
+				} else {
+					column2.add(featuredFlyers.get(i));
+				}
+			}
 			if(session.getAttribute("currentUser") != null) {
 				return "dashboard";
 			} else {
-	//			model.put("flyer", flyerDAO.getFeaturedFlyers());
+				model.put("column1", column1);
+				model.put("column2", column2);
 				return "index";
 			}
 		}
