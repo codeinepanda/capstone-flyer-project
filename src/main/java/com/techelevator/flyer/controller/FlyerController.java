@@ -42,6 +42,7 @@ public class FlyerController {
 		
 		@RequestMapping(path="/", method=RequestMethod.GET)
 		public String showHomePage(Map<String, Object> model, HttpSession session) {
+			boolean notPreview = false;
 			ArrayList<Flyer> featuredFlyers = flyerDAO.getFeaturedFlyers();
 			ArrayList<Flyer> column1 = new ArrayList();
 			ArrayList<Flyer> column2 = new ArrayList();
@@ -57,12 +58,13 @@ public class FlyerController {
 			} else {
 				model.put("column1", column1);
 				model.put("column2", column2);
+				model.put("notPreview", notPreview);
 				return "index";
 			}
 		}
 		
-		@RequestMapping(path="/viewSelected", method=RequestMethod.GET)
-		public String showSelectedFlyer(Map<String, Object> model, @RequestParam("flyerName") String flyerName,
+		@RequestMapping(path="/previewSelected", method=RequestMethod.GET)
+		public String previewSelectedFlyer(Map<String, Object> model, @RequestParam("flyerName") String flyerName,
 																   @RequestParam("userName") String userName,
 																   @RequestParam("company") String company,
 																   @RequestParam("startDate") String start,
@@ -71,6 +73,7 @@ public class FlyerController {
 																   @RequestParam("numTabs") int numTabs,
 																   @RequestParam("category") String category,
 																   @RequestParam("flyerInfo") String flyerDescription) {
+
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 			LocalDate startDate = LocalDate.parse(start, formatter);
 			LocalDate endDate = LocalDate.parse(end, formatter);
@@ -80,6 +83,31 @@ public class FlyerController {
 	//		selectedFlyer.setCreateDate(createDate);
 			System.out.println("Created selectedFlyer object");
 			model.put("selectedFlyer", selectedFlyer);
+			System.out.println("Put selectedFlyer into model.");
+			return "selectedFlyer";
+		}
+		
+		@RequestMapping(path="/viewSelected", method=RequestMethod.GET)
+		public String openSelectedFlyer(Map<String, Object> model, @RequestParam("flyerName") String flyerName,
+																   @RequestParam("userName") String userName,
+																   @RequestParam("company") String company,
+																   @RequestParam("startDate") String start,
+																   @RequestParam("endDate") String end,
+																  // @RequestParam("createDate") String create,
+																   @RequestParam("numTabs") int numTabs,
+																   @RequestParam("category") String category,
+																   @RequestParam("flyerInfo") String flyerDescription) {
+
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			LocalDate startDate = LocalDate.parse(start, formatter);
+			LocalDate endDate = LocalDate.parse(end, formatter);
+		//	LocalDate createDate = LocalDate.parse(create, formatter);
+			System.out.println("Inside show selected");
+			Flyer selectedFlyer = new Flyer(userName, company, flyerName, startDate, endDate, numTabs, category, flyerDescription);
+	//		selectedFlyer.setCreateDate(createDate);
+			System.out.println("Created selectedFlyer object");
+			model.put("selectedFlyer", selectedFlyer);
+			model.put("notPreview", true);
 			System.out.println("Put selectedFlyer into model.");
 			return "selectedFlyer";
 		}

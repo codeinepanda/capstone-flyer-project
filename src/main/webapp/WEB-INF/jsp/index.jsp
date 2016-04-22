@@ -31,7 +31,18 @@
                     ><c:forEach var="flyer" items="${column1}" begin="0" step="1"
                     ><div class="row featured"
                     	><div class="col-xs-12 featured"
-	                	   ><c:url var="flyerPreview" value="/viewSelected"
+	                	   ><c:url var="flyerPreview" value="/previewSelected"
+	                	   		><c:param name="flyerName" value="${flyer.flyerName}"
+	                	   		/><c:param name="company" value="${flyer.company}"
+	                	   		/><c:param name="userName" value="${flyer.userName}"
+	                	   		/><c:param name="startDate" value="${flyer.startDate}"
+	                	   		/><c:param name="endDate" value="${flyer.endDate}"
+	                	   		/><c:param name="numTabs" value="${flyer.numberOfTabs}"
+	                	   		/><c:param name="flyerInfo" value="${flyer.flyerDescription}"
+	                	   		/><c:param name="category" value="${flyer.category}"
+	                	   		/><c:param name="notPreview" value="false"
+	                	   /></c:url
+	                	   	><c:url var="navigateTo" value="/viewSelected"
 	                	   		><c:param name="flyerName" value="${flyer.flyerName}"
 	                	   		/><c:param name="company" value="${flyer.company}"
 	                	   		/><c:param name="userName" value="${flyer.userName}"
@@ -41,7 +52,7 @@
 	                	   		/><c:param name="flyerInfo" value="${flyer.flyerDescription}"
 	                	   		/><c:param name="category" value="${flyer.category}"
 	                	   /></c:url
-	                	   ><a href="${flyerPreview}" class="btn btn-block btn-info">View This Flyer</a
+	                	   ><a href="${navigateTo}" class="btn btn-block btn-info">View This Flyer</a
 	                	   ><iframe src="${flyerPreview}" width="650" height="650"
 	                	   ></iframe
                 		></div
@@ -52,7 +63,7 @@
                     ><c:forEach var="flyer" items="${column2}" begin="0" step="1"
                     	><div class="row featured"
                     		><div class="column-xs-12 featured"
-		                        ><c:url var="flyerPreview" value="/viewSelected"
+		                        ><c:url var="flyerPreview" value="/previewSelected"
 	                	   			><c:param name="flyerName" value="${flyer.flyerName}"
 	                	   		/><c:param name="company" value="${flyer.company}"
 	                	   		/><c:param name="userName" value="${flyer.userName}"
@@ -62,7 +73,17 @@
 	                	   		/><c:param name="flyerInfo" value="${flyer.flyerDescription}"
 	                	   		/><c:param name="category" value="${flyer.category}"
 	                	   /></c:url
-	                	   ><a href="${flyerPreview}" class="btn btn-block btn-info">View This Flyer</a
+	                	   	><c:url var="navigateTo" value="/viewSelected"
+	                	   		><c:param name="flyerName" value="${flyer.flyerName}"
+	                	   		/><c:param name="company" value="${flyer.company}"
+	                	   		/><c:param name="userName" value="${flyer.userName}"
+	                	   		/><c:param name="startDate" value="${flyer.startDate}"
+	                	   		/><c:param name="endDate" value="${flyer.endDate}"
+	                	   		/><c:param name="numTabs" value="${flyer.numberOfTabs}"
+	                	   		/><c:param name="flyerInfo" value="${flyer.flyerDescription}"
+	                	   		/><c:param name="category" value="${flyer.category}"
+	                	   /></c:url
+	                	   ><a href="${navigateTo}" class="btn btn-block btn-info">View This Flyer</a
 	                	   ><iframe src="${flyerPreview}" width="650" height="650"
 	                	   ></iframe
                 			></div
@@ -70,6 +91,12 @@
                 	></c:forEach
               ></div
             ></div
-        ></div>
+        ></div
+   ><script src="https://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo="   crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/additional-methods.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous">
+  </script>
+  <script src="js/home.js"></script>
     </body>
 </html>

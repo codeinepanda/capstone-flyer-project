@@ -16,7 +16,8 @@
             <h3 id="userName">Flyers Corner</h3
       ></div><!-- END NAME COLUMN
     --></div><!-- END ROW HEADER
-    --><div class="row header-buttons"
+    --><c:if test="${notPreview}"
+      ><div class="row header-buttons"
           ><div class="col-xs-3"
           ><c:url var="toHome" value="/"
         /><a href="${toHome}" class="btn btn-primary btn-block fa fa-home"> Home</a
@@ -34,7 +35,8 @@
         /><a href="${publishNew}" class="btn btn-primary btn-block fa fa-envelope"> Make Flyer</a
           ></div
       ></div><!-- END HEADER BUTTONS
-    --><div class="row" id="flyer-body"
+      --></c:if
+        ><div class="row" id="flyer-body"
       ><div class="col-xs-12" id="body-title"
         ><h1 id="company"><c:out value="${selectedFlyer.company}"/></h1
         ><h2 id="flyer-title"><c:out value="${selectedFlyer.flyerName}"/></h2
