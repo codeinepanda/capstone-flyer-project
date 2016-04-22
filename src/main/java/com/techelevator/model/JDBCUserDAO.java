@@ -23,6 +23,7 @@ public class JDBCUserDAO implements UserDAO {
 			this.passwordHasher = passwordHasher;
 		}
 		
+		
 		@Override
 		public void createUser(User newUser) {
 			byte[] salt = passwordHasher.generateRandomSalt();

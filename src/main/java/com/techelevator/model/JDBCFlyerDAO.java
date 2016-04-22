@@ -26,7 +26,7 @@ public class JDBCFlyerDAO implements FlyerDAO {
 	@Override
 	public ArrayList<Flyer> getFeaturedFlyers() {
 		ArrayList<Flyer> featuredFlyersList = new ArrayList<>();
-		String sqlSelectFeaturedFlyers = "SELECT * FROM flyer LIMIT 6";
+		String sqlSelectFeaturedFlyers = "SELECT * FROM flyer ORDER BY start_date LIMIT 6";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSelectFeaturedFlyers);
 		
 		while (results.next()) {
