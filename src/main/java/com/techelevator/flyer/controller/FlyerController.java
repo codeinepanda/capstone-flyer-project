@@ -173,7 +173,6 @@ public class FlyerController {
 				session.invalidate();
 				System.out.println("User Found");
 				User currentUser = userDAO.returnUserByUsername(display);
-			//	List<Flyer> userFlyers = flyerDAO.getAllFlyersForUser(display);
 				ArrayList<Flyer> featuredFlyers = flyerDAO.getFeaturedFlyers();
 				ArrayList<Flyer> column1 = new ArrayList();
 				ArrayList<Flyer> column2 = new ArrayList();
