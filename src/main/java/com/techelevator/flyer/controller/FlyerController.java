@@ -113,16 +113,8 @@ public class FlyerController {
 			ArrayList<Flyer> filteredFlyers = flyerDAO.getFlyersFiltered(userName, category, flyerName, company, order);
 			ArrayList<Flyer> column1 = new ArrayList();
 			ArrayList<Flyer> column2 = new ArrayList();
-			for(int i = 0; i < filteredFlyers.size(); i++) {
-				if(i < filteredFlyers.size()/2) {
-					column1.add(filteredFlyers.get(i));
-				} else {
-					column2.add(filteredFlyers.get(i));
-				}
-			}
 			
-			model.put("column1", column1);
-			model.put("column2", column2);
+			model.put("filteredFlyers", filteredFlyers);
 			
 			return "filteredFlyers";
 		}
