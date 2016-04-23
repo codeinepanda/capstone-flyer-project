@@ -34,11 +34,13 @@
                                 <br>
                                 <input type="checkbox" name="category" value="automobile"> Automobile <input type="checkbox" name="category" value="career"> Career <input type="checkbox" name="category" value="social"> Social
                                 <input type="checkbox" name="category" value="food"> Food <input type="checkbox" name="category" value="forSale"> For Sale <input type="checkbox" name="category" value="entertainment"> Entertainment<br>
+                                <input type="hidden" name="category" value="IS NOT NULL">
+                                <br>
                                 <br>
                                 <br>
                                 <label>Order By: </label>
                                 <select name="orderBy">
-                                	<option value="popularity">Most Popular</option>
+                                	<option value="popularity" selected="selected">Most Popular</option>
                                 	<option value="endDate">Days to Expiration</option>
                                 	<option value="numTabs">Tabs Remaining</option>
                                 	<option value="createDate">Most Recent</option>

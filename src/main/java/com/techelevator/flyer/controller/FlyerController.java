@@ -98,7 +98,6 @@ public class FlyerController {
 		public String showFilteredFlyers(Map<String, Object> model, @RequestParam("company") String company,
 																	@RequestParam("flyerName") String flyerName,
 																	@RequestParam("userName") String userName,
-																	@RequestParam("numTabs") int numTabs,
 																	@RequestParam("category") String category,
 																	@RequestParam("orderBy") String orderBy) {
 			String order = "";
