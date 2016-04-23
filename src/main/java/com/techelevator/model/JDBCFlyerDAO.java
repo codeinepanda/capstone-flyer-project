@@ -36,17 +36,16 @@ public class JDBCFlyerDAO implements FlyerDAO {
 	}
 
 	@Override
-	public ArrayList<Flyer> getFlyersFiltered(String userName,String category, String flyerName, String company, boolean mostPopular) {
+	public ArrayList<Flyer> getFlyersFiltered(String userName,String category, String flyerName, String company, String order) {
 		ArrayList<Flyer> filteredFlyersList = new ArrayList<>();
-		
 		Object[] params = {userName, category, flyerName, company, userName, category, userName, flyerName, userName, company, flyerName, category, flyerName, company, category, company, 
-											userName, category, flyerName, userName, category, company, userName, flyerName, company, flyerName, category, company, userName, category, flyerName, company, mostPopular};
+											userName, category, flyerName, userName, category, company, userName, flyerName, company, flyerName, category, company, userName, category, flyerName, company, order};
 		
 		
 		String sqlFilteredFlyersList = "SELECT * FROM flyer WHERE user_name = ? OR category = ? OR flyer_name = ? OR company = ?" 
 									+ " OR (user_name = ? AND category = ?) OR (user_name = ? AND flyer_name = ?) OR (user_name = ? AND company = ?) OR (flyer_name = ? AND category = ?) OR (flyer_name = ? AND company = ?) OR (category = ? AND company = ?)"
-									+ " OR (user_name = ? AND category = ? AND flyer_name = ?) OR (user_name = ? AND category AND company = ?) OR (user_name = ? AND flyer_name = ? AND company = ?) OR (flyer_name = ? AND category = ? AND company = ?)"	
-									+ " OR (user_name = ? AND category = ? AND flyer_name = ? AND company = ?) ORDER BY (SELECT COUNT(*) FROM tabs WHERE tab_flyer_id = flyer_flyer_id) DESC";
+									+ " OR (user_name = ? AND category = ? AND flyer_name = ?) OR (user_name = ? AND category = ? AND company = ?) OR (user_name = ? AND flyer_name = ? AND company = ?) OR (flyer_name = ? AND category = ? AND company = ?)"	
+									+ " OR (user_name = ? AND category = ? AND flyer_name = ? AND company = ?) ORDER BY ? DESC";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlFilteredFlyersList, params);
 		while (results.next())
 		{

@@ -27,7 +27,7 @@
                 ></div
                 ><div class="col-xs-2 login"
                 	><c:url var="toSearch" value="/searchFlyers"
-                	/><a class="btn btn-block btn-default" href="${toSearch}">Search</a
+                	/><a class="btn btn-block btn-default" href="${toSearch}">Return to Search</a
                 ></div
             ></div
             ><div id="main-content" class="row featured"

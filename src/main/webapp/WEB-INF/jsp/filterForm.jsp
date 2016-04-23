@@ -17,11 +17,11 @@
              ><div class="row form"
                    ><div class="col-xs-12 form">
                         <div id="form_box"
-                            ><form id="flyer_form" action="createFlyer" method="POST">
+                            ><form id="flyer_form" action="filterFlyers" method="POST">
                                 <label>Flyer Name: </label> <input type="text" name="flyerName" id="flyerName"/>
                                 <br>
                                 <br>
-                                <label>Company Name: </label> <input type="text" name="companyName" id="companyName"/>
+                                <label>Company Name: </label> <input type="text" name="company" id="company"/>
                                 <br>
                                 <br>
                                 <label>Flyer Author: </label> <input type="text" name="userName" id="userName"/>
@@ -37,11 +37,11 @@
                                 <br>
                                 <br>
                                 <label>Order By: </label>
-                                <select>
-                                	<option name="orderBy" value="popularity">Most Popular</option>
-                                	<option name="orderBy" value="endDate">Days to Expiration</option>
-                                	<option name="orderBy" value="numTabs">Tabs Remaining</option>
-                                	<option name="orderBy" value="createDate">Most Recent</option>
+                                <select name="orderBy">
+                                	<option value="popularity">Most Popular</option>
+                                	<option value="endDate">Days to Expiration</option>
+                                	<option value="numTabs">Tabs Remaining</option>
+                                	<option value="createDate">Most Recent</option>
                                 </select>
                                 <input class="btn btn-primary" type="submit" value="Submit">
                             </form

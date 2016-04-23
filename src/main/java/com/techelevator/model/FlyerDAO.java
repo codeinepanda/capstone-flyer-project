@@ -11,7 +11,7 @@ public interface FlyerDAO {
 	public List<Flyer> getAllFlyersByCreator(String userName);
 	public ArrayList<Flyer> selectAllNotExpired(LocalDate endDate);
 	public ArrayList<Flyer> getFlyersFiltered(String userName, String category, String flyerName, String company,
-			boolean mostPopular);
+			String order);
 	public String pullTab();
 	public ArrayList<Flyer> viewAllUnredeemedTabsByUser(String userName);
 }

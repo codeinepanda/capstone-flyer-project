@@ -26,11 +26,15 @@
                 	><c:url var="toFlyerForm" value="/flyerForm"
                 	/><a class="btn btn-block btn-warning" href="${toFlyerForm}">New Flyer</a
                 ></div
-                ><div class="col-xs-2 button login"
+                ><div class="col-xs-1 button login"
                 	><c:url var="logout" value="/logout"
                 	/><form id="logout" method="POST" action="${logout}"
                 		><input type="submit" value="Logout" class="btn btn-block btn-danger"
                 /></form></div
+                 ><div class="col-xs-1 button search"
+                	><c:url var="toSearch" value="/searchFlyers"
+                	/><a class="btn btn-block btn-info" href="${toSearch}">Search</a
+                ></div
                 ><div class="col-xs-2 profile"
                 /></div
                 ><div class="col-xs-2 button profile"

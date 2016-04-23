@@ -94,15 +94,24 @@ public class FlyerController {
 			return "filterForm";
 		}
 		
-		@RequestMapping(path="/filteredFlyers", method=RequestMethod.POST)
+		@RequestMapping(path="/filterFlyers", method=RequestMethod.POST)
 		public String showFilteredFlyers(Map<String, Object> model, @RequestParam("company") String company,
 																	@RequestParam("flyerName") String flyerName,
 																	@RequestParam("userName") String userName,
 																	@RequestParam("numTabs") int numTabs,
 																	@RequestParam("category") String category,
 																	@RequestParam("orderBy") String orderBy) {
-			
-			ArrayList<Flyer> filteredFlyers = flyerDAO.getFlyersFiltered(userName, category, flyerName, company, true);
+			String order = "";
+			if(orderBy.equals("popularity")) {
+				order = "(SELECT COUNT(*) FROM tabs WHERE tab_flyer_id = flyer_flyer_id)";
+			} else if(orderBy.equals("endDate")) {
+				order = "end_date";
+			} else if(orderBy.equals("numTabs")) {
+				order = "num_tabs";
+			} else if(orderBy.equals("createDate")) {
+				order = "create_date";
+			}
+			ArrayList<Flyer> filteredFlyers = flyerDAO.getFlyersFiltered(userName, category, flyerName, company, order);
 			ArrayList<Flyer> column1 = new ArrayList();
 			ArrayList<Flyer> column2 = new ArrayList();
 			for(int i = 0; i < filteredFlyers.size(); i++) {
