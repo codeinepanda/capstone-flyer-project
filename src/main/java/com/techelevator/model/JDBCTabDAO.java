@@ -26,11 +26,11 @@ public class JDBCTabDAO implements TabDAO{
 	public void pullNewTab(String userName, int flyerID) throws SQLException {
 		Connection conn = datasource.getConnection();
 	    Statement stmt = conn.createStatement();
-		String sqlCreateTab = "INSERT INTO tab(user_name, flyer_id, isredeemed) VALUES(?,?,?);";
+		String sqlCreateTab = "INSERT INTO tab(isredeemed, flyer_id, user_name) VALUES(?,?,?);";
 		PreparedStatement pstmt = conn.prepareStatement(sqlCreateTab);
-		pstmt.setString(0, userName);
-		pstmt.setInt(1, flyerID);
-		pstmt.setBoolean(2, true);
+		pstmt.setString(1, userName);
+		pstmt.setInt(2, flyerID);
+		pstmt.setBoolean(3, true);
 	}
 
 	@Override
