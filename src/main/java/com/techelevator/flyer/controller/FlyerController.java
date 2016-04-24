@@ -1,7 +1,7 @@
 package com.techelevator.flyer.controller;
 
 import java.sql.Date;
-
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
+import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -176,7 +177,12 @@ public class FlyerController {
 				User currentUser = (User) session.getAttribute("currentUser");
 				if(userDAO.canTakeTab(currentUser.getUsername(), flyerID)) {
 					message = flyerDAO.pullTab(flyerID);
-					tabDAO.pullNewTab(currentUser.getUsername(), flyerID);
+					try {
+						tabDAO.pullNewTab(currentUser.getUsername(), flyerID);
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					model.put("message", message);
 				} else {
 					message = "Sorry, no more than one tab per flyer! If you like this offer, be sure to have a look at similar flyers!";
