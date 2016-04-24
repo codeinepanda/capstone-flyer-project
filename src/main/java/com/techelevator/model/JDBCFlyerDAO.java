@@ -165,6 +165,17 @@ public class JDBCFlyerDAO implements FlyerDAO {
 		}
 		return false;
 	}
+
+	@Override
+	public void retireAFlyer(int flyerID) {
+		LocalDate today= LocalDate.now();
+		Date newExpirationDate = Date.valueOf(today);
+		String sqlRetireFlyer = "UPDATE flyer " +
+								"SET num_tabs = 0, end_date = ? " +
+								"WHERE flyer_id = ?;";
+		Object[] params = {newExpirationDate, flyerID};
+		jdbcTemplate.update(sqlRetireFlyer, params);
+	}
 	
 	
 	

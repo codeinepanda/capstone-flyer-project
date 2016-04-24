@@ -50,4 +50,13 @@ public class JDBCTabDAO implements TabDAO{
 		return unredeemedTabs;
 	}
 
+	@Override
+	public void redeemAllTabsByFlyer(int flyerID) {
+		Object[] params = {flyerID};
+		String sqlRedeemTab = "UPDATE tab " +
+							  "SET isredeemed = true " +
+							  "WHERE flyer_id = ?;";
+		jdbcTemplate.update(sqlRedeemTab, params);	
+	}
+
 }

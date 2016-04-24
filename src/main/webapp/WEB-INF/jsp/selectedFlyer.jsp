@@ -58,6 +58,14 @@
 	    /><c:param name="category" value="${selectedFlyer.category}"
     /></c:url
         ><a href="${takeTab}" class="btn btn-default fa fa-ticket link"> <strong>Grab A Tab</strong><br>Only <c:out value="${selectedFlyer.numberOfTabs}"/> left!</a
+        ><c:url var="retireFlyer" value="/retireFlyer"
+        	><c:param name="flyerID" value="${selectedFlyer.flyerID}"
+        /></c:url
+        ><c:if test="${not empty author}"
+        	><br
+        	><br
+        	><a href="${retireFlyer}" class="btn btn-danger fa fa-trash"><strong>Retire This Flyer</strong></a
+        ></c:if
         ><c:if test="${not empty message}"
         	><br
         	><br

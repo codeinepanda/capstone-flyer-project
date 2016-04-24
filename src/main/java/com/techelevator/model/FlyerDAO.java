@@ -14,4 +14,5 @@ public interface FlyerDAO {
 			String order);
 	public String pullTab(int flyerID);
 	public ArrayList<Flyer> getFlyersFromUnredeemedTabsByUser(String userName);
+	public void retireAFlyer(int flyerID);
 }

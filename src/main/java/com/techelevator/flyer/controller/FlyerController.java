@@ -71,17 +71,17 @@ public class FlyerController {
 		}
 		
 		@RequestMapping(path="/previewSelected", method=RequestMethod.GET)
-		public String previewSelectedFlyer(Map<String, Object> model, @RequestParam("flyerName") String flyerName,
-																   @RequestParam("userName") String userName,
-																   @RequestParam("company") String company,
-																   @RequestParam("flyerID") int flyerID,
-																   @RequestParam("startDate") String start,
-																   @RequestParam("endDate") String end,
-																   @RequestParam("createDate") String create,
-																   @RequestParam("numTabs") int numTabs,
-																   @RequestParam("category") String category,
-																   @RequestParam("flyerInfo") String flyerDescription) {
-
+		public String previewSelectedFlyer(Map<String, Object> model, HttpSession session, @RequestParam("flyerName") String flyerName,
+																   						   @RequestParam("userName") String userName,
+																   						   @RequestParam("company") String company,
+																   						   @RequestParam("flyerID") int flyerID,
+																   						   @RequestParam("startDate") String start,
+																   						   @RequestParam("endDate") String end,
+																   						   @RequestParam("createDate") String create,
+																   						   @RequestParam("numTabs") int numTabs,
+																   						   @RequestParam("category") String category,
+																   						   @RequestParam("flyerInfo") String flyerDescription) {
+			User currentUser = null;
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 			LocalDate startDate = LocalDate.parse(start, formatter);
 			LocalDate endDate = LocalDate.parse(end, formatter);
@@ -91,6 +91,13 @@ public class FlyerController {
 			selectedFlyer.setCreateDate(createDate);
 			selectedFlyer.setFlyerID(flyerID);
 			System.out.println("Created selectedFlyer object");
+			
+			if(session.getAttribute("currentUser") != null) {
+				currentUser = (User) session.getAttribute("currentUser");
+				if(currentUser.getUsername().equals(selectedFlyer.getUserName())) {
+					model.put("author", currentUser.getUsername());
+				}
+			}
 			model.put("selectedFlyer", selectedFlyer);
 			System.out.println("Put selectedFlyer into model.");
 			return "selectedFlyer";
@@ -151,6 +158,13 @@ public class FlyerController {
 			model.put("notPreview", true);
 			System.out.println("Put selectedFlyer into model.");
 			return "selectedFlyer";
+		}
+		
+		@RequestMapping(path="/retireFlyer", method=RequestMethod.GET)
+		public String showRetireFlyerComplete(Map<String, Object> model, @RequestParam("flyerID") int flyerID) {
+			flyerDAO.retireAFlyer(flyerID);
+			tabDAO.redeemAllTabsByFlyer(flyerID);
+			return "redirect:/";
 		}
 		
 		@RequestMapping(path="/pullTab", method=RequestMethod.GET)
