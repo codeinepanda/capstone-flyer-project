@@ -97,9 +97,9 @@ public class JDBCFlyerDAO implements FlyerDAO {
 	}
 
 	@Override
-	public ArrayList<Flyer> viewAllUnredeemedTabsByUser(String userName) {
+	public ArrayList<Flyer> getFlyersFromUnredeemedTabsByUser(String userName) {
 		ArrayList<Flyer> listOfUnredeemedTabs = new ArrayList<>();
-		String sqlListOfUnredeemedTabs = "SELECT * FROM flyer INNER JOIN tab ON flyer.flyer_id=tab.flyer_id WHERE isRedeemed = true AND tab.user_name = ?;";
+		String sqlListOfUnredeemedTabs = "SELECT * FROM flyer JOIN tab ON tab.flyer_id = flyer.flyer_id WHERE isRedeemed = false AND tab.user_name = ?;";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlListOfUnredeemedTabs, userName);
 		while (results.next()) {
 		listOfUnredeemedTabs.add(getFlyerFromDB(results));	

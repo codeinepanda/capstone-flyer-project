@@ -13,5 +13,5 @@ public interface FlyerDAO {
 	public ArrayList<Flyer> getFlyersFiltered(String userName, String category, String flyerName, String company,
 			String order);
 	public String pullTab(int flyerID);
-	public ArrayList<Flyer> viewAllUnredeemedTabsByUser(String userName);
+	public ArrayList<Flyer> getFlyersFromUnredeemedTabsByUser(String userName);
 }

@@ -35,9 +35,11 @@
                 	><c:url var="toSearch" value="/searchFlyers"
                 	/><a class="btn btn-block btn-info" href="${toSearch}">Search</a
                 ></div
-                ><div class="col-xs-2 profile"
-                /></div
-                ><div class="col-xs-2 button profile"
+                ><div class="col-xs-1 button tabs"
+                	><c:url var="toTabs" value="/viewTabs"
+                	/><a class="btn btn-block btn-success" href="${toTabs}">Your Tabs</a
+                ></div
+                ><div class="col-xs-1 button profile"
                 	><c:url var="toProfile" value="/profilePage"
                 	/><a class="btn btn-block btn-primary" href="${toProfile}">Profile</a
                 ></div

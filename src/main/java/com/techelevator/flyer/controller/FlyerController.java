@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.techelevator.model.Flyer;
 import com.techelevator.model.FlyerDAO;
+import com.techelevator.model.Tab;
 import com.techelevator.model.TabDAO;
 import com.techelevator.model.User;
 import com.techelevator.model.UserDAO;
@@ -192,6 +193,22 @@ public class FlyerController {
 					  "taking advantage of all the great promotions and deals our flyers offer!";
 			model.put("message", message);
 			return "permissionsError";
+		}
+		
+		@RequestMapping(path="/viewTabs", method=RequestMethod.GET)
+		public String showUserTabs(Map<String, Object> model, HttpSession session) {
+			String message = "";
+			if(session.getAttribute("currentUser") != null) {
+				User currentUser = (User) session.getAttribute("currentUser");
+				ArrayList<Tab> unredeemedTabs = tabDAO.getTabsByHolder(currentUser.getUsername());
+				model.put("tabs", unredeemedTabs);
+				return "tabs";
+			} else {
+				message = "Sorry, it appears you don't have permission to view that resource. Please ensure that you're logged in " +
+						  "and try again.";
+				model.put("message", message);
+				return "permissionsError";
+			}
 		}
 		
 		@RequestMapping(path="/registration", method=RequestMethod.GET)
