@@ -14,23 +14,17 @@ import org.springframework.stereotype.Component;
 @Component
 public class JDBCTabDAO implements TabDAO{
 	private JdbcTemplate jdbcTemplate;
-	private DataSource datasource;
 	
 	@Autowired
 	public JDBCTabDAO(DataSource dataSource) {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
-		this.datasource = dataSource;
 	}
 	
 	@Override
-	public void pullNewTab(String userName, int flyerID) throws SQLException {
-		Connection conn = datasource.getConnection();
-	    Statement stmt = conn.createStatement();
+	public void pullNewTab(String userName, int flyerID) {
+		Object[] params = {false, flyerID, userName};
 		String sqlCreateTab = "INSERT INTO tab(isredeemed, flyer_id, user_name) VALUES(?,?,?);";
-		PreparedStatement pstmt = conn.prepareStatement(sqlCreateTab);
-		pstmt.setString(1, userName);
-		pstmt.setInt(2, flyerID);
-		pstmt.setBoolean(3, true);
+		jdbcTemplate.update(sqlCreateTab, params);
 	}
 
 	@Override

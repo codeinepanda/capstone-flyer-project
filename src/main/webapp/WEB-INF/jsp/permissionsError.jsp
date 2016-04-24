@@ -19,7 +19,7 @@
              ><div class="row form"
                    ><div class="col-xs-12 form">
                         <div id="success_box"
-             				><h1>Sorry, something went wrong with your request! It looks like you don't have permission to view the requested resource!</h1
+             				><h1><c:out value="${message}"/></h1
              				><c:url var="toHome" value="/"
              				/><a href="${toHome}"><h3>Click Here To Return To Your Dashboard</h3></a
                         ></div

@@ -177,12 +177,7 @@ public class FlyerController {
 				User currentUser = (User) session.getAttribute("currentUser");
 				if(userDAO.canTakeTab(currentUser.getUsername(), flyerID)) {
 					message = flyerDAO.pullTab(flyerID);
-					try {
-						tabDAO.pullNewTab(currentUser.getUsername(), flyerID);
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+					tabDAO.pullNewTab(currentUser.getUsername(), flyerID);
 					model.put("message", message);
 				} else {
 					message = "Sorry, no more than one tab per flyer! If you like this offer, be sure to have a look at similar flyers!";
@@ -282,6 +277,7 @@ public class FlyerController {
 		
 		@RequestMapping(path="/viewYourFlyer", method=RequestMethod.GET)
 		public String previewNewFlyer(Map<String, Object> model, HttpSession session) {
+			String message = "Sorry, something went wrong with your request! It looks like you don't have permission to view the requested resource!";
 			User currentUser = (User) session.getAttribute("currentUser");
 			Flyer newFlyer = (Flyer) session.getAttribute("newFlyer");
 			int days = (int) ChronoUnit.DAYS.between(newFlyer.getStartDate(), newFlyer.getEndDate());
@@ -291,12 +287,14 @@ public class FlyerController {
 				model.put("days", days);
 				return "newFlyer";
 			} else {
+				model.put("message", message);
 				return "permissionsError";
 			}
 		}
 		
 		@RequestMapping(path="/confirmPublish", method=RequestMethod.GET)
 		public String displayPublicationConfirmation(Map<String, Object> model, HttpSession session) {
+			String message = "Sorry, but you don't have permission to take that action. Ensure that you are logged in and try again!";
 			User currentUser = (User) session.getAttribute("currentUser");
 			Flyer newFlyer = (Flyer) session.getAttribute("newFlyer");
 			if(currentUser.getUsername().equals(newFlyer.getUserName())) {
@@ -304,12 +302,14 @@ public class FlyerController {
 				flyerDAO.createFlyer(newFlyer);
 				return "publishComplete";
 			} else {
+				model.put("message", message);
 				return "permissionsError";
 			}
 		}
 		
 		@RequestMapping(path="/cancelPublish", method=RequestMethod.GET)
 		public String returnHomeAfterCancellation(Map<String, Object> model, HttpSession session) {
+			String message = "Sorry, something went wrong with your request! It looks like you don't have permission to view the requested resource!";
 			User currentUser = (User) session.getAttribute("currentUser");
 			Flyer newFlyer = (Flyer) session.getAttribute("newFlyer");
 			if(currentUser.getUsername().equals(newFlyer.getUserName())) {
@@ -318,6 +318,7 @@ public class FlyerController {
 				model.remove("newFlyer");
 				return "redirect:/";
 			} else {
+				model.put("message", message);
 				return "permissionsError";
 			}
 		}
