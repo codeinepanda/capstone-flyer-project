@@ -225,17 +225,26 @@ public class FlyerController {
 			}
 		}
 		
+		@RequestMapping(path="/redeemTab", method=RequestMethod.GET)
+		public String showRedemptionSuccess(Map<String, Object> model, HttpSession session, @RequestParam("flyerID") int flyerID) {
+			User currentUser = (User) session.getAttribute("currentUser");
+			tabDAO.redeemTab(currentUser.getUsername(), flyerID);
+			System.out.println("Current User is: " + currentUser.getUsername());
+			System.out.println("Flyer ID is: " + flyerID);
+			return "redemptionComplete";
+		}
+		
 		@RequestMapping(path="/registration", method=RequestMethod.GET)
 		public String showRegistrationPage() {
 			return "register";
 		}
 		
 		@RequestMapping(path="/createUser", method=RequestMethod.POST)
-		public String showRegistrationConfirmation(@RequestParam("firstName") String first,
-												   @RequestParam("lastName") String last,
-												   @RequestParam("username") String display,
-												   @RequestParam("email") String Email,
-												   @RequestParam("password") String pwd) {
+		public String showRegistrationConfirmation(Map<String, Object> model, @RequestParam("firstName") String first,
+												   							  @RequestParam("lastName") String last,
+												   							  @RequestParam("username") String display,
+												   							  @RequestParam("email") String Email,
+												   							  @RequestParam("password") String pwd) {
 			
 			User newUser = new User(first, last, display, Email, pwd);
 			userDAO.createUser(newUser);

@@ -19,9 +19,11 @@
              ><div class="row form"
                    ><div class="col-xs-12 form">
                         <div id="success_box"
-							><h1>Congratulations! You've Been Successfully Registered!</h1
-             				><c:url var="toLogin" value="/loginPage"
-             				/><a href="${toLogin}"><h3>Click Here To Login To Your Account</h3></a
+                            ><h1>Congratulations! You've Successfully Redeemed This Tab!</h1
+             				><c:url var="toHome" value="/"
+             				/><a href="${toHome}"><h3>Return Home</h3></a
+             				><c:url var="toTabs" value="/viewTabs"
+             				/><a href="${toTabs}"><h3>Redeem More Tabs</h3></a
                         ></div
                    ></div
              ></div

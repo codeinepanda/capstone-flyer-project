@@ -17,7 +17,7 @@ public class Tab {
 		this.isRedeemed = false;
 	}
 	
-	public Tab(String userName, int FlyerID, boolean isRedeemed, LocalDate localDate, LocalDate localDate2, String flyerName) {
+	public Tab(String userName, int flyerID, boolean isRedeemed, LocalDate localDate, LocalDate localDate2, String flyerName) {
 		this.userName = userName;
 		this.flyerID = flyerID;
 		this.isRedeemed = isRedeemed;

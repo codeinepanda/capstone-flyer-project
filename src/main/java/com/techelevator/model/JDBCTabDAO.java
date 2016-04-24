@@ -26,16 +26,16 @@ public class JDBCTabDAO implements TabDAO{
 	@Override
 	public void pullNewTab(String userName, int flyerID) {
 		Object[] params = {false, flyerID, userName};
-		String sqlCreateTab = "INSERT INTO tab(isredeemed, flyer_id, user_name) VALUES(?,?,?);";
+		String sqlCreateTab = "INSERT INTO tab(isRedeemed, flyer_id, user_name) VALUES(?,?,?);";
 		jdbcTemplate.update(sqlCreateTab, params);
 	}
 
 	@Override
 	public void redeemTab(String userName, int flyerID) {
-		Object[] params = {userName, flyerID};
-		String sqlRedeemTab = "UPDATE tab" +
-							  "SET isredeemed = 1" +
-							  "WHERE user_name = ? AND flyer_id = ?;";
+		Object[] params = {true, flyerID, userName};
+		String sqlRedeemTab = "UPDATE tab " +
+							  "SET isRedeemed = ? " +
+							  "WHERE flyer_id = ? AND user_name = ?;";
 		jdbcTemplate.update(sqlRedeemTab, params);
 	}
 
@@ -54,7 +54,7 @@ public class JDBCTabDAO implements TabDAO{
 	public void redeemAllTabsByFlyer(int flyerID) {
 		Object[] params = {flyerID};
 		String sqlRedeemTab = "UPDATE tab " +
-							  "SET isredeemed = true " +
+							  "SET isRedeemed = true " +
 							  "WHERE flyer_id = ?;";
 		jdbcTemplate.update(sqlRedeemTab, params);	
 	}
