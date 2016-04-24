@@ -11,38 +11,38 @@
     <body>
         <div class="container-fluid"
             ><div class="row"
-                ><div class="col-xs-2 logo"
+                ><div class="col-xs-4 logo"
                 	><img src=""
                 ></div
-                ><div class="col-xs-4 title"
+                ><div class="col-xs-8 title"
                 	><h1>FLYERS CORNER</h1
                 	><h4>Welcome back, <c:out value="${currentUser.firstName}"/>!</h4
                 ></div
-                ><div class="col-xs-1 button alerts"
+                ><div class="col-xs-2 button alerts"
                 	><c:url var="toAlerts" value="/alerts"
                 	/><a class="btn btn-block btn-warning" href="${toAlerts}">Alerts</a
                 ></div
-                ><div class="col-xs-1 button createFlyer"
+                ><div class="col-xs-2 button createFlyer"
                 	><c:url var="toFlyerForm" value="/flyerForm"
-                	/><a class="btn btn-block btn-warning" href="${toFlyerForm}">New Flyer</a
+                	/><a class="btn btn-block btn-primary" href="${toFlyerForm}">New Flyer</a
                 ></div
-                ><div class="col-xs-1 button login"
+                 ><div class="col-xs-2 button search"
+                	><c:url var="toSearch" value="/searchFlyers"
+                	/><a class="btn btn-block btn-info" href="${toSearch}">Search</a
+                ></div
+                ><div class="col-xs-2 button tabs"
+                	><c:url var="toTabs" value="/viewTabs"
+                	/><a class="btn btn-block btn-success" href="${toTabs}">Your Tabs</a
+                ></div
+                ><div class="col-xs-2 button profile"
+                	><c:url var="toProfile" value="/profilePage"
+                	/><a class="btn btn-block btn-primary" href="${toProfile}">Profile</a
+                ></div
+                ><div class="col-xs-2 button login"
                 	><c:url var="logout" value="/logout"
                 	/><form id="logout" method="POST" action="${logout}"
                 		><input type="submit" value="Logout" class="btn btn-block btn-danger"
                 /></form></div
-                 ><div class="col-xs-1 button search"
-                	><c:url var="toSearch" value="/searchFlyers"
-                	/><a class="btn btn-block btn-info" href="${toSearch}">Search</a
-                ></div
-                ><div class="col-xs-1 button tabs"
-                	><c:url var="toTabs" value="/viewTabs"
-                	/><a class="btn btn-block btn-success" href="${toTabs}">Your Tabs</a
-                ></div
-                ><div class="col-xs-1 button profile"
-                	><c:url var="toProfile" value="/profilePage"
-                	/><a class="btn btn-block btn-primary" href="${toProfile}">Profile</a
-                ></div
             ></div
             ><div class="row"
                 ><div class="col-xs-6 featured-col"
