@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -121,6 +122,7 @@ public class JDBCFlyerDAO implements FlyerDAO {
 		LocalDate start = results.getDate("start_date").toLocalDate();
 		LocalDate end = results.getDate("end_date").toLocalDate();
 		Flyer newFlyer = new Flyer();
+		newFlyer.setFlyerID(results.getInt("flyer_id"));
 		newFlyer.setTabsTaken(results.getInt("tabs_taken"));
 		newFlyer.setUserName(results.getString("user_name"));
 		newFlyer.setCompany(results.getString("company"));
@@ -134,12 +136,34 @@ public class JDBCFlyerDAO implements FlyerDAO {
 		return newFlyer;
 	}
 	
-	
-
 	@Override
-	public String pullTab() {
-		// TODO Auto-generated method stub
-		return null;
+	public String pullTab(int flyerID) {
+		String message = "";
+		if(hasAtLeastOneTab(flyerID)) {
+			message = "Congratulations! You've successfully pulled a tab from this flyer! Be sure to redeem it before the offer expires!";
+			Object[] params ={flyerID};
+			String sqlPullTabQuery = "Update flyer " +
+								 	 "SET num_tabs = num_tabs - 1, tabs_taken = tabs_taken + 1 " +
+								 	 "WHERE flyer_id = ?;";
+			jdbcTemplate.update(sqlPullTabQuery, params);
+		} else {
+			message = "Sorry, there aren't any tabs left on this flyer! But don't let that discourage you! Have a look through our other " +
+					  "flyers on this site and find another offer that's right for you!";
+		}
+		return message;
+	}
+	
+	public boolean hasAtLeastOneTab(int flyerID) {
+		int numTabs = 0;
+		String sqlCheckIfTabsRemain = "SELECT num_tabs FROM flyer WHERE flyer_id = ?";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlCheckIfTabsRemain, flyerID);
+		while(results.next()) {
+			numTabs = results.getInt("num_tabs");
+		}
+		if(numTabs > 0) {
+			return true;
+		}
+		return false;
 	}
 	
 	

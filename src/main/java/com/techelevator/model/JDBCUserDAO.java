@@ -70,5 +70,20 @@ public class JDBCUserDAO implements UserDAO {
 			String saltString = new String(Base64.encode(salt));
 			jdbcTemplate.update("UPDATE app_user SET password = '"+hashedPassword+"', salt = '"+saltString+"' WHERE user_name = '"+userName+"'");
 		}
+		
+		@Override
+		public boolean canTakeTab(String userName, int flyerID) {
+			int tabsTakenByUser = 0;
+			Object[] params = {userName, flyerID};
+			String sqlCheckIfPulled = "SELECT COUNT(*) FROM tab WHERE user_name = ? AND flyer_id = ?";
+			SqlRowSet results = jdbcTemplate.queryForRowSet(sqlCheckIfPulled, params);
+			while(results.next()) {
+				tabsTakenByUser = results.getInt("count");
+			}
+			if(tabsTakenByUser > 0) {
+				return false;
+			}
+			return true;
+		}
 
 }

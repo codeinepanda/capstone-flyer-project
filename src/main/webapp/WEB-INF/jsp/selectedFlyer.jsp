@@ -46,7 +46,18 @@
       ></div><!-- END DESCRIPTION COLUMN
     --><div class="col-xs-12 takeTab"
     ><c:url var="takeTab" value="/pullTab"
-        /><a href="${takeTab}" class="btn btn-default fa fa-ticket link"> <strong>Grab A Tab</strong><br>Only <c:out value="${selectedFlyer.numberOfTabs}"/> left!</a
+    	><c:param name="flyerName" value="${selectedFlyer.flyerName}"
+		/><c:param name="company" value="${selectedFlyer.company}"
+		/><c:param name="flyerID" value="${selectedFlyer.flyerID}"
+		/><c:param name="userName" value="${selectedFlyer.userName}"
+	    /><c:param name="createDate" value="${selectedFlyer.createDate}"
+	    /><c:param name="startDate" value="${selectedFlyer.startDate}"
+	    /><c:param name="endDate" value="${selectedFlyer.endDate}"
+	    /><c:param name="numTabs" value="${selectedFlyer.numberOfTabs}"
+	    /><c:param name="flyerInfo" value="${selectedFlyer.flyerDescription}"
+	    /><c:param name="category" value="${selectedFlyer.category}"
+    /></c:url
+        ><a href="${takeTab}" class="btn btn-default fa fa-ticket link"> <strong>Grab A Tab</strong><br>Only <c:out value="${selectedFlyer.numberOfTabs}"/> left!</a
         ><c:if test="${not empty message}"
         	><br
         	><br

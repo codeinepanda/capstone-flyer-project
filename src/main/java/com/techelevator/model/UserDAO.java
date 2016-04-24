@@ -10,6 +10,8 @@ public interface UserDAO {
 
 	public void updatePassword(String userName, String password);
 
+	boolean canTakeTab(String userName, int flyerID);
+
 }
 
 

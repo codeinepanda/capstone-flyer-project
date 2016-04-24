@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.techelevator.model.Flyer;
 import com.techelevator.model.FlyerDAO;
+import com.techelevator.model.TabDAO;
 import com.techelevator.model.User;
 import com.techelevator.model.UserDAO;
 
@@ -33,11 +34,13 @@ import com.techelevator.model.UserDAO;
 public class FlyerController {
 		private UserDAO userDAO;
 		private FlyerDAO flyerDAO;
+		private TabDAO tabDAO;
 		
 	@Autowired
-	public FlyerController(UserDAO userDAO, FlyerDAO flyerDAO) {
+	public FlyerController(UserDAO userDAO, FlyerDAO flyerDAO, TabDAO tabDAO) {
 			this.userDAO = userDAO;
 			this.flyerDAO = flyerDAO;
+			this.tabDAO = tabDAO;
 	}
 		
 		@RequestMapping(path="/", method=RequestMethod.GET)
@@ -69,6 +72,7 @@ public class FlyerController {
 		public String previewSelectedFlyer(Map<String, Object> model, @RequestParam("flyerName") String flyerName,
 																   @RequestParam("userName") String userName,
 																   @RequestParam("company") String company,
+																   @RequestParam("flyerID") int flyerID,
 																   @RequestParam("startDate") String start,
 																   @RequestParam("endDate") String end,
 																   @RequestParam("createDate") String create,
@@ -83,6 +87,7 @@ public class FlyerController {
 			System.out.println("Inside show selected");
 			Flyer selectedFlyer = new Flyer(userName, company, flyerName, startDate, endDate, numTabs, category, flyerDescription);
 			selectedFlyer.setCreateDate(createDate);
+			selectedFlyer.setFlyerID(flyerID);
 			System.out.println("Created selectedFlyer object");
 			model.put("selectedFlyer", selectedFlyer);
 			System.out.println("Put selectedFlyer into model.");
@@ -123,6 +128,7 @@ public class FlyerController {
 		public String openSelectedFlyer(Map<String, Object> model, @RequestParam("flyerName") String flyerName,
 																   @RequestParam("userName") String userName,
 																   @RequestParam("company") String company,
+																   @RequestParam("flyerID") int flyerID,
 																   @RequestParam("startDate") String start,
 																   @RequestParam("endDate") String end,
 																   @RequestParam("createDate") String create,
@@ -137,6 +143,7 @@ public class FlyerController {
 			System.out.println("Inside show selected");
 			Flyer selectedFlyer = new Flyer(userName, company, flyerName, startDate, endDate, numTabs, category, flyerDescription);
 			selectedFlyer.setCreateDate(createDate);
+			selectedFlyer.setFlyerID(flyerID);
 			System.out.println("Created selectedFlyer object");
 			model.put("selectedFlyer", selectedFlyer);
 			model.put("notPreview", true);
@@ -145,14 +152,45 @@ public class FlyerController {
 		}
 		
 		@RequestMapping(path="/pullTab", method=RequestMethod.GET)
-		public String showFlyerMinusTab(Map<String, Object> model, HttpSession session) {
+		public String showFlyerMinusTab(Map<String, Object> model, HttpSession session, @RequestParam("flyerName") String flyerName,
+				   																		@RequestParam("userName") String userName,
+				   																		@RequestParam("company") String company,
+				   																		@RequestParam("flyerID") int flyerID,
+				   																		@RequestParam("startDate") String start,
+				   																		@RequestParam("endDate") String end,
+				   																		@RequestParam("createDate") String create,
+				   																		@RequestParam("numTabs") int numTabs,
+				   																		@RequestParam("category") String category,
+				   																		@RequestParam("flyerInfo") String flyerDescription) {
+			
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			LocalDate startDate = LocalDate.parse(start, formatter);
+			LocalDate endDate = LocalDate.parse(end, formatter);
+			LocalDate createDate = LocalDate.parse(create, formatter);
+			Flyer selectedFlyer = new Flyer(userName, company, flyerName, startDate, endDate, numTabs, category, flyerDescription);
+			selectedFlyer.setCreateDate(createDate);
+			selectedFlyer.setFlyerID(flyerID);
+			model.put("selectedFlyer", selectedFlyer);
+			String message = "";
 			if(session.getAttribute("currentUser") != null) {
-				String message = flyerDAO.pullTab();
-				model.put("message", message);
-			} else {
-				return "permissionError";
+				User currentUser = (User) session.getAttribute("currentUser");
+				if(userDAO.canTakeTab(currentUser.getUsername(), flyerID)) {
+					message = flyerDAO.pullTab(flyerID);
+					tabDAO.pullNewTab(currentUser.getUsername(), flyerID);
+					model.put("message", message);
+				} else {
+					message = "Sorry, no more than one tab per flyer! If you like this offer, be sure to have a look at similar flyers!";
+					model.put("message", message);
+					return "permissionsError";
+				}
+				return "selectedFlyer";
 			}
-			return "/viewSelected";
+			message = "Sorry, it looks like you don't have permission to take tabs. Only registered members can do that. " +
+					  "If you are a registered member, make sure you're logged in before you try to take a tab. If you're " +
+					  "not yet a registered member, click on \"Register\" in the upper-right corner of the screen to start " +
+					  "taking advantage of all the great promotions and deals our flyers offer!";
+			model.put("message", message);
+			return "permissionsError";
 		}
 		
 		@RequestMapping(path="/registration", method=RequestMethod.GET)
