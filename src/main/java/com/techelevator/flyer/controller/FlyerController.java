@@ -193,11 +193,11 @@ public class FlyerController {
 				if(userDAO.canTakeTab(currentUser.getUsername(), flyerID)) {
 					System.out.println("Unredeemed tabs: " + tabDAO.getNumUnredeemedTabsFromUser(currentUser.getUsername()));
 					System.out.println("Allowable tabs: " + tabDAO.getNumAllowableTabs(currentUser.getUsername()));
-					if(tabDAO.getNumUnredeemedTabsFromUser(userName) <= tabDAO.getNumAllowableTabs(currentUser.getUsername())) {
+					if(tabDAO.getNumUnredeemedTabsFromUser(currentUser.getUsername()) <= tabDAO.getNumAllowableTabs(currentUser.getUsername())) {
 						message = flyerDAO.pullTab(flyerID);
 						tabDAO.pullNewTab(currentUser.getUsername(), flyerID);
-						System.out.println("Unredeemed tabs: " + tabDAO.getNumUnredeemedTabsFromUser(userName));
-						System.out.println("Allowable tabs: " + tabDAO.getNumAllowableTabs(userName));
+						System.out.println("Unredeemed tabs: " + tabDAO.getNumUnredeemedTabsFromUser(currentUser.getUsername()));
+						System.out.println("Allowable tabs: " + tabDAO.getNumAllowableTabs(currentUser.getUsername()));
 					model.put("message", message);
 					} else {
 						message = "Sorry, but it looks like you've already taken your maximum allowable number of tabs. You can " +
