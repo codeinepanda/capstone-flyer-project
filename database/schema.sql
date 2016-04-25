@@ -37,6 +37,7 @@ CREATE TABLE flyer (
 );
 
 CREATE TABLE tab (
+	pull_date date NOT NULL, 
 	isRedeemed BOOLEAN NOT NULL DEFAULT false,
 	flyer_id integer,
 	user_name varchar(256),

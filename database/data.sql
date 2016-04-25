@@ -19,8 +19,8 @@ INSERT INTO flyer (company, flyer_id, user_name, flyer_name, create_date, start_
 
 -- tab -- 
 
-INSERT INTO tab (isRedeemed, flyer_id, user_name) VALUES (false, '1' ,'kkkkkk');
-INSERT INTO tab (isRedeemed, flyer_id, user_name) VALUES (false,'2' ,'ttttt');
-INSERT INTO tab (isRedeemed, flyer_id, user_name) VALUES (true, '3' , 'ffffff');
-INSERT INTO tab (isRedeemed, flyer_id, user_name) VALUES (true, '4' ,'jjjjjj');
+INSERT INTO tab (isRedeemed,pull_date, flyer_id, user_name) VALUES (false,'2016-01-01', '1' ,'kkkkkk');
+INSERT INTO tab (isRedeemed,pull_date, flyer_id, user_name) VALUES (false,'2016-01-01','2' ,'ttttt');
+INSERT INTO tab (isRedeemed,pull_date, flyer_id, user_name) VALUES (true,'2016-01-01', '3' , 'ffffff');
+INSERT INTO tab (isRedeemed,pull_date, flyer_id, user_name) VALUES (true,'2016-01-01',  '4' ,'jjjjjj');
 
