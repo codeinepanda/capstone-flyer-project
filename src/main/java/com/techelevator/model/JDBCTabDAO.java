@@ -35,9 +35,10 @@ public class JDBCTabDAO implements TabDAO{
 
 	@Override
 	public void redeemTab(String userName, int flyerID) {
-		Object[] params = {true, flyerID, userName};
+		Date pullDate = Date.valueOf(LocalDate.now());
+		Object[] params = {true, pullDate, flyerID, userName};
 		String sqlRedeemTab = "UPDATE tab " +
-							  "SET isRedeemed = ? " +
+							  "SET isRedeemed = ?, pull_date = ? " +
 							  "WHERE flyer_id = ? AND user_name = ?;";
 		jdbcTemplate.update(sqlRedeemTab, params);
 	}
