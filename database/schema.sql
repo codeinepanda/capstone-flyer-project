@@ -3,6 +3,7 @@
 -- *************************************************************************************************
 
 CREATE TABLE flyer_user (
+  redeemScore integer DEFAULT 0,
   first_name varchar(256) NOT NULL,   										 -- First Name
   last_name varchar(256) NOT NULL,	 										 -- Last Name
   password varchar(256) NOT NULL,     										 -- Password (in plain-text)
@@ -19,6 +20,7 @@ CREATE SEQUENCE flyer_flyer_id_seq
   CACHE 1;
 
 CREATE TABLE flyer (
+	isRetired BOOLEAN NOT NULL DEFAULT false,
 	company varchar(256) NOT NULL,																		-- Company Name used for categorizing and searching for flyers
 	flyer_id integer DEFAULT nextval('flyer_flyer_id_seq') NOT NULL,					-- Flyer ID
 	user_name varchar(1000) NOT NULL,																	-- User ID Foreign Key
