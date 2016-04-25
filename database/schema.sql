@@ -3,7 +3,7 @@
 -- *************************************************************************************************
 
 CREATE TABLE flyer_user (
-  redeemScore integer DEFAULT 1,
+ -- redeemScore integer DEFAULT 1,
   first_name varchar(256) NOT NULL,   										 -- First Name
   last_name varchar(256) NOT NULL,	 										 -- Last Name
   password varchar(256) NOT NULL,     										 -- Password (in plain-text)
@@ -37,8 +37,9 @@ CREATE TABLE flyer (
 );
 
 CREATE TABLE tab (
-	pull_date date NOT NULL, 
+	
 	isRedeemed BOOLEAN NOT NULL DEFAULT false,
+	pull_date date NOT NULL, 
 	flyer_id integer,
 	user_name varchar(256),
 	CONSTRAINT pk_flyer_user_flyer_flyer_id PRIMARY KEY (flyer_id, user_name),
