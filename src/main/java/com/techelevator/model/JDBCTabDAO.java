@@ -28,17 +28,18 @@ public class JDBCTabDAO implements TabDAO{
 	
 	@Override
 	public void pullNewTab(String userName, int flyerID) {
-		Object[] params = {false, flyerID, userName};
-		String sqlCreateTab = "INSERT INTO tab(isRedeemed, flyer_id, user_name) VALUES(?,?,?);";
+		Date pullDate = Date.valueOf(LocalDate.now());
+		Object[] params = {false, pullDate, flyerID, userName};
+		String sqlCreateTab = "INSERT INTO tab(isRedeemed, pull_date, flyer_id, user_name) VALUES(?,?,?,?);";
 		jdbcTemplate.update(sqlCreateTab, params);
 	}
 
 	@Override
 	public void redeemTab(String userName, int flyerID) {
 		Date pullDate = Date.valueOf(LocalDate.now());
-		Object[] params = {true, pullDate, flyerID, userName};
+		Object[] params = {true, flyerID, userName};
 		String sqlRedeemTab = "UPDATE tab " +
-							  "SET isRedeemed = ?, pull_date = ? " +
+							  "SET isRedeemed = ?" +
 							  "WHERE flyer_id = ? AND user_name = ?;";
 		jdbcTemplate.update(sqlRedeemTab, params);
 	}
