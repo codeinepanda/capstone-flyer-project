@@ -30,9 +30,9 @@ public class JDBCFlyerDAO implements FlyerDAO {
 		Date today = Date.valueOf(LocalDate.now());
 		Object[] params = {today, false};
 		String sqlSelectFeaturedFlyers = "SELECT * FROM flyer " +
-										 "WHERE end_date < ? AND isRetired = ? " +
+										 "WHERE end_date > ? AND isRetired = ? " +
 										 "ORDER BY create_date LIMIT 6";
-		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSelectFeaturedFlyers);
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSelectFeaturedFlyers, params);
 		
 		while (results.next()) {
 			featuredFlyersList.add(getFlyerFromDB(results));

@@ -49,7 +49,7 @@ public class JDBCTabDAO implements TabDAO{
 		Object[] paramsRedeemed = {userName, true, mostRecentExpire};
 		String sqlNumRedeemTabs = "SELECT COUNT(*) FROM tab " +
 								  "JOIN flyer ON tab.flyer_id = flyer.flyer_id " +
-								  "WHERE tab.user_name = ? AND tab.isRedeemed = ? AND flyer.end_date > ?;";
+								  "WHERE tab.user_name = ? AND tab.isRedeemed = ? AND tab.pull_date > ?;";
 		SqlRowSet redeemedResults = jdbcTemplate.queryForRowSet(sqlNumRedeemTabs, paramsRedeemed);
 		while(redeemedResults.next()) {
 			numAllowableTabs = redeemedResults.getInt("count");
