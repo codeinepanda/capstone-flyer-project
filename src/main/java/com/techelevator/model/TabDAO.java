@@ -12,4 +12,6 @@ public interface TabDAO {
 	public void redeemTab(String userName, int flyerID);
 	public ArrayList<Tab> getTabsByHolder(String username);
 	public void redeemAllTabsByFlyer(int flyerID);
+	public int getNumAllowableTabs(String userName);
+	public int getNumUnredeemedTabsFromUser(String userName);
 }

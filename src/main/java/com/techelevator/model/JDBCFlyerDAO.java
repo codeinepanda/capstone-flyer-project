@@ -27,7 +27,11 @@ public class JDBCFlyerDAO implements FlyerDAO {
 	@Override
 	public ArrayList<Flyer> getFeaturedFlyers() {
 		ArrayList<Flyer> featuredFlyersList = new ArrayList<>();
-		String sqlSelectFeaturedFlyers = "SELECT * FROM flyer ORDER BY create_date LIMIT 6";
+		Date today = Date.valueOf(LocalDate.now());
+		Object[] params = {today, false};
+		String sqlSelectFeaturedFlyers = "SELECT * FROM flyer " +
+										 "WHERE end_date < ? AND isRetired = ? " +
+										 "ORDER BY create_date LIMIT 6";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSelectFeaturedFlyers);
 		
 		while (results.next()) {
@@ -171,9 +175,9 @@ public class JDBCFlyerDAO implements FlyerDAO {
 		LocalDate today= LocalDate.now();
 		Date newExpirationDate = Date.valueOf(today);
 		String sqlRetireFlyer = "UPDATE flyer " +
-								"SET num_tabs = 0, end_date = ? " +
+								"SET num_tabs = 0, end_date = ?, isRetired = ? " +
 								"WHERE flyer_id = ?;";
-		Object[] params = {newExpirationDate, flyerID};
+		Object[] params = {newExpirationDate, true, flyerID};
 		jdbcTemplate.update(sqlRetireFlyer, params);
 	}
 	

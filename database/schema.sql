@@ -3,7 +3,7 @@
 -- *************************************************************************************************
 
 CREATE TABLE flyer_user (
-  redeemScore integer DEFAULT 0,
+  redeemScore integer DEFAULT 1,
   first_name varchar(256) NOT NULL,   										 -- First Name
   last_name varchar(256) NOT NULL,	 										 -- Last Name
   password varchar(256) NOT NULL,     										 -- Password (in plain-text)
