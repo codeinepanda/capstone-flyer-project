@@ -47,10 +47,10 @@ public class JDBCFlyerDAO implements FlyerDAO {
 											userName, category, flyerName, userName, category, company, userName, flyerName, company, flyerName, category, company, userName, category, flyerName, company, order};
 		
 		
-		String sqlFilteredFlyersList = "SELECT * FROM flyer WHERE user_name = ? OR category = ? OR flyer_name = ? OR company = ?" 
-									+ " OR (user_name = ? AND category = ?) OR (user_name = ? AND flyer_name = ?) OR (user_name = ? AND company = ?) OR (flyer_name = ? AND category = ?) OR (flyer_name = ? AND company = ?) OR (category = ? AND company = ?)"
-									+ " OR (user_name = ? AND category = ? AND flyer_name = ?) OR (user_name = ? AND category = ? AND company = ?) OR (user_name = ? AND flyer_name = ? AND company = ?) OR (flyer_name = ? AND category = ? AND company = ?)"	
-									+ " OR (user_name = ? AND category = ? AND flyer_name = ? AND company = ?) ORDER BY ? DESC";
+		String sqlFilteredFlyersList = "SELECT * FROM flyer WHERE UPPER(user_name) = ? OR category LIKE ? OR UPPER(flyer_name) = ? OR UPPER(company) = ?" 
+									+ " OR (UPPER(user_name) = ? AND category LIKE ?) OR (UPPER(user_name) = ? AND UPPER(flyer_name) = ?) OR (UPPER(user_name) = ? AND UPPER(company) = ?) OR (UPPER(flyer_name) = ? AND category LIKE ?) OR (UPPER(flyer_name) = ? AND UPPER(company) = ?) OR (category LIKE ? AND UPPER(company) = ?)"
+									+ " OR (UPPER(user_name) = ? AND category LIKE ? AND UPPER(flyer_name) = ?) OR (UPPER(user_name) = ? AND category LIKE ? AND UPPER(company) = ?) OR (UPPER(user_name) = ? AND UPPER(flyer_name) = ? AND UPPER(company) = ?) OR (UPPER(flyer_name) = ? AND category LIKE ? AND UPPER(company) = ?)"	
+									+ " OR (UPPER(user_name) = ? AND category LIKE ? AND UPPER(flyer_name) = ? AND UPPER(company) = ?) ORDER BY ? DESC";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlFilteredFlyersList, params);
 		while (results.next())
 		{

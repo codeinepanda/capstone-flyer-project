@@ -33,8 +33,8 @@
                                 <label>Categories: </label>
                                 <br>
                                 <input type="checkbox" name="category" value="automobile"> Automobile <input type="checkbox" name="category" value="career"> Career <input type="checkbox" name="category" value="social"> Social
-                                <input type="checkbox" name="category" value="food"> Food <input type="checkbox" name="category" value="forSale"> For Sale <input type="checkbox" name="category" value="entertainment"> Entertainment<br>
-                                <input type="hidden" name="category" value="IS NOT NULL">
+                                <input type="checkbox" name="category" value="food"> Food <input type="checkbox" name="category" value="forSale"> For Sale <input type="checkbox" name="category" value="entertainment"> Entertainment
+                                <input type="checkbox" checked="checked" name="category" value=""> Any<br>
                                 <br>
                                 <br>
                                 <br>

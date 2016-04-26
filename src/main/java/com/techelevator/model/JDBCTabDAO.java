@@ -27,7 +27,7 @@ public class JDBCTabDAO implements TabDAO{
 	}
 	
 	@Override
-	public void pullNewTab(String userName, int flyerID) {
+	public void generateNewTab(String userName, int flyerID) {
 		Date pullDate = Date.valueOf(LocalDate.now());
 		Object[] params = {false, pullDate, flyerID, userName};
 		String sqlCreateTab = "INSERT INTO tab(isRedeemed, pull_date, flyer_id, user_name) VALUES(?,?,?,?);";

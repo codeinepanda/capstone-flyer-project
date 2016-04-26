@@ -10,6 +10,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
@@ -115,6 +116,8 @@ public class FlyerController {
 																	@RequestParam("category") String category,
 																	@RequestParam("orderBy") String orderBy) {
 			String order = "";
+				category = category.replace(Pattern.quote(","), "");
+				category = "%" + category + "%";
 			if(orderBy.equals("popularity")) {
 				order = "(SELECT COUNT(*) FROM tabs WHERE tab_flyer_id = flyer_flyer_id)";
 			} else if(orderBy.equals("endDate")) {
@@ -124,7 +127,8 @@ public class FlyerController {
 			} else if(orderBy.equals("createDate")) {
 				order = "create_date";
 			}
-			ArrayList<Flyer> filteredFlyers = flyerDAO.getFlyersFiltered(userName, category, flyerName, company, order);
+			System.out.println("The categories field is populated with: " + category);
+			ArrayList<Flyer> filteredFlyers = flyerDAO.getFlyersFiltered(userName.toUpperCase(), category, flyerName.toUpperCase(), company.toUpperCase(), order);
 			ArrayList<Flyer> column1 = new ArrayList();
 			ArrayList<Flyer> column2 = new ArrayList();
 			
@@ -195,7 +199,7 @@ public class FlyerController {
 					System.out.println("Allowable tabs: " + tabDAO.getNumAllowableTabs(currentUser.getUsername()));
 					if(tabDAO.getNumUnredeemedTabsFromUser(currentUser.getUsername()) <= tabDAO.getNumAllowableTabs(currentUser.getUsername())) {
 						message = flyerDAO.pullTab(flyerID);
-						tabDAO.pullNewTab(currentUser.getUsername(), flyerID);
+						tabDAO.generateNewTab(currentUser.getUsername(), flyerID);
 						System.out.println("Unredeemed tabs: " + tabDAO.getNumUnredeemedTabsFromUser(currentUser.getUsername()));
 						System.out.println("Allowable tabs: " + tabDAO.getNumAllowableTabs(currentUser.getUsername()));
 					model.put("message", message);
