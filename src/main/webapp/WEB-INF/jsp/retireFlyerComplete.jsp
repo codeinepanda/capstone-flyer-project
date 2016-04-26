@@ -5,8 +5,7 @@
         <title>Registration Complete</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="css/register.css">
-        <script src=""></script>
-        <script src=""></script>
+        <base target="_parent"/>
     </head>
     
     <body>
@@ -19,10 +18,10 @@
              ><div class="row form"
                    ><div class="col-xs-12 form">
                         <div id="success_box"
-             				><h1>Congratulations! Your Flyer Has Been Successfully Published!</h1
+             				><h1>Congratulations! Your Flyer Has Been Successfully Retired!</h1
              				><c:url var="cancel" value="/"
              				/><c:url var="createNew" value="/flyerForm"
-             				/><a href="${createNew}"><h3>Click Here To Create Another Flyer!</h3></a
+             				/><a href="${createNew}"><h3>Click Here To Create A New Flyer!</h3></a
              				><a href="${cancel}"><h3>Return Home</h3></a
                         ></div
                    ></div

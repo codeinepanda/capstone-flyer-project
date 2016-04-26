@@ -7,6 +7,7 @@
         <link rel="stylesheet" type="text/css" href="css/register.css">
         <script src=""></script>
         <script src=""></script>
+        <base target="_parent"/>
     </head>
     
     <body>

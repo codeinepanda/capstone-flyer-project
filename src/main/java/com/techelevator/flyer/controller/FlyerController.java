@@ -81,14 +81,15 @@ public class FlyerController {
 																   						   @RequestParam("createDate") String create,
 																   						   @RequestParam("numTabs") int numTabs,
 																   						   @RequestParam("category") String category,
-																   						   @RequestParam("flyerInfo") String flyerDescription) {
+																   						   @RequestParam("flyerInfo") String flyerDescription,
+																   						   @RequestParam("isRetired") boolean isRetired) {
 			User currentUser = null;
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 			LocalDate startDate = LocalDate.parse(start, formatter);
 			LocalDate endDate = LocalDate.parse(end, formatter);
 			LocalDate createDate = LocalDate.parse(create, formatter);
 			System.out.println("Inside show selected");
-			Flyer selectedFlyer = new Flyer(userName, company, flyerName, startDate, endDate, numTabs, category, flyerDescription);
+			Flyer selectedFlyer = new Flyer(userName, company, flyerName, startDate, endDate, numTabs, category, flyerDescription, isRetired);
 			selectedFlyer.setCreateDate(createDate);
 			selectedFlyer.setFlyerID(flyerID);
 			System.out.println("Created selectedFlyer object");
@@ -110,11 +111,15 @@ public class FlyerController {
 		}
 		
 		@RequestMapping(path="/filterFlyers", method=RequestMethod.POST)
-		public String showFilteredFlyers(Map<String, Object> model, @RequestParam("company") String company,
-																	@RequestParam("flyerName") String flyerName,
-																	@RequestParam("userName") String userName,
-																	@RequestParam("category") String category,
-																	@RequestParam("orderBy") String orderBy) {
+		public String showFilteredFlyers(Map<String, Object> model, HttpSession session, @RequestParam("company") String company,
+																						 @RequestParam("flyerName") String flyerName,
+																						 @RequestParam("userName") String userName,
+																						 @RequestParam("category") String category,
+																						 @RequestParam("orderBy") String orderBy) {
+			if(session.getAttribute("currentUser") != null) {
+				User currentUser = (User) session.getAttribute("currentUser");
+				model.put("currentUser", currentUser);
+			}
 			String order = "";
 			if(!category.equals("")) {
 				category = "%" + category + "%";
@@ -148,14 +153,15 @@ public class FlyerController {
 																   @RequestParam("createDate") String create,
 																   @RequestParam("numTabs") int numTabs,
 																   @RequestParam("category") String category,
-																   @RequestParam("flyerInfo") String flyerDescription) {
+																   @RequestParam("flyerInfo") String flyerDescription,
+																   @RequestParam("isRetired") boolean isRetired) {
 
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 			LocalDate startDate = LocalDate.parse(start, formatter);
 			LocalDate endDate = LocalDate.parse(end, formatter);
 			LocalDate createDate = LocalDate.parse(create, formatter);
 			System.out.println("Inside show selected");
-			Flyer selectedFlyer = new Flyer(userName, company, flyerName, startDate, endDate, numTabs, category, flyerDescription);
+			Flyer selectedFlyer = new Flyer(userName, company, flyerName, startDate, endDate, numTabs, category, flyerDescription, isRetired);
 			selectedFlyer.setCreateDate(createDate);
 			selectedFlyer.setFlyerID(flyerID);
 			System.out.println("Created selectedFlyer object");
@@ -169,7 +175,7 @@ public class FlyerController {
 		public String showRetireFlyerComplete(Map<String, Object> model, @RequestParam("flyerID") int flyerID) {
 			flyerDAO.retireAFlyer(flyerID);
 			tabDAO.redeemAllTabsByFlyer(flyerID);
-			return "redirect:/";
+			return "retireFlyerComplete";
 		}
 		
 		@RequestMapping(path="/pullTab", method=RequestMethod.GET)
@@ -182,13 +188,14 @@ public class FlyerController {
 				   																		@RequestParam("createDate") String create,
 				   																		@RequestParam("numTabs") int numTabs,
 				   																		@RequestParam("category") String category,
-				   																		@RequestParam("flyerInfo") String flyerDescription) {
+				   																		@RequestParam("flyerInfo") String flyerDescription,
+				   																		@RequestParam("isRetired") boolean isRetired) {
 			
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 			LocalDate startDate = LocalDate.parse(start, formatter);
 			LocalDate endDate = LocalDate.parse(end, formatter);
 			LocalDate createDate = LocalDate.parse(create, formatter);
-			Flyer selectedFlyer = new Flyer(userName, company, flyerName, startDate, endDate, numTabs, category, flyerDescription);
+			Flyer selectedFlyer = new Flyer(userName, company, flyerName, startDate, endDate, numTabs, category, flyerDescription, isRetired);
 			selectedFlyer.setCreateDate(createDate);
 			selectedFlyer.setFlyerID(flyerID);
 			model.put("selectedFlyer", selectedFlyer);
@@ -218,8 +225,8 @@ public class FlyerController {
 				return "selectedFlyer";
 			}
 			message = "Sorry, it looks like you don't have permission to take tabs. Only registered members can do that. " +
-					  "If you are a registered member, make sure you're logged in before you try to take a tab. If you're " +
-					  "not yet a registered member, click on \"Register\" in the upper-right corner of the screen to start " +
+					  "If you are a registered member, make sure you're logged in. Otherwise, " +
+					  "click on \"Register\" in the upper-right corner of the screen to " +
 					  "taking advantage of all the great promotions and deals our flyers offer!";
 			model.put("message", message);
 			return "permissionsError";
@@ -228,10 +235,13 @@ public class FlyerController {
 		@RequestMapping(path="/viewTabs", method=RequestMethod.GET)
 		public String showUserTabs(Map<String, Object> model, HttpSession session) {
 			String message = "";
+			int redemptionPoints = 0;
 			if(session.getAttribute("currentUser") != null) {
 				User currentUser = (User) session.getAttribute("currentUser");
 				ArrayList<Tab> unredeemedTabs = tabDAO.getTabsByHolder(currentUser.getUsername());
 				model.put("tabs", unredeemedTabs);
+				redemptionPoints = tabDAO.getNumAllowableTabs(currentUser.getUsername());
+				model.put("points", redemptionPoints);
 				return "tabs";
 			} else {
 				message = "Sorry, it appears you don't have permission to view that resource. Please ensure that you're logged in " +
@@ -313,19 +323,20 @@ public class FlyerController {
 		}
 		
 		@RequestMapping(path="/createFlyer", method=RequestMethod.POST)
-		public String showNewFlyerConfirmation(Map<String, Object> model, @RequestParam("flyerName") String flyer,
+		public String showNewFlyerConfirmation(Map<String, Object> model, HttpSession session,
+																		  @RequestParam("flyerName") String flyer,
 																		  @RequestParam("companyName") String company,
 																		  @RequestParam("startDate") Date start,
 																		  @RequestParam("expDate") Date expire,
 																		  @RequestParam("numTabs") int tabs,
 																		  @RequestParam("category") String cat,
 																		  @RequestParam("description") String info,
-																		  HttpSession session) {
+																		  @RequestParam("isRetired") boolean isRetired) {
 			LocalDate startDate = start.toLocalDate();
 			LocalDate endDate = expire.toLocalDate();
 			LocalDate createDate = LocalDate.now();
 			User currentUser = (User) session.getAttribute("currentUser");
-			Flyer newFlyer = new Flyer(currentUser.getUsername(), company, flyer, startDate, endDate, tabs, cat, info);
+			Flyer newFlyer = new Flyer(currentUser.getUsername(), company, flyer, startDate, endDate, tabs, cat, info, isRetired);
 			newFlyer.setCreateDate(createDate);
 			session.putValue("newFlyer", newFlyer);
 			return "newFlyerComplete";

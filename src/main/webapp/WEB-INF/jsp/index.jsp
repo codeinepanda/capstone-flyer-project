@@ -46,7 +46,7 @@
 	                	   		/><c:param name="numTabs" value="${flyer.numberOfTabs}"
 	                	   		/><c:param name="flyerInfo" value="${flyer.flyerDescription}"
 	                	   		/><c:param name="category" value="${flyer.category}"
-	                	   		/><c:param name="notPreview" value="false"
+	                	   		/><c:param name="isRetired" value="${flyer.retired}"
 	                	   /></c:url
 	                	   	><c:url var="navigateTo" value="/viewSelected"
 	                	   		><c:param name="flyerName" value="${flyer.flyerName}"
@@ -59,6 +59,7 @@
 	                	   		/><c:param name="numTabs" value="${flyer.numberOfTabs}"
 	                	   		/><c:param name="flyerInfo" value="${flyer.flyerDescription}"
 	                	   		/><c:param name="category" value="${flyer.category}"
+	                	   		/><c:param name="isRetired" value="${flyer.retired}"
 	                	   /></c:url
 	                	   ><a href="${navigateTo}" class="btn btn-block btn-info">View This Flyer</a
 	                	   ><iframe src="${flyerPreview}" width="650" height="650"
@@ -82,6 +83,7 @@
 	                	   		/><c:param name="numTabs" value="${flyer.numberOfTabs}"
 	                	   		/><c:param name="flyerInfo" value="${flyer.flyerDescription}"
 	                	   		/><c:param name="category" value="${flyer.category}"
+	                	   		/><c:param name="isRetired" value="${flyer.retired}"
 	                	   /></c:url
 	                	   	><c:url var="navigateTo" value="/viewSelected"
 	                	   		><c:param name="flyerName" value="${flyer.flyerName}"
@@ -94,6 +96,7 @@
 	                	   		/><c:param name="numTabs" value="${flyer.numberOfTabs}"
 	                	   		/><c:param name="flyerInfo" value="${flyer.flyerDescription}"
 	                	   		/><c:param name="category" value="${flyer.category}"
+	                	   		/><c:param name="isRetired" value="${flyer.retired}"
 	                	   /></c:url
 	                	   ><a href="${navigateTo}" class="btn btn-block btn-info">View This Flyer</a
 	                	   ><iframe src="${flyerPreview}" width="650" height="650"

@@ -28,9 +28,9 @@ public class JDBCFlyerDAO implements FlyerDAO {
 	public ArrayList<Flyer> getFeaturedFlyers() {
 		ArrayList<Flyer> featuredFlyersList = new ArrayList<>();
 		Date today = Date.valueOf(LocalDate.now());
-		Object[] params = {today, false};
+		Object[] params = {today, false, 0};
 		String sqlSelectFeaturedFlyers = "SELECT * FROM flyer " +
-										 "WHERE end_date > ? AND isRetired = ? " +
+										 "WHERE end_date > ? AND isRetired = ? AND num_tabs > ?" +
 										 "ORDER BY create_date LIMIT 6";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSelectFeaturedFlyers, params);
 		
@@ -137,6 +137,7 @@ public class JDBCFlyerDAO implements FlyerDAO {
 		newFlyer.setNumberOfTabs(results.getInt("num_tabs")); 
 		newFlyer.setCategory(results.getString("category"));
 		newFlyer.setFlyerDescription(results.getString("flyer_info"));
+		newFlyer.setRetired(results.getBoolean("isRetired"));
 		return newFlyer;
 	}
 	

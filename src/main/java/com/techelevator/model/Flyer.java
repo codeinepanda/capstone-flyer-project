@@ -17,9 +17,10 @@ public class Flyer {
 	private String flyerDescription;
 	private LocalDate createDate;
 	private int tabsTaken;
+	private boolean retired;
 	
 	
-	public Flyer(String userName, String company, String flyerName, LocalDate startDate, LocalDate endDate, int numTabs, String category, String flyerDescription) {
+	public Flyer(String userName, String company, String flyerName, LocalDate startDate, LocalDate endDate, int numTabs, String category, String flyerDescription, boolean isRetired) {
 		this.userName = userName;
 		this.company = company;
 		this.flyerName = flyerName;
@@ -28,6 +29,7 @@ public class Flyer {
 		this.numberOfTabs = numTabs;
 		this.category = category;
 		this.flyerDescription = flyerDescription;
+		this.retired = isRetired;
 	}
 	public Flyer() {
 	}
@@ -99,6 +101,13 @@ public class Flyer {
 	public void setTabsTaken(int tabsTaken) {
 		this.tabsTaken = tabsTaken;
 	}
+	public boolean isRetired() {
+		return retired;
+	}
+	public void setRetired(boolean retired) {
+		this.retired = retired;
+	}
+	
 
 	
 }

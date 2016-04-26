@@ -14,9 +14,18 @@
                 ><div class="col-xs-4 logo"
                 	><img src=""
                 ></div
-                ><div class="col-xs-8 title"
+                ><div class="col-xs-6 title"
                 	><h1>FLYERS CORNER</h1
                 	><h4>Welcome back, <c:out value="${currentUser.firstName}"/>!</h4
+                ></div
+                ><div class="col-xs-2 rewards"
+                	><h4>Your Current Redemption Rewards:</h4
+                	><c:if test="${not empty points}"
+                		><p><strong><c:out value="${points}"/></strong></p
+                	></c:if
+                	><c:if test="${empty points}"
+                		><p><strong>0</strong></p
+                	></c:if
                 ></div
                 ><div class="col-xs-2 button tabs"
                 	><c:url var="toHome" value="/"
