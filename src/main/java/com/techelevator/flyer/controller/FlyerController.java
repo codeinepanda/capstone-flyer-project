@@ -205,7 +205,7 @@ public class FlyerController {
 				if(userDAO.canTakeTab(currentUser.getUsername(), flyerID)) {
 					System.out.println("Unredeemed tabs: " + tabDAO.getNumUnredeemedTabsFromUser(currentUser.getUsername()));
 					System.out.println("Allowable tabs: " + tabDAO.getNumAllowableTabs(currentUser.getUsername()));
-					if(tabDAO.getNumUnredeemedTabsFromUser(currentUser.getUsername()) <= tabDAO.getNumAllowableTabs(currentUser.getUsername())) {
+					if(tabDAO.getNumUnredeemedTabsFromUser(currentUser.getUsername()) < tabDAO.getNumAllowableTabs(currentUser.getUsername())) {
 						message = flyerDAO.pullTab(flyerID);
 						tabDAO.generateNewTab(currentUser.getUsername(), flyerID);
 						System.out.println("Unredeemed tabs: " + tabDAO.getNumUnredeemedTabsFromUser(currentUser.getUsername()));
