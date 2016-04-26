@@ -62,17 +62,23 @@ public class JDBCFlyerDAO implements FlyerDAO {
 
 	@Override
 	public void createFlyer(Flyer newFlyer) {
+		int flyerID = 0;
 		Date startDate = Date.valueOf(newFlyer.getStartDate());
 		Date endDate = Date.valueOf(newFlyer.getEndDate());
 		Date createDate = Date.valueOf(newFlyer.getCreateDate());
 		Object[] params = {newFlyer.getCompany(), newFlyer.getUserName(), newFlyer.getFlyerName(), createDate, startDate, endDate, newFlyer.getNumberOfTabs(), newFlyer.getFlyerDescription()};
 		String sqlCreateNewFlyer = "INSERT INTO flyer(company, user_name, flyer_name, create_date, start_date, end_date, num_tabs, flyer_info) VALUES (?,?,?,?,?,?,?,?);";
+		jdbcTemplate.update(sqlCreateNewFlyer, params);
+		String sqlGetIdFromNewFlyer = "SELECT flyer_id FROM flyer WHERE company = ? AND user_name = ? AND flyer_name = ? AND create_date = ? AND start_date = ? AND end_date = ? AND num_tabs = ? AND flyer_info = ?;";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlGetIdFromNewFlyer, params);
+		while(results.next()) {
+			flyerID = results.getInt("flyer_id");
+		}
 		for(String str : newFlyer.getCategories()) {
 			String sqlAddCategory = "INSERT INTO category(category, flyer_id) VALUES (?,?)";
-			Object[] categoryParams = {str, newFlyer.getFlyerID()};
+			Object[] categoryParams = {str, flyerID};
 			jdbcTemplate.update(sqlAddCategory, categoryParams);
 		}
-		jdbcTemplate.update(sqlCreateNewFlyer, params);
 	}
 
 	@Override
