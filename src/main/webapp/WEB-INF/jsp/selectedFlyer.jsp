@@ -55,7 +55,7 @@
 	    /><c:param name="endDate" value="${selectedFlyer.endDate}"
 	    /><c:param name="numTabs" value="${selectedFlyer.numberOfTabs}"
 	    /><c:param name="flyerInfo" value="${selectedFlyer.flyerDescription}"
-	    /><c:param name="category" value="${selectedFlyer.category}"
+	    /><c:param name="category" value="${selectedFlyer.categories}"
 	    /><c:param name="isRetired" value="${selectedFlyer.retired}"
     /></c:url
         ><a href="${takeTab}" class="btn btn-default fa fa-ticket link"> <strong>Grab A Tab</strong><br>Only <c:out value="${selectedFlyer.numberOfTabs}"/> left!</a

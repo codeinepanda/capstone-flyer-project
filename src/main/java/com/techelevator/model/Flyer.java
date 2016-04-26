@@ -14,7 +14,7 @@ public class Flyer {
 	private LocalDate startDate;
 	private LocalDate endDate;
 	private int numberOfTabs;
-	private ArrayList<String> categories;
+	private ArrayList<String> categories = new ArrayList();
 	private String flyerDescription;
 	private LocalDate createDate;
 	private int tabsTaken;

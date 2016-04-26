@@ -49,7 +49,7 @@ CREATE TABLE tab (
 CREATE TABLE category (
 	category varchar(256),
 	flyer_id integer,
-	CONSTRAINT pk_flyer_flyer_id_category_flyer_id FOREIGN KEY (flyer_id) REFERENCES flyer(flyer_id)
+	CONSTRAINT fk_flyer_flyer_id FOREIGN KEY (flyer_id) REFERENCES flyer(flyer_id)
 );
 
 

@@ -342,19 +342,18 @@ public class FlyerController {
 																		  @RequestParam("expDate") Date expire,
 																		  @RequestParam("numTabs") int tabs,
 																		  @RequestParam("category") String cat,
-																		  @RequestParam("description") String info,
-																		  @RequestParam("isRetired") boolean isRetired) {
+																		  @RequestParam("description") String info) {
 			LocalDate startDate = start.toLocalDate();
 			LocalDate endDate = expire.toLocalDate();
 			LocalDate createDate = LocalDate.now();
 			User currentUser = (User) session.getAttribute("currentUser");
 			String[] categories = cat.split(Pattern.quote(","));
-			Flyer newFlyer = new Flyer(currentUser.getUsername(), company, flyer, startDate, endDate, tabs, info, isRetired);
+			Flyer newFlyer = new Flyer(currentUser.getUsername(), company, flyer, startDate, endDate, tabs, info, false);
 			for(String category : categories) {
 				newFlyer.getCategories().add(category);
 			}
 			newFlyer.setCreateDate(createDate);
-			model.put("newFlyer", newFlyer);
+			session.putValue("newFlyer", newFlyer);
 			return "newFlyerComplete";
 		}
 		

@@ -59,7 +59,7 @@
 	                	   		/><c:param name="endDate" value="${flyer.endDate}"
 	                	   		/><c:param name="numTabs" value="${flyer.numberOfTabs}"
 	                	   		/><c:param name="flyerInfo" value="${flyer.flyerDescription}"
-	                	   		/><c:param name="category" value="${flyer.category}"
+	                	   		/><c:param name="category" value="${flyer.categories}"
 	                	   		/><c:param name="isRetired" value="${flyer.retired}"
 	                	   /></c:url
 	                	   	><c:url var="navigateTo" value="/viewSelected"
@@ -72,7 +72,7 @@
 	                	   		/><c:param name="endDate" value="${flyer.endDate}"
 	                	   		/><c:param name="numTabs" value="${flyer.numberOfTabs}"
 	                	   		/><c:param name="flyerInfo" value="${flyer.flyerDescription}"
-	                	   		/><c:param name="category" value="${flyer.category}"
+	                	   		/><c:param name="category" value="${flyer.categories}"
 	                	   		/><c:param name="isRetired" value="${flyer.retired}"
 	                	   /></c:url
 	                	   ><a href="${navigateTo}" class="btn btn-block btn-info">View This Flyer</a
@@ -96,7 +96,7 @@
 	                	   		/><c:param name="endDate" value="${flyer.endDate}"
 	                	   		/><c:param name="numTabs" value="${flyer.numberOfTabs}"
 	                	   		/><c:param name="flyerInfo" value="${flyer.flyerDescription}"
-	                	   		/><c:param name="category" value="${flyer.category}"
+	                	   		/><c:param name="category" value="${flyer.categories}"
 	                	   		/><c:param name="isRetired" value="${flyer.retired}"
 	                	   /></c:url
 	                	   	><c:url var="navigateTo" value="/viewSelected"
@@ -109,7 +109,7 @@
 	                	   		/><c:param name="endDate" value="${flyer.endDate}"
 	                	   		/><c:param name="numTabs" value="${flyer.numberOfTabs}"
 	                	   		/><c:param name="flyerInfo" value="${flyer.flyerDescription}"
-	                	   		/><c:param name="category" value="${flyer.category}"
+	                	   		/><c:param name="category" value="${flyer.categories}"
 	                	   		/><c:param name="isRetired" value="${flyer.retired}"
 	                	   /></c:url
 	                	   ><a href="${navigateTo}" class="btn btn-block btn-info">View This Flyer</a
