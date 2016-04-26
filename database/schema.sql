@@ -31,7 +31,6 @@ CREATE TABLE flyer (
 	num_tabs integer,																			-- number of tabs on flyer
 	tabs_taken integer DEFAULT 0,
 	flyer_info varchar(1000),																	-- User created
-	category varchar(256) NOT NULL,
     CONSTRAINT fk_flyer_user_user_name FOREIGN KEY (user_name) REFERENCES flyer_user(user_name),
 	CONSTRAINT pk_flyer_flyer_id PRIMARY KEY (flyer_id)
 );
@@ -45,6 +44,12 @@ CREATE TABLE tab (
 	CONSTRAINT pk_flyer_user_flyer_flyer_id PRIMARY KEY (flyer_id, user_name),
 	CONSTRAINT fk_flyer_flyer_id FOREIGN KEY (flyer_id) REFERENCES flyer(flyer_id),
 	CONSTRAINT fk_flyer_user_user_name FOREIGN KEY (user_name) REFERENCES flyer_user(user_name)
+);
+
+CREATE TABLE category (
+	category varchar(256),
+	flyer_id integer,
+	CONSTRAINT pk_flyer_flyer_id_category_flyer_id PRIMARY KEY (flyer_id) REFERENCES flyer(flyer_id)
 );
 
 
