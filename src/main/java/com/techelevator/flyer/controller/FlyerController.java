@@ -116,8 +116,9 @@ public class FlyerController {
 																	@RequestParam("category") String category,
 																	@RequestParam("orderBy") String orderBy) {
 			String order = "";
-				category = category.replace(Pattern.quote(","), "");
+			if(!category.equals("")) {
 				category = "%" + category + "%";
+			}
 			if(orderBy.equals("popularity")) {
 				order = "(SELECT COUNT(*) FROM tabs WHERE tab_flyer_id = flyer_flyer_id)";
 			} else if(orderBy.equals("endDate")) {
