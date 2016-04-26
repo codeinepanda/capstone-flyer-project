@@ -6,6 +6,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import javax.sql.DataSource;
 
@@ -64,8 +65,13 @@ public class JDBCFlyerDAO implements FlyerDAO {
 		Date startDate = Date.valueOf(newFlyer.getStartDate());
 		Date endDate = Date.valueOf(newFlyer.getEndDate());
 		Date createDate = Date.valueOf(newFlyer.getCreateDate());
-		Object[] params = {newFlyer.getCompany(), newFlyer.getUserName(), newFlyer.getFlyerName(), createDate, startDate, endDate, newFlyer.getNumberOfTabs(), newFlyer.getFlyerDescription(), newFlyer.getCategory()};
-		String sqlCreateNewFlyer = "INSERT INTO flyer(company, user_name, flyer_name, create_date, start_date, end_date, num_tabs, flyer_info, category) VALUES (?,?,?,?,?,?,?,?,?);";
+		Object[] params = {newFlyer.getCompany(), newFlyer.getUserName(), newFlyer.getFlyerName(), createDate, startDate, endDate, newFlyer.getNumberOfTabs(), newFlyer.getFlyerDescription()};
+		String sqlCreateNewFlyer = "INSERT INTO flyer(company, user_name, flyer_name, create_date, start_date, end_date, num_tabs, flyer_info) VALUES (?,?,?,?,?,?,?,?);";
+		for(String str : newFlyer.getCategories()) {
+			String sqlAddCategory = "INSERT INTO category(category, flyer_id) VALUES (?,?)";
+			Object[] categoryParams = {str, newFlyer.getFlyerID()};
+			jdbcTemplate.update(sqlAddCategory, categoryParams);
+		}
 		jdbcTemplate.update(sqlCreateNewFlyer, params);
 	}
 
@@ -135,9 +141,13 @@ public class JDBCFlyerDAO implements FlyerDAO {
 		newFlyer.setStartDate(start);
 		newFlyer.setEndDate(end);
 		newFlyer.setNumberOfTabs(results.getInt("num_tabs")); 
-		newFlyer.setCategory(results.getString("category"));
 		newFlyer.setFlyerDescription(results.getString("flyer_info"));
 		newFlyer.setRetired(results.getBoolean("isRetired"));
+		String sqlGetCategories = "SELECT * FROM category WHERE flyer_id = ?;";
+		SqlRowSet categoryResults = jdbcTemplate.queryForRowSet(sqlGetCategories, newFlyer.getFlyerID());
+		while(categoryResults.next()) {
+			newFlyer.getCategories().add(categoryResults.getString("category"));
+		}
 		return newFlyer;
 	}
 	

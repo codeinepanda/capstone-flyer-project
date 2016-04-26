@@ -2,6 +2,7 @@ package com.techelevator.model;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 
 public class Flyer {
@@ -13,21 +14,20 @@ public class Flyer {
 	private LocalDate startDate;
 	private LocalDate endDate;
 	private int numberOfTabs;
-	private String category;
+	private ArrayList<String> categories;
 	private String flyerDescription;
 	private LocalDate createDate;
 	private int tabsTaken;
 	private boolean retired;
 	
 	
-	public Flyer(String userName, String company, String flyerName, LocalDate startDate, LocalDate endDate, int numTabs, String category, String flyerDescription, boolean isRetired) {
+	public Flyer(String userName, String company, String flyerName, LocalDate startDate, LocalDate endDate, int numTabs, String flyerDescription, boolean isRetired) {
 		this.userName = userName;
 		this.company = company;
 		this.flyerName = flyerName;
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.numberOfTabs = numTabs;
-		this.category = category;
 		this.flyerDescription = flyerDescription;
 		this.retired = isRetired;
 	}
@@ -39,11 +39,11 @@ public class Flyer {
 	public void setCreateDate(LocalDate createDate) {
 		this.createDate = createDate;
 	}
-	public String getCategory() {
-		return category;
+	public ArrayList<String> getCategories() {
+		return categories;
 	}
-	public void setCategory(String category) {
-		this.category = category;
+	public void setCategories(ArrayList<String> categories) {
+		this.categories = categories;
 	}
 	public int getFlyerID() {
 		return flyerID;

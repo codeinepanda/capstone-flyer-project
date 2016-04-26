@@ -89,7 +89,11 @@ public class FlyerController {
 			LocalDate endDate = LocalDate.parse(end, formatter);
 			LocalDate createDate = LocalDate.parse(create, formatter);
 			System.out.println("Inside show selected");
-			Flyer selectedFlyer = new Flyer(userName, company, flyerName, startDate, endDate, numTabs, category, flyerDescription, isRetired);
+			String[] categories = category.split(Pattern.quote(","));
+			Flyer selectedFlyer = new Flyer(userName, company, flyerName, startDate, endDate, numTabs, flyerDescription, isRetired);
+			for(String cat : categories) {
+				selectedFlyer.getCategories().add(cat);
+			}
 			selectedFlyer.setCreateDate(createDate);
 			selectedFlyer.setFlyerID(flyerID);
 			System.out.println("Created selectedFlyer object");
@@ -161,7 +165,11 @@ public class FlyerController {
 			LocalDate endDate = LocalDate.parse(end, formatter);
 			LocalDate createDate = LocalDate.parse(create, formatter);
 			System.out.println("Inside show selected");
-			Flyer selectedFlyer = new Flyer(userName, company, flyerName, startDate, endDate, numTabs, category, flyerDescription, isRetired);
+			String[] categories = category.split(Pattern.quote(","));
+			Flyer selectedFlyer = new Flyer(userName, company, flyerName, startDate, endDate, numTabs, flyerDescription, isRetired);
+			for(String cat : categories) {
+				selectedFlyer.getCategories().add(cat);
+			}
 			selectedFlyer.setCreateDate(createDate);
 			selectedFlyer.setFlyerID(flyerID);
 			System.out.println("Created selectedFlyer object");
@@ -195,7 +203,11 @@ public class FlyerController {
 			LocalDate startDate = LocalDate.parse(start, formatter);
 			LocalDate endDate = LocalDate.parse(end, formatter);
 			LocalDate createDate = LocalDate.parse(create, formatter);
-			Flyer selectedFlyer = new Flyer(userName, company, flyerName, startDate, endDate, numTabs, category, flyerDescription, isRetired);
+			String[] categories = category.split(Pattern.quote(","));
+			Flyer selectedFlyer = new Flyer(userName, company, flyerName, startDate, endDate, numTabs, flyerDescription, isRetired);
+			for(String cat : categories) {
+				selectedFlyer.getCategories().add(cat);
+			}
 			selectedFlyer.setCreateDate(createDate);
 			selectedFlyer.setFlyerID(flyerID);
 			model.put("selectedFlyer", selectedFlyer);
@@ -336,9 +348,13 @@ public class FlyerController {
 			LocalDate endDate = expire.toLocalDate();
 			LocalDate createDate = LocalDate.now();
 			User currentUser = (User) session.getAttribute("currentUser");
-			Flyer newFlyer = new Flyer(currentUser.getUsername(), company, flyer, startDate, endDate, tabs, cat, info, isRetired);
+			String[] categories = cat.split(Pattern.quote(","));
+			Flyer newFlyer = new Flyer(currentUser.getUsername(), company, flyer, startDate, endDate, tabs, info, isRetired);
+			for(String category : categories) {
+				newFlyer.getCategories().add(category);
+			}
 			newFlyer.setCreateDate(createDate);
-			session.putValue("newFlyer", newFlyer);
+			model.put("newFlyer", newFlyer);
 			return "newFlyerComplete";
 		}
 		
