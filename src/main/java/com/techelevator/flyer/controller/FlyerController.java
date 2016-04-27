@@ -125,11 +125,8 @@ public class FlyerController {
 				model.put("currentUser", currentUser);
 			}
 			String order = "";
-			if(!category.equals("")) {
-				category = "%" + category + "%";
-			}
 			if(orderBy.equals("popularity")) {
-				order = "(SELECT COUNT(*) FROM tabs WHERE tab_flyer_id = flyer_flyer_id)";
+				order = "(SELECT COUNT(*) FROM tab WHERE tab.flyer_id = flyer.flyer_id)";
 			} else if(orderBy.equals("endDate")) {
 				order = "end_date";
 			} else if(orderBy.equals("numTabs")) {
@@ -137,8 +134,9 @@ public class FlyerController {
 			} else if(orderBy.equals("createDate")) {
 				order = "create_date";
 			}
+			String[] categories = category.split(Pattern.quote(","));
 			System.out.println("The categories field is populated with: " + category);
-			ArrayList<Flyer> filteredFlyers = flyerDAO.getFlyersFiltered(userName.toUpperCase(), category, flyerName.toUpperCase(), company.toUpperCase(), order);
+			ArrayList<Flyer> filteredFlyers = flyerDAO.getFlyersFiltered(userName.toUpperCase(), categories, flyerName.toUpperCase(), company.toUpperCase(), order);
 			ArrayList<Flyer> column1 = new ArrayList();
 			ArrayList<Flyer> column2 = new ArrayList();
 			
