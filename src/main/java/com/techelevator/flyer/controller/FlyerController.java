@@ -8,6 +8,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -32,7 +33,7 @@ import com.techelevator.model.User;
 import com.techelevator.model.UserDAO;
 
 @Controller
-@SessionAttributes("currentUser")
+@SessionAttributes({"currentUser", "userPreferences"})
 @Transactional
 public class FlyerController {
 		private UserDAO userDAO;
@@ -134,9 +135,8 @@ public class FlyerController {
 			} else if(orderBy.equals("createDate")) {
 				order = "create_date";
 			}
-			String[] categories = category.split(Pattern.quote(","));
 			System.out.println("The categories field is populated with: " + category);
-			ArrayList<Flyer> filteredFlyers = flyerDAO.getFlyersFiltered(userName.toUpperCase(), categories, flyerName.toUpperCase(), company.toUpperCase(), order);
+			ArrayList<Flyer> filteredFlyers = flyerDAO.getFlyersFiltered(userName.toUpperCase(), category, flyerName.toUpperCase(), company.toUpperCase(), order);
 			ArrayList<Flyer> column1 = new ArrayList();
 			ArrayList<Flyer> column2 = new ArrayList();
 			
@@ -144,6 +144,53 @@ public class FlyerController {
 			
 			return "filteredFlyers";
 		}
+		
+		@RequestMapping(path="/preferences", method=RequestMethod.GET)
+		public String showPreferencesForm(Map<String, Object> model) {
+			ArrayList<String> categories = flyerDAO.getAllUniqueValuesFromCategory();
+			ArrayList<String> companies = flyerDAO.getAllUniqueValuesFromFlyer("company");
+			ArrayList<String> authors = flyerDAO.getAllUniqueValuesFromFlyer("user_name");
+			model.put("categories", categories);
+			model.put("companies", companies);
+			model.put("authors", authors);
+			return "userPreferences";
+		}
+		
+		@RequestMapping(path="/createPreferences", method=RequestMethod.POST)
+			public String generateUserPreferences(Map<String, Object> model, HttpSession session, @RequestParam("author") String author,
+																	   @RequestParam("categories") String category,
+																	   @RequestParam("company") String company) {
+				String message = "Great! Your preferences have been recorded. Whenever any new flyers are created " +
+								 "which match your preferences, you can view them by selecting \"Recommended Flyers\" in " +
+								 "your navigation bar.";
+				model.put("message", message);
+				HashMap userPreferences = new HashMap();
+				userPreferences.put("author", author);
+				userPreferences.put("categories", category);
+				userPreferences.put("company", company);
+				session.setAttribute("userPreferences", userPreferences);
+				return "userPreferencesComplete";
+			}
+		
+		@RequestMapping(path="/recommendedFlyers", method=RequestMethod.GET)
+			public String showRecommendedFlyers(Map<String, Object> model, HttpSession session) {
+				User currentUser;
+				ArrayList<Flyer> recommendedFlyers;
+				if(session.getAttribute("currentUser") != null) {
+					currentUser = (User) session.getAttribute("currentUser");
+					if(session.getAttribute("userPreferences") != null) {
+						HashMap<String, String> userPreferences = (HashMap<String, String>) session.getAttribute("userPreferences");
+						recommendedFlyers = flyerDAO.getFlyersFiltered(userPreferences.get("author"), userPreferences.get("categories"), "", userPreferences.get("company"), "create_date");
+						model.put("filteredFlyers", recommendedFlyers);
+						return "filteredFlyers";
+					} else {
+						return "featured";
+					}
+				} else {
+					String message = "Sorry, you need need to be a registered member to get personalized recommendations";
+					return "permissionsError";
+				}
+			}
 		
 		@RequestMapping(path="/viewSelected", method=RequestMethod.GET)
 		public String openSelectedFlyer(Map<String, Object> model, @RequestParam("flyerName") String flyerName,
@@ -403,7 +450,7 @@ public class FlyerController {
 			}
 		}
 		
-		@RequestMapping(path="/logout", method=RequestMethod.POST)
+		@RequestMapping(path="/logout", method=RequestMethod.GET)
 		public String logout(Map<String, Object> model, HttpSession session) {
 			model.remove("currentUser");
 			session.removeAttribute("currentUser");

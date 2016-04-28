@@ -6,7 +6,27 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="css/register.css">
     </head>
-    
+    <nav class="navbar navbar-inverse">
+  			<div class="container-fluid">
+   				<div class="navbar-header">
+      				<a class="navbar-brand" href="#">Flyers Corner</a>
+    			</div>
+    			<ul class="nav navbar-nav">
+    				<c:url var="toHome" value="/"/>
+     	 			<li><a href="${toHome}">Home</a></li>
+     	 			<c:url var="toSearch" value="/searchFlyers"/>
+      				<li><a href="${toSearch}">Search Flyers</a></li>
+      				<c:url var="toFeatured" value="/viewFeatured"/>
+      				<li><a href="${toFeatured}">View Featured Flyers</a></li> 
+    			</ul>
+    			<ul class="nav navbar-nav navbar-right">
+    			<c:url var="toRegistration" value="/registration"/>
+      				<li><a href="${toRegistration}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      				<c:url var="toLogin" value="/loginPage"/>
+      				<li class="active"><a href="${toLogin}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    			</ul>
+  			</div>
+		</nav>
     <body>
         <div class="container-fluid"
              ><div class="row header"

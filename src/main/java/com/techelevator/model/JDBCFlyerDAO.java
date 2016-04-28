@@ -24,7 +24,29 @@ public class JDBCFlyerDAO implements FlyerDAO {
 	public JDBCFlyerDAO(DataSource dataSource) {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
-
+	
+	@Override
+	public ArrayList<String> getAllUniqueValuesFromFlyer(String column) {
+		ArrayList<String> values = new ArrayList();
+		String sqlAllCategories = "SELECT DISTINCT ? FROM flyer;";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlAllCategories, column);
+		while(results.next()) {
+			values.add(results.getString(column));
+		}
+		return values;
+	}
+	
+	@Override
+	public ArrayList<String> getAllUniqueValuesFromCategory() {
+		ArrayList<String> values = new ArrayList();
+		String sqlAllCategories = "SELECT DISTINCT category FROM category;";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlAllCategories);
+		while(results.next()) {
+			values.add(results.getString("category"));
+		}
+		return values;
+	}
+	
 	@Override
 	public ArrayList<Flyer> getFeaturedFlyers() {
 		ArrayList<Flyer> featuredFlyersList = new ArrayList<>();
@@ -42,7 +64,8 @@ public class JDBCFlyerDAO implements FlyerDAO {
 	}
 
 	@Override
-	public ArrayList<Flyer> getFlyersFiltered(String userName,String[] categories, String flyerName, String company, String order) {
+	public ArrayList<Flyer> getFlyersFiltered(String userName,String category, String flyerName, String company, String order) {
+		String[] categories = category.split(Pattern.quote(","));
 		ArrayList<Flyer> filteredFlyersList = new ArrayList<>();
 		String sqlGetFilteredFlyerList = "SELECT * FROM flyer ";
 		if(!categories[0].equals("") && order.equals("(SELECT COUNT(*) FROM tab WHERE tab.flyer_id = flyer.flyer_id)")) {
@@ -154,14 +177,49 @@ public class JDBCFlyerDAO implements FlyerDAO {
 		return listOfUnredeemedTabs;
 		}
 	
-	public boolean isActive(LocalDate endDate) {
-		LocalDate today = LocalDate.now();
-		int daysRemaining = (int)ChronoUnit.DAYS.between(today, endDate);
-		if(daysRemaining > 0) {
-			return true;
+
+	
+	@Override
+	public String pullTab(int flyerID) {
+		String message = "";
+		if(hasAtLeastOneTab(flyerID)) {
+			message = "Congratulations! You've successfully pulled a tab from this flyer! Be sure to redeem it before the offer expires!";
+			Object[] params ={flyerID};
+			String sqlPullTabQuery = "Update flyer " +
+								 	 "SET num_tabs = num_tabs - 1, tabs_taken = tabs_taken + 1 " +
+								 	 "WHERE flyer_id = ?;";
+			jdbcTemplate.update(sqlPullTabQuery, params);
 		} else {
-			return false;
+			message = "Sorry, there aren't any tabs left on this flyer! But don't let that discourage you! Have a look through our other " +
+					  "flyers on this site and find another offer that's right for you!";
 		}
+		return message;
+	}
+
+	@Override
+	public void retireAFlyer(int flyerID) {
+		LocalDate today= LocalDate.now();
+		Date newExpirationDate = Date.valueOf(today);
+		String sqlRetireFlyer = "UPDATE flyer " +
+								"SET num_tabs = 0, end_date = ?, isRetired = ? " +
+								"WHERE flyer_id = ?;";
+		Object[] params = {newExpirationDate, true, flyerID};
+		jdbcTemplate.update(sqlRetireFlyer, params);
+	}
+	
+	// ------- SUB-METHODS FOR INTERNAL USE BY INTERFACE-DEFINED METHODS
+	
+	public boolean hasAtLeastOneTab(int flyerID) {
+		int numTabs = 0;
+		String sqlCheckIfTabsRemain = "SELECT num_tabs FROM flyer WHERE flyer_id = ?";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlCheckIfTabsRemain, flyerID);
+		while(results.next()) {
+			numTabs = results.getInt("num_tabs");
+		}
+		if(numTabs > 0) {
+			return true;
+		}
+		return false;
 	}
 	
 	private Flyer getFlyerFromDB(SqlRowSet results) {
@@ -188,45 +246,14 @@ public class JDBCFlyerDAO implements FlyerDAO {
 		return newFlyer;
 	}
 	
-	@Override
-	public String pullTab(int flyerID) {
-		String message = "";
-		if(hasAtLeastOneTab(flyerID)) {
-			message = "Congratulations! You've successfully pulled a tab from this flyer! Be sure to redeem it before the offer expires!";
-			Object[] params ={flyerID};
-			String sqlPullTabQuery = "Update flyer " +
-								 	 "SET num_tabs = num_tabs - 1, tabs_taken = tabs_taken + 1 " +
-								 	 "WHERE flyer_id = ?;";
-			jdbcTemplate.update(sqlPullTabQuery, params);
-		} else {
-			message = "Sorry, there aren't any tabs left on this flyer! But don't let that discourage you! Have a look through our other " +
-					  "flyers on this site and find another offer that's right for you!";
-		}
-		return message;
-	}
-	
-	public boolean hasAtLeastOneTab(int flyerID) {
-		int numTabs = 0;
-		String sqlCheckIfTabsRemain = "SELECT num_tabs FROM flyer WHERE flyer_id = ?";
-		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlCheckIfTabsRemain, flyerID);
-		while(results.next()) {
-			numTabs = results.getInt("num_tabs");
-		}
-		if(numTabs > 0) {
+	public boolean isActive(LocalDate endDate) {
+		LocalDate today = LocalDate.now();
+		int daysRemaining = (int)ChronoUnit.DAYS.between(today, endDate);
+		if(daysRemaining > 0) {
 			return true;
+		} else {
+			return false;
 		}
-		return false;
-	}
-
-	@Override
-	public void retireAFlyer(int flyerID) {
-		LocalDate today= LocalDate.now();
-		Date newExpirationDate = Date.valueOf(today);
-		String sqlRetireFlyer = "UPDATE flyer " +
-								"SET num_tabs = 0, end_date = ?, isRetired = ? " +
-								"WHERE flyer_id = ?;";
-		Object[] params = {newExpirationDate, true, flyerID};
-		jdbcTemplate.update(sqlRetireFlyer, params);
 	}
 	
 	

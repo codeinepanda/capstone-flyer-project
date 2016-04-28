@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Search For Flyers</title>
+        <title>User Preferences</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="css/register.css">
     </head>
@@ -31,54 +31,53 @@
         <div class="container-fluid"
              ><div class="row header"
                    ><div class="col-xs-12 header"
-                         ><h1>Create A New Flyer</h1
+                         ><h1>User Preferences</h1
+                         ><h2>Fill in the fields below with any preferences you might have and we'll notify you whenever a new flyer
+                         is created that matches your preferences. You can view a list of our most recent flyers that match your
+                         preferences any time you want, just by clicking "Recommended Flyers" in your navigation bar.</h2
                    ></div
              ></div
              ><div class="row form"
                    ><div class="col-xs-12 form">
                         <div id="form_box">
-                   			<select name="searchBy" id="searchBy">
-                   				<option name="searchBy" value="title">Flyer Name</option>
-                   				<option name="searchBy" value="author">Flyer Author</option>
-                   				<option name="searchBy" value="company">Company of Origin</option>
-                   				<option name="searchBy" value="tabs">Remaining Tabs</option>
-                   				<option name="searchBy" value="category">Category</option>
-                   			</select>
-                   			<br>
-                   			<br>
-                            <form id="flyer_form" action="filterFlyers" method="POST">
-                                <section id="flyerName" hidden>
-                                	<label>Flyer Name: </label> <input type="text" name="flyerName"/>
+                            <form id="flyer_form" action="createPreferences" method="POST">
+
+                                <section id="company">
+                                	<label>Company Name: </label>
+                                	<select multiple name="company">
+                                		<c:forEach var="company" items="${companies}">
+                                			<option value="${company}"><c:out value="${company}"/></option>
+                                		</c:forEach>
+                                	</select>
                                 	<br>
                                 	<br>
                                 </section>
-                                <section id="company" hidden>
-                                	<label>Company Name: </label> <input type="text" name="company"/>
+                                <section id="author">
+                                	<label>Flyer Author: </label> <input type="text" name="author"/>
+                                	<select multiple name="author">
+                                		<c:forEach var="author" items="${authors}">
+                                			<option value="${author}"><c:out value="${author}"/></option>
+                                		</c:forEach>
+                                	</select>
                                 	<br>
                                 	<br>
                                 </section>
-                                <section id="userName" hidden>
-                                	<label>Flyer Author: </label> <input type="text" name="userName"/>
-                                	<br>
-                                	<br>
-                                </section>
-                                <section id="category" hidden>
+                                <section id="category">
                                 	<label>Categories: </label>
+                                	<p>Select from the list of currently available categories. If you would like to add additional categories
+                                	to your preferences, you may. We will add flyers of that category to your recommendations as soon as they
+                                	become available.</p>
+                                	<select multiple name="category">
+                                		<c:forEach var="category" items="${categories}">
+                                			<option value="${category}"><c:out value="${category}"/></option>
+                                		</c:forEach>
+                                	</select>
                                 	<br>
-                                	<input type="checkbox" name="category" value="automobile"> Automobile <input type="checkbox" name="category" value="career"> Career <input type="checkbox" name="category" value="social"> Social
-                                	<input type="checkbox" name="category" value="food"> Food <input type="checkbox" name="category" value="forSale"> For Sale <input type="checkbox" name="category" value="entertainment"> Entertainment
-                                	<input type="checkbox" checked="checked" name="category" value=""> Any<br>
+                                	<label>Additional categories: </label> <input type="text" name="category">
                                 	<br>
                                 	<br>
                                 	<br>
                                 </section>
-                                <label>Order By: </label>
-                                <select name="orderBy">
-                                	<option value="popularity" selected="selected">Most Popular</option>
-                                	<option value="endDate">Days to Expiration</option>
-                                	<option value="numTabs">Tabs Remaining</option>
-                                	<option value="createDate">Most Recent</option>
-                                </select>
                                 <input class="btn btn-primary" type="submit" id="submit" value="Submit">
                             </form
                         ></div
@@ -90,7 +89,5 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/additional-methods.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous">
   </script>
-  <script src="js/filterValid.js"></script>
-  <script src="js/filterForm.js"></script>
-    </body>
+</body>
 </html>
