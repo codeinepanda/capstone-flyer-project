@@ -52,5 +52,12 @@ CREATE TABLE category (
 	CONSTRAINT fk_flyer_flyer_id FOREIGN KEY (flyer_id) REFERENCES flyer(flyer_id)
 );
 
+CREATE TABLE prefs (
+	user_name varchar(1000),
+	company varchar(1000),
+	author varchar(1000),
+	category varchar(256),
+	CONSTRAINT pk_user_name PRIMARY KEY (user_name) REFERENCES flyer_user(user_name)
+)
 
 
