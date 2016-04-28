@@ -1,6 +1,10 @@
 package com.techelevator.model;
 
+import java.sql.Connection;
 import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -28,8 +32,8 @@ public class JDBCFlyerDAO implements FlyerDAO {
 	@Override
 	public ArrayList<String> getAllUniqueValuesFromFlyer(String column) {
 		ArrayList<String> values = new ArrayList();
-		String sqlAllCategories = "SELECT DISTINCT ? FROM flyer;";
-		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlAllCategories, column);
+		String sqlAllCategories = "SELECT DISTINCT " + column + " FROM flyer;";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlAllCategories);
 		while(results.next()) {
 			values.add(results.getString(column));
 		}

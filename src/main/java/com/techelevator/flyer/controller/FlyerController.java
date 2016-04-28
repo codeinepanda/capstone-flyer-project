@@ -148,8 +148,10 @@ public class FlyerController {
 		@RequestMapping(path="/preferences", method=RequestMethod.GET)
 		public String showPreferencesForm(Map<String, Object> model) {
 			ArrayList<String> categories = flyerDAO.getAllUniqueValuesFromCategory();
-			ArrayList<String> companies = flyerDAO.getAllUniqueValuesFromFlyer("company");
-			ArrayList<String> authors = flyerDAO.getAllUniqueValuesFromFlyer("user_name");
+			ArrayList<String> companies = new ArrayList();
+			ArrayList<String> authors = new ArrayList();
+			companies = flyerDAO.getAllUniqueValuesFromFlyer("company");
+			authors = flyerDAO.getAllUniqueValuesFromFlyer("user_name");
 			model.put("categories", categories);
 			model.put("companies", companies);
 			model.put("authors", authors);

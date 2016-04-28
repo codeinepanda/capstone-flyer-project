@@ -6,36 +6,13 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 		<link rel="stylesheet" type="text/css" href="css/flyer.css">
 	</head>
+	<c:if test="${notPreview}">
+		<c:import url="/WEB-INF/jsp/header.jsp"/>
+	</c:if>
 	<body>
   <div class="container-fluid"
-       
-    ><div class="row page" id="page">
-      <div class="col-xs-12 page">
-        <div class="row" id="Mainheader">
-          <div class="col-xs-12 Name">
-            <h3 id="userName">Flyers Corner</h3
-      ></div><!-- END NAME COLUMN
-    --></div><!-- END ROW HEADER
-    --><c:if test="${notPreview}"
-      ><div class="row header-buttons"
-          ><div class="col-xs-3"
-          ><c:url var="toHome" value="/"
-        /><a href="${toHome}" class="btn btn-primary btn-block fa fa-home"> Home</a
-          ></div
-          ><div class="col-xs-3"
-          ><c:url var="toSearch" value="/searchFlyers"
-        /><a href="${toSearch}" class="btn btn-primary btn-block fa fa-info-circle"> Search Flyers</a
-          ></div
-          ><div class="col-xs-3"
-          ><c:url var="toSuggested" value="/suggestedFlyers"
-        /><a href="${toSuggested}" class="btn btn-primary btn-block fa fa-folder-open"> View Suggested</a
-          ></div>
-          <div class="col-xs-3"
-          ><c:url var="publishNew" value="flyerForm"
-        /><a href="${publishNew}" class="btn btn-primary btn-block fa fa-envelope"> Make Flyer</a
-          ></div
-      ></div><!-- END HEADER BUTTONS
-      --></c:if
+    ><div class="row page" id="page"
+      ><div class="col-xs-12 page"
         ><div class="row" id="flyer-body"
       ><div class="col-xs-12" id="body-title"
         ><h1 id="company"><c:out value="${selectedFlyer.company}"/></h1

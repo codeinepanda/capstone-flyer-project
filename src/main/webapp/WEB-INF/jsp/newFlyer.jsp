@@ -6,9 +6,9 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 		<link rel="stylesheet" type="text/css" href="css/flyer.css">
 	</head>
+	<c:import url="/WEB-INF/jsp/header.jsp"/>
 	<body>
-  <div class="container-fluid"
-       
+  <div class="container-fluid" 
     ><div class="row page" id="page">
       <div class="col-xs-12 page">
         <div class="row" id="Mainheader">

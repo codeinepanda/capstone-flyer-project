@@ -6,35 +6,15 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="css/register.css">
     </head>
-    <nav class="navbar navbar-inverse">
-  			<div class="container-fluid">
-   				<div class="navbar-header">
-      				<a class="navbar-brand" href="#">Flyers Corner</a>
-    			</div>
-    			<ul class="nav navbar-nav">
-    				<c:url var="toHome" value="/"/>
-     	 			<li><a href="${toHome}">Home</a></li>
-     	 			<c:url var="toSearch" value="/searchFlyers"/>
-      				<li class="active"><a href="${toSearch}">Search Flyers</a></li>
-      				<c:url var="toFeatured" value="/viewFeatured"/>
-      				<li><a href="${toFeatured}">View Featured Flyers</a></li> 
-    			</ul>
-    			<ul class="nav navbar-nav navbar-right">
-    			<c:url var="toRegistration" value="/registration"/>
-      				<li><a href="${toRegistration}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-      				<c:url var="toLogin" value="/loginPage"/>
-      				<li><a href="${toLogin}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-    			</ul>
-  			</div>
-		</nav>
+    <c:import url="/WEB-INF/jsp/header.jsp"/>
     <body>
         <div class="container-fluid"
              ><div class="row header"
                    ><div class="col-xs-12 header"
                          ><h1>User Preferences</h1
-                         ><h2>Fill in the fields below with any preferences you might have and we'll notify you whenever a new flyer
+                         ><h4>Fill in the fields below with any preferences you might have and we'll notify you whenever a new flyer
                          is created that matches your preferences. You can view a list of our most recent flyers that match your
-                         preferences any time you want, just by clicking "Recommended Flyers" in your navigation bar.</h2
+                         preferences any time you want, just by clicking "Recommended Flyers" in your navigation bar.</h4
                    ></div
              ></div
              ><div class="row form"
@@ -45,6 +25,7 @@
                                 <section id="company">
                                 	<label>Company Name: </label>
                                 	<select multiple name="company">
+                                		<option value="any" selected="selected">Any</option>
                                 		<c:forEach var="company" items="${companies}">
                                 			<option value="${company}"><c:out value="${company}"/></option>
                                 		</c:forEach>
@@ -53,8 +34,9 @@
                                 	<br>
                                 </section>
                                 <section id="author">
-                                	<label>Flyer Author: </label> <input type="text" name="author"/>
+                                	<label>Flyer Author: </label>
                                 	<select multiple name="author">
+                                		<option value="any" selected="selected">Any</option>
                                 		<c:forEach var="author" items="${authors}">
                                 			<option value="${author}"><c:out value="${author}"/></option>
                                 		</c:forEach>
@@ -67,13 +49,14 @@
                                 	<p>Select from the list of currently available categories. If you would like to add additional categories
                                 	to your preferences, you may. We will add flyers of that category to your recommendations as soon as they
                                 	become available.</p>
-                                	<select multiple name="category">
+                                	<select multiple name="categories">
+                                		<option value="any" selected="selected">Any</option>
                                 		<c:forEach var="category" items="${categories}">
                                 			<option value="${category}"><c:out value="${category}"/></option>
                                 		</c:forEach>
                                 	</select>
                                 	<br>
-                                	<label>Additional categories: </label> <input type="text" name="category">
+                                	<label>Additional categories: </label> <input type="text" name="categories">
                                 	<br>
                                 	<br>
                                 	<br>
