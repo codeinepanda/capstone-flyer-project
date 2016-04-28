@@ -2,10 +2,10 @@
 <c:if test="${not empty currentUser}">
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-xs-4 logo">
-        		<img src="">
+			<div class="col-xs-2 logo">
+        		<img class="img-circle img-responsive" src="img/logo.jpg">
         	</div>
-        	<div class="col-xs-6 title">
+        	<div class="col-xs-8 title">
         		<h1>FLYERS CORNER</h1>
            	 	<h4>Welcome back, <c:out value="${currentUser.firstName}"/>!</h4>
         	</div>
@@ -55,10 +55,10 @@
 <c:if test="${empty currentUser}">
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-xs-4 logo">
-        		<img src="">
+			<div class="col-xs-2 logo">
+        		<img class="img-circle img-responsive" src="img/logo.jpg">
         	</div>
-        	<div class="col-xs-8 title">
+        	<div class="col-xs-10 title">
         		<h1>FLYERS CORNER</h1>
            	 	<h4>Welcome!</h4>
         	</div>
