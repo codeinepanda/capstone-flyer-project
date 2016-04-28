@@ -11,47 +11,59 @@
         <div class="container-fluid"
              ><div class="row header"
                    ><div class="col-xs-12 header"
-                         ><h1>Create A New Flyer</h1
+                         ><h1>Search Flyers</h1
                    ></div
              ></div
              ><div class="row form"
                    ><div class="col-xs-12 form">
                         <div id="form_box">
+                        	<label>Search By: </label>
+                        	<br>
                    			<select name="searchBy" id="searchBy">
+                   				<option name="searchBy">{{Select One}}</option>
                    				<option name="searchBy" value="title">Flyer Name</option>
                    				<option name="searchBy" value="author">Flyer Author</option>
                    				<option name="searchBy" value="company">Company of Origin</option>
-                   				<option name="searchBy" value="tabs">Remaining Tabs</option>
                    				<option name="searchBy" value="category">Category</option>
                    			</select>
                    			<br>
                    			<br>
                             <form id="flyer_form" action="filterFlyers" method="POST">
-                                <section id="flyerName" hidden>
-                                	<label>Flyer Name: </label> <input type="text" name="flyerName"/>
+                            	<section id="flyerName" hidden>
+                                	<label>Flyer Name: </label> <input type="text" name="flyerName">
                                 	<br>
                                 	<br>
                                 </section>
                                 <section id="company" hidden>
-                                	<label>Company Name: </label> <input type="text" name="company"/>
+                                	<label>Company Name: </label>
+                                	<select name="company">
+                                		<option value="any" selected="selected">Any</option>
+                                		<c:forEach var="company" items="${companies}">
+                                			<option value="${company}"><c:out value="${company}"/></option>
+                                		</c:forEach>
+                                	</select>
                                 	<br>
                                 	<br>
                                 </section>
                                 <section id="userName" hidden>
-                                	<label>Flyer Author: </label> <input type="text" name="userName"/>
+                                	<label>Flyer Author: </label>
+                                	<select name="userName">
+                                		<option value="any" selected="selected">Any</option>
+                                		<c:forEach var="author" items="${authors}">
+                                			<option value="${author}"><c:out value="${author}"/></option>
+                                		</c:forEach>
+                                	</select>
                                 	<br>
                                 	<br>
                                 </section>
                                 <section id="category" hidden>
                                 	<label>Categories: </label>
-                                	<br>
-                                	<input type="checkbox" name="category" value="automobile"> Automobile <input type="checkbox" name="category" value="career"> Career <input type="checkbox" name="category" value="social"> Social
-                                	<input type="checkbox" name="category" value="food"> Food <input type="checkbox" name="category" value="forSale"> For Sale <input type="checkbox" name="category" value="entertainment"> Entertainment
-                                	<input type="checkbox" checked="checked" name="category" value=""> Any<br>
-                                	<br>
-                                	<br>
-                                	<br>
-                                </section>
+                                	<select name="categories">
+                                		<option value="any" selected="selected">Any</option>
+                                		<c:forEach var="category" items="${categories}">
+                                			<option value="${category}"><c:out value="${category}"/></option>
+                                		</c:forEach>
+                                	</select>
                                 <label>Order By: </label>
                                 <select name="orderBy">
                                 	<option value="popularity" selected="selected">Most Popular</option>

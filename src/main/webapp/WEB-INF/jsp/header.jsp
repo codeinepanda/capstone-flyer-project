@@ -31,7 +31,7 @@
 	     	 	<li><a href="${toHome}">Home</a></li>
 	     	 	<c:url var="toSearch" value="/searchFlyers"/>
 	      		<li><a href="${toSearch}">Search Flyers</a></li>
-	      		<c:url var="toFeatured" value="/viewFeatured"/>
+	      		<c:url var="toFeatured" value="/featured"/>
 	      		<li><a href="${toFeatured}">Today's Featured Flyers</a></li>
 	      		<c:url var="toRecommended" value="/recommendedFlyers"/>
 	      		<li><a href="${toRecommended}">Recommended Flyers</a></li>

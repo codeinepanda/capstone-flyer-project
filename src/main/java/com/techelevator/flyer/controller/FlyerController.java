@@ -102,7 +102,13 @@ public class FlyerController {
 		}
 		
 		@RequestMapping(path="/searchFlyers", method=RequestMethod.GET)
-		public String showFilterForm() {
+		public String showFilterForm(Map<String, Object> model) {
+			ArrayList<String> categories = flyerDAO.getAllUniqueValuesFromCategory();
+			ArrayList<String> authors = flyerDAO.getAllUniqueValuesFromFlyer("user_name");
+			ArrayList<String> companies = flyerDAO.getAllUniqueValuesFromFlyer("company");
+			model.put("categories", categories);
+			model.put("companies", companies);
+			model.put("authors", authors);
 			return "filterForm";
 		}
 		
@@ -183,7 +189,7 @@ public class FlyerController {
 						model.put("filteredFlyers", recommendedFlyers);
 						return "filteredFlyers";
 					} else {
-						return "featured";
+						return "redirect:/featured";
 					}
 				} else {
 					String message = "Sorry, you need need to be a registered member to get personalized recommendations";
