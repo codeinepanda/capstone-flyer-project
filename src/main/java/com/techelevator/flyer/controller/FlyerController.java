@@ -49,27 +49,18 @@ public class FlyerController {
 		
 		@RequestMapping(path="/", method=RequestMethod.GET)
 		public String showHomePage(Map<String, Object> model, HttpSession session) {
-			boolean notPreview = false;
-			ArrayList<Flyer> featuredFlyers = flyerDAO.getFeaturedFlyers();
-			ArrayList<Flyer> column1 = new ArrayList();
-			ArrayList<Flyer> column2 = new ArrayList();
-			for(int i = 0; i < featuredFlyers.size(); i++) {
-				if(i < featuredFlyers.size()/2) {
-					column1.add(featuredFlyers.get(i));
-				} else {
-					column2.add(featuredFlyers.get(i));
-				}
-			}
 			if(session.getAttribute("currentUser") != null) {
-				model.put("column1", column1);
-				model.put("column2", column2);
 				return "dashboard";
 			} else {
-				model.put("column1", column1);
-				model.put("column2", column2);
-				model.put("notPreview", notPreview);
 				return "index";
 			}
+		}
+		
+		@RequestMapping(path="/featured", method=RequestMethod.GET)
+		public String showFeaturedFlyers(Map<String, Object> model) {
+			ArrayList<Flyer> featuredFlyers = flyerDAO.getFeaturedFlyers();
+			model.put("filteredFlyers", featuredFlyers);
+			return "filteredFlyers";
 		}
 		
 		@RequestMapping(path="/previewSelected", method=RequestMethod.GET)
@@ -356,19 +347,7 @@ public class FlyerController {
 				session.invalidate();
 				System.out.println("User Found");
 				User currentUser = userDAO.returnUserByUsername(display);
-				ArrayList<Flyer> featuredFlyers = flyerDAO.getFeaturedFlyers();
-				ArrayList<Flyer> column1 = new ArrayList();
-				ArrayList<Flyer> column2 = new ArrayList();
-				for(int i = 0; i < featuredFlyers.size(); i++) {
-					if(i < featuredFlyers.size()/2) {
-						column1.add(featuredFlyers.get(i));
-					} else {
-						column2.add(featuredFlyers.get(i));
-					}
-				}
 				model.put("currentUser", currentUser);
-				model.put("column1", column1);
-				model.put("column2", column2);
 				return "dashboard";
 			}
 			System.out.println("User NOT Found!");
