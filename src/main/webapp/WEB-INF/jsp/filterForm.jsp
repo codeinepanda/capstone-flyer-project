@@ -64,6 +64,7 @@
                                 			<option value="${category}"><c:out value="${category}"/></option>
                                 		</c:forEach>
                                 	</select>
+                                </section>
                                 <label>Order By: </label>
                                 <select name="orderBy">
                                 	<option value="popularity" selected="selected">Most Popular</option>

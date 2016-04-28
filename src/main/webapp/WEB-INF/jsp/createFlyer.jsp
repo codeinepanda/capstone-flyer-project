@@ -37,7 +37,9 @@
                                 <br>
                                 <input type="checkbox" name="category" value="automobile"> Automobile <input type="checkbox" name="category" value="career"> Career <input type="checkbox" name="category" value="social"> Social
                                 <input type="checkbox" name="category" value="food"> Food <input type="checkbox" name="category" value="forSale"> For Sale <input type="checkbox" name="category" value="entertainment"> Entertainment<br>
-                                <label>Describe Your Flyer: </label> <textarea name="description" id="discription" form="flyer_form" rows="5" cols="100"></textarea>
+                                <label>Describe Your Flyer: </label>
+                                <br>
+                                <textarea name="description" id="discription" form="flyer_form" rows="5" style="width: 100%"></textarea>
                                 <br>
                                 <br>
                                 <input class="btn btn-primary" type="submit" value="Submit">

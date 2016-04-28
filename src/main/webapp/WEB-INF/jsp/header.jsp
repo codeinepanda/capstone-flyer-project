@@ -71,10 +71,11 @@
       		<a class="navbar-brand" href="#">Flyers Corner</a>
     	</div>
     	<ul class="nav navbar-nav">
-     	 	<li class="active"><a href="#">Home</a></li>
+    		<c:url var="toHome" value="/"/>
+     	 	<li class="active"><a href="${toHome}">Home</a></li>
      	 	<c:url var="toSearch" value="/searchFlyers"/>
       		<li><a href="${toSearch}">Search Flyers</a></li>
-      		<c:url var="toFeatured" value="/viewFeatured"/>
+      		<c:url var="toFeatured" value="/featured"/>
       		<li><a href="${toFeatured}">View Featured Flyers</a></li> 
     	</ul>
     	<ul class="nav navbar-nav navbar-right">
