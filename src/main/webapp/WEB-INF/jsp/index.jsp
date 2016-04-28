@@ -13,6 +13,7 @@
 		<div class="container-fluid"
 			><div class="row"
             	><div class="col-md-6 headers"
+            		><img src="img/placeholder.png"
             		><h1>Welcome to Flyers Corner!</h1
             		><h2>Login or Register to Get Started!</h2
         	   ></div

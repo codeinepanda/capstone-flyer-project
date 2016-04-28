@@ -3,9 +3,9 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-xs-4 logo">
-        		<img src="">
+			      <img src="img/placeholder.png">
         	</div>
-        	<div class="col-xs-6 title">
+        	<div class="col-xs-6 title headers">
         		<h1>FLYERS CORNER</h1>
            	 	<h4>Welcome back, <c:out value="${currentUser.firstName}"/>!</h4>
         	</div>

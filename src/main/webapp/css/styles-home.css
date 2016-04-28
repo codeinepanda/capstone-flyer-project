@@ -1,6 +1,6 @@
-* {
-    border: 1px solid black;
-}
+ * {
+<!--     border: 1px solid black; -->
+} 
 
 html {
 	min-height: 100%;
@@ -47,8 +47,14 @@ iframe {
 	text-align: center;
 }
 
-.headers {
+.headers h1{
 	font-family: 'Monofett', cursive;
+}
+
+.title h1 {
+	font-family: 'Monofett', cursive;
+	font-size: 12em;
+	color: red;
 }
 
 .rewards {
