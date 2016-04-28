@@ -52,12 +52,20 @@ CREATE TABLE category (
 	CONSTRAINT fk_flyer_flyer_id FOREIGN KEY (flyer_id) REFERENCES flyer(flyer_id)
 );
 
+CREATE SEQUENCE prefs_prefs_id
+  START WITH 1
+  INCREMENT BY 1
+  NO MAXVALUE
+  CACHE 1;
+
 CREATE TABLE prefs (
+	prefs_id integer DEFAULT nextval('prefs_prefs_id'),
 	user_name varchar(1000),
 	company varchar(1000),
 	author varchar(1000),
 	category varchar(256),
-	CONSTRAINT pk_user_name PRIMARY KEY (user_name) REFERENCES flyer_user(user_name)
-)
+	CONSTRAINT pk_user_name PRIMARY KEY (prefs_id),
+	CONSTRAINT fk_user_name FOREIGN KEY (user_name) REFERENCES flyer_user(user_name)
+);
 
 
