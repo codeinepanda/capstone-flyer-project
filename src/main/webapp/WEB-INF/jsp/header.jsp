@@ -33,8 +33,8 @@
 	      		<li><a href="${toSearch}">Search Flyers</a></li>
 	      		<c:url var="toFeatured" value="/viewFeatured"/>
 	      		<li><a href="${toFeatured}">Today's Featured Flyers</a></li>
-	      		<c:url var="toRecommended" value="/viewRecommended"/>
-	      		<li><a href="${toRecommended}">Your Recommended Flyers</a></li>
+	      		<c:url var="toRecommended" value="/recommendedFlyers"/>
+	      		<li><a href="${toRecommended}">Recommended Flyers</a></li>
 	      		<c:url var="toFlyerForm" value="/flyerForm"/>
 	      		<li><a href="${toFlyerForm}">Publish a Flyer</a></li> 
 	    	</ul>

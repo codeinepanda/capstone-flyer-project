@@ -33,7 +33,7 @@ import com.techelevator.model.User;
 import com.techelevator.model.UserDAO;
 
 @Controller
-@SessionAttributes({"currentUser", "userPreferences"})
+@SessionAttributes({"currentUser", "userPreferences", "points"})
 @Transactional
 public class FlyerController {
 		private UserDAO userDAO;
@@ -166,11 +166,17 @@ public class FlyerController {
 								 "which match your preferences, you can view them by selecting \"Recommended Flyers\" in " +
 								 "your navigation bar.";
 				model.put("message", message);
-				HashMap userPreferences = new HashMap();
-				userPreferences.put("author", author);
-				userPreferences.put("categories", category);
-				userPreferences.put("company", company);
-				session.setAttribute("userPreferences", userPreferences);
+				if(session.getAttribute("currentUser") != null) {
+					User currentUser = (User) session.getAttribute("currentUser");
+					HashMap<String, String> userPreferences;
+					if(userDAO.preferencesExist(currentUser.getUsername())) {
+						userDAO.updateUserPreferences(currentUser.getUsername(), company, author, category);
+					} else {
+					userDAO.createUserPreferences(currentUser.getUsername(), company, author, category);
+					}
+					userPreferences = userDAO.getUserPreferences(currentUser.getUsername());
+					session.setAttribute("userPreferences", userPreferences);
+				}
 				return "userPreferencesComplete";
 			}
 		
@@ -300,7 +306,7 @@ public class FlyerController {
 				ArrayList<Tab> unredeemedTabs = tabDAO.getTabsByHolder(currentUser.getUsername());
 				model.put("tabs", unredeemedTabs);
 				redemptionPoints = tabDAO.getNumAllowableTabs(currentUser.getUsername());
-				model.put("points", redemptionPoints);
+				session.setAttribute("points", redemptionPoints);
 				return "tabs";
 			} else {
 				message = "Sorry, it appears you don't have permission to view that resource. Please ensure that you're logged in " +

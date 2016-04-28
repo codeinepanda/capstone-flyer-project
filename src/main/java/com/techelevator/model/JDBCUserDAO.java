@@ -1,5 +1,7 @@
 package com.techelevator.model;
 
+import java.util.HashMap;
+
 import javax.sql.DataSource;
 
 import org.bouncycastle.util.encoders.Base64;
@@ -84,6 +86,51 @@ public class JDBCUserDAO implements UserDAO {
 				return false;
 			}
 			return true;
+		}
+
+
+		@Override
+		public void createUserPreferences(String user, String company, String author, String categories) {
+			String sqlCreatePreferences = "INSERT INTO prefs(user_name, company, author, category) VALUES(?,?,?,?);";
+			Object[] params = {user, company, author, categories};
+			jdbcTemplate.update(sqlCreatePreferences, params);
+		}
+
+
+		@Override
+		public void updateUserPreferences(String user, String company, String author, String categories) {
+			String sqlUpdatePreferences = "Update prefs " +
+										  "SET company = ?, author = ?, category = ? " +
+										  "WHERE user_name = ?;";
+			Object[] params = {company, author, categories, user};
+			jdbcTemplate.update(sqlUpdatePreferences, params);
+		}
+
+
+		@Override
+		public boolean preferencesExist(String username) {
+			String sqlHasPreferences = "SELECT COUNT(*) FROM prefs WHERE user_name = ?;";
+			SqlRowSet results = jdbcTemplate.queryForRowSet(sqlHasPreferences, username);
+			while(results.next()) {
+				if(results.getInt("count") > 0) {
+					return true;
+				}
+			}
+			return false;
+		}
+
+
+		@Override
+		public HashMap<String, String> getUserPreferences(String username) {
+			HashMap<String, String> userPrefs = new HashMap();
+			String sqlGetUserPrefs = "SELECT * FROM prefs WHERE user_name = ?;";
+			SqlRowSet results = jdbcTemplate.queryForRowSet(sqlGetUserPrefs, username);
+			while(results.next()) {
+				userPrefs.put("company", results.getString("company"));
+				userPrefs.put("author", results.getString("author"));
+				userPrefs.put("categories", results.getString("category"));
+			}
+			return userPrefs;
 		}
 
 }
