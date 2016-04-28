@@ -353,6 +353,8 @@ public class FlyerController {
 				session.invalidate();
 				System.out.println("User Found");
 				User currentUser = userDAO.returnUserByUsername(display);
+				int redemptionPoints = tabDAO.getNumAllowableTabs(currentUser.getUsername());
+				session.setAttribute("points", redemptionPoints);
 				model.put("currentUser", currentUser);
 				return "dashboard";
 			}

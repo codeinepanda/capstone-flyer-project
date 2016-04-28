@@ -6,12 +6,13 @@
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="css/styles-home.css"/>
+        <link href='https://fonts.googleapis.com/css?family=Monofett' rel='stylesheet' type='text/css'>
     </head>
     <c:import url="/WEB-INF/jsp/header.jsp"/>
     <body>
 		<div class="container-fluid"
 			><div class="row"
-            	><div class="col-md-6"
+            	><div class="col-md-6 headers"
             		><h1>Welcome to Flyers Corner!</h1
             		><h2>Login or Register to Get Started!</h2
         	   ></div
