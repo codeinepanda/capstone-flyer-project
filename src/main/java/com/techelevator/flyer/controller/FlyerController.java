@@ -33,7 +33,7 @@ import com.techelevator.model.User;
 import com.techelevator.model.UserDAO;
 
 @Controller
-@SessionAttributes({"currentUser", "userPreferences", "points"})
+@SessionAttributes({"currentUser", "userPreferences", "points", "newFlyerAlert"})
 @Transactional
 public class FlyerController {
 		private UserDAO userDAO;
@@ -50,6 +50,15 @@ public class FlyerController {
 		@RequestMapping(path="/", method=RequestMethod.GET)
 		public String showHomePage(Map<String, Object> model, HttpSession session) {
 			if(session.getAttribute("currentUser") != null) {
+/*				if(session.getAttribute("userPreferences") != null) {
+					User currentUser = (User) session.getAttribute("currentUser");
+					if(session.getAttribute("userPreferences") != null) {
+						HashMap<String, String> userPrefs = (HashMap<String, String>) session.getAttribute("userPreferences");
+						int newRecommendations = flyerDAO.getNumNewRecommendations(userPrefs.get("authors"), userPrefs.get("categories"), "", userPrefs.get("companies"), "create_date");
+						session.putValue("newFlyerAlert", newRecommendations);
+					}
+				}
+*/
 				return "dashboard";
 			} else {
 				return "index";
@@ -171,7 +180,7 @@ public class FlyerController {
 		
 		@RequestMapping(path="/createPreferences", method=RequestMethod.POST)
 			public String generateUserPreferences(Map<String, Object> model, HttpSession session, @RequestParam("author") String author,
-																	   @RequestParam("categories") String category,
+																	   @RequestParam("category") String category,
 																	   @RequestParam("company") String company) {
 				String message = "Great! Your preferences have been recorded. Whenever any new flyers are created " +
 								 "which match your preferences, you can view them by selecting \"Recommended Flyers\" in " +
@@ -181,11 +190,12 @@ public class FlyerController {
 					User currentUser = (User) session.getAttribute("currentUser");
 					HashMap<String, String> userPreferences;
 					if(userDAO.preferencesExist(currentUser.getUsername())) {
-						userDAO.updateUserPreferences(currentUser.getUsername(), company.toUpperCase(), author.toUpperCase(), category.toUpperCase());
+						userDAO.updateUserPreferences(currentUser.getUsername(), company.toUpperCase(), author.toUpperCase(), category);
 					} else {
-					userDAO.createUserPreferences(currentUser.getUsername(), company.toUpperCase(), author.toUpperCase(), category.toUpperCase());
+						userDAO.createUserPreferences(currentUser.getUsername(), company.toUpperCase(), author.toUpperCase(), category);
 					}
-					userPreferences = userDAO.getUserPreferences(currentUser.getUsername());
+					userPreferences = (HashMap<String, String>) userDAO.getUserPreferences(currentUser.getUsername());
+					
 					session.setAttribute("userPreferences", userPreferences);
 				}
 				return "userPreferencesComplete";
@@ -398,10 +408,11 @@ public class FlyerController {
 																		  @RequestParam("numTabs") int tabs,
 																		  @RequestParam("category") String cat,
 																		  @RequestParam("description") String info) {
+			
+			User currentUser = (User) session.getAttribute("currentUser");
 			LocalDate startDate = start.toLocalDate();
 			LocalDate endDate = expire.toLocalDate();
 			LocalDate createDate = LocalDate.now();
-			User currentUser = (User) session.getAttribute("currentUser");
 			String[] categories = cat.split(Pattern.quote(","));
 			Flyer newFlyer = new Flyer(currentUser.getUsername(), company, flyer, startDate, endDate, tabs, info, false);
 			for(String category : categories) {
@@ -437,6 +448,12 @@ public class FlyerController {
 			if(currentUser.getUsername().equals(newFlyer.getUserName())) {
 				System.out.println("Usernames match");
 				flyerDAO.createFlyer(newFlyer);
+/*				if(session.getAttribute("userPreferences") != null) {
+					HashMap<String, String> userPrefs = (HashMap<String, String>) session.getAttribute("userPreferences");
+					int newRecommendations = flyerDAO.getNumNewRecommendations(userPrefs.get("authors"), userPrefs.get("categories"), "", userPrefs.get("companies"), "create_date");
+					session.putValue("newFlyerAlert", newRecommendations);
+				}
+*/				
 				return "publishComplete";
 			} else {
 				model.put("message", message);

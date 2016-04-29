@@ -27,4 +27,6 @@ public interface FlyerDAO {
 	public ArrayList<String> getAllUniqueValuesFromFlyer(String column);
 	
 	public ArrayList<String> getAllUniqueValuesFromCategory();
+
+	int getNumNewRecommendations(String userName, String category, String flyerName, String company, String order);
 }

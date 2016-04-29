@@ -50,7 +50,7 @@
                                 	<p>Select from the list of currently available categories. If you would like to add additional categories
                                 	to your preferences, you may. We will add flyers of that category to your recommendations as soon as they
                                 	become available.</p>
-                                	<select multiple name="categories">
+                                	<select multiple name="category">
                                 		<option value="" selected="selected">Any</option>
                                 		<c:forEach var="category" items="${categories}">
                                 			<option value="${category}"><c:out value="${category}"/></option>

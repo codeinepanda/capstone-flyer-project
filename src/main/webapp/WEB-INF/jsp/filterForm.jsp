@@ -38,7 +38,7 @@
                                 <section id="company" hidden>
                                 	<label>Company Name: </label>
                                 	<select name="company">
-                                		<option value="any" selected="selected">Any</option>
+                                		<option value="" selected="selected">Any</option>
                                 		<c:forEach var="company" items="${companies}">
                                 			<option value="${company}"><c:out value="${company}"/></option>
                                 		</c:forEach>
@@ -49,7 +49,7 @@
                                 <section id="userName" hidden>
                                 	<label>Flyer Author: </label>
                                 	<select name="userName">
-                                		<option value="any" selected="selected">Any</option>
+                                		<option value="" selected="selected">Any</option>
                                 		<c:forEach var="author" items="${authors}">
                                 			<option value="${author}"><c:out value="${author}"/></option>
                                 		</c:forEach>
@@ -59,8 +59,8 @@
                                 </section>
                                 <section id="category" hidden>
                                 	<label>Categories: </label>
-                                	<select name="categories">
-                                		<option value="any" selected="selected">Any</option>
+                                	<select name="category">
+                                		<option value="" selected="selected">Any</option>
                                 		<c:forEach var="category" items="${categories}">
                                 			<option value="${category}"><c:out value="${category}"/></option>
                                 		</c:forEach>

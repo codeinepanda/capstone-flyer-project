@@ -5,17 +5,18 @@
         <title>Login</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="css/register.css">
+        <link rel="stylesheet" type="text/css" href="css/headerStyle.css">
     </head>
     <c:import url="/WEB-INF/jsp/header.jsp"/>
     <body>
         <div class="container-fluid"
              ><div class="row header"
-                   ><div class="col-xs-12 header"
+                   ><div class="col-md-12 body-header"
                          ><h1>Log Into Your Flyers Corner Account</h1
                    ></div
              ></div
              ><div class="row form"
-                   ><div class="col-xs-12 form">
+                   ><div class="col-md-12 form">
                         <div id="form_box">
                             <form id="login_form" method="POST" action="login">
                                 <label>Username: </label> <input type="text" name="username" id="username"/>

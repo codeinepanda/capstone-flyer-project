@@ -69,14 +69,38 @@ public class JDBCFlyerDAO implements FlyerDAO {
 
 	@Override
 	public ArrayList<Flyer> getFlyersFiltered(String userName,String category, String flyerName, String company, String order) {
+		System.out.println("Category variable contains: " + category);
 		String[] categories = category.split(Pattern.quote(","));
+		String firstCategory = "";
+		if(categories.length >= 1) {
+			firstCategory = categories[0];
+		} else {
+			firstCategory = category;
+		}
+		String conjunction;
+		String[] arguments = {userName, flyerName, company, firstCategory};
+		int present = 0;
+		for(String arg : arguments) {
+			if(!arg.equals("")) {
+				present++;
+			}
+		}
+		if(present > 1) {
+			conjunction = "OR ";
+		} else {
+			conjunction = "AND ";
+		}
 		ArrayList<Flyer> filteredFlyersList = new ArrayList<>();
 		String sqlGetFilteredFlyerList = "SELECT * FROM flyer ";
-		if(!categories[0].equals("") && order.equals("(SELECT COUNT(*) FROM tab WHERE tab.flyer_id = flyer.flyer_id)")) {
+		if(firstCategory.equals(",") && order.equals("(SELECT COUNT(*) FROM tab WHERE tab.flyer_id = flyer.flyer_id)")) {
+			sqlGetFilteredFlyerList += "JOIN tab ON flyer.flyer_id = tab.flyer_id WHERE ";
+		} else if(firstCategory.equals(",")) {
+			sqlGetFilteredFlyerList += "WHERE ";
+		} else if(!firstCategory.equals("") && order.equals("(SELECT COUNT(*) FROM tab WHERE tab.flyer_id = flyer.flyer_id)")) {
 			sqlGetFilteredFlyerList += "JOIN tab ON flyer.flyer_id = tab.flyer_id JOIN category ON flyer.flyer_id = category.flyer_id WHERE ";
 			if(categories.length == 1) {
-				sqlGetFilteredFlyerList += "category.category = '" + categories[0] + "' ";
-				System.out.println(categories[0]);
+				sqlGetFilteredFlyerList += "category.category = '" + firstCategory + "' ";
+				System.out.println(firstCategory);
 			} else {
 				for(int i = 0; i < categories.length -1; i++) {
 					System.out.println("Category i: " + categories[i]);
@@ -84,19 +108,25 @@ public class JDBCFlyerDAO implements FlyerDAO {
 				}
 				sqlGetFilteredFlyerList += "category.category = '" + categories[categories.length - 1] + "' ";
 			}
-		} else if(!categories[0].equals("")) {
+		} else if(!firstCategory.equals("")) {
 			sqlGetFilteredFlyerList += "JOIN category ON flyer.flyer_id = category.flyer_id WHERE ";
 			if(categories.length == 1) {
-				sqlGetFilteredFlyerList += "category.category = '" + categories[0] + "' ";
-				System.out.println(categories[0]);
+				sqlGetFilteredFlyerList += "category.category = '" + firstCategory + "' ";
+				System.out.println(firstCategory);
 			} else {
 				for(int i = 0; i < categories.length -1; i++) {
 					System.out.println("Category i: " + categories[i]);
 					sqlGetFilteredFlyerList += "category.category = '" + categories[i] + "' OR ";
 				}
-				sqlGetFilteredFlyerList += "category.category = '" + categories[categories.length - 1] + "' ";
+				String insert = "";
+				if(categories.length <= 1) {
+					insert = firstCategory;
+				} else {
+					insert = categories[categories.length - 1];
+				}
+				sqlGetFilteredFlyerList += "category.category = '" + insert + "' ";
 			}
-			if(!categories[0].equals("") && !userName.equals("") || !flyerName.equals("") || !company.equals("")) {
+			if(!firstCategory.equals("") && !userName.equals("") || !flyerName.equals("") || !company.equals("")) {
 				sqlGetFilteredFlyerList += " OR ";
 			}
 		} else if(order.equals("(SELECT COUNT(*) FROM tab WHERE tab.flyer_id = flyer.flyer_id)")){
@@ -106,18 +136,18 @@ public class JDBCFlyerDAO implements FlyerDAO {
 		}
 		if(!userName.equals("")) {
 			sqlGetFilteredFlyerList += "UPPER(flyer.user_name) = '" + userName + "' ";
-			if(!flyerName.equals("") || !company.equals("")) {
-				sqlGetFilteredFlyerList += " OR ";
-			}
+		} else if(userName.equals("")) {
+			sqlGetFilteredFlyerList += "flyer.user_name IS NOT NULL ";
 		}
 		if(!flyerName.equals("")) {
-			sqlGetFilteredFlyerList += "UPPER(flyer.flyer_name) = '" + flyerName + "' ";
-			if(!company.equals("")) {
-				sqlGetFilteredFlyerList += " OR ";
-			}
+			sqlGetFilteredFlyerList += conjunction + "UPPER(flyer.flyer_name) = '" + flyerName + "' ";
+		} else if(flyerName.equals("")) {
+			sqlGetFilteredFlyerList += " AND flyer.flyer_name IS NOT NULL ";
 		}
 		if(!company.equals("")) {
-			sqlGetFilteredFlyerList += "UPPER(flyer.company) = '" + company + "' ";
+			sqlGetFilteredFlyerList += conjunction + "UPPER(flyer.company) = '" + company + "' ";
+		} else if(company.equals("")) {
+			sqlGetFilteredFlyerList += "AND flyer.company IS NOT NULL ";
 		}
 		sqlGetFilteredFlyerList += "ORDER BY " + order + ";";
 		System.out.println("full sql statement: " + sqlGetFilteredFlyerList);
@@ -127,6 +157,100 @@ public class JDBCFlyerDAO implements FlyerDAO {
 			filteredFlyersList.add(getFlyerFromDB(results));
 		}
 		return filteredFlyersList; 
+	}
+	
+	@Override
+	public int getNumNewRecommendations(String userName,String category, String flyerName, String company, String order) {
+		int newRecommendations = 0;
+		
+		System.out.println("Category variable contains: " + category);
+		String[] categories = category.split(Pattern.quote(","));
+		String firstCategory = "";
+		if(categories.length >= 1) {
+			firstCategory = categories[0];
+		} else {
+			firstCategory = category;
+		}
+		String conjunction;
+		String[] arguments = {userName, flyerName, company, firstCategory};
+		int present = 0;
+		for(String arg : arguments) {
+			if(!arg.equals("")) {
+				present++;
+			}
+		}
+		if(present > 1) {
+			conjunction = "OR ";
+		} else {
+			conjunction = "AND ";
+		}
+		
+		String sqlGetFilteredFlyerList = "SELECT COUNT(*) FROM flyer ";
+		if(firstCategory.equals(",") && order.equals("(SELECT COUNT(*) FROM tab WHERE tab.flyer_id = flyer.flyer_id)")) {
+			sqlGetFilteredFlyerList += "JOIN tab ON flyer.flyer_id = tab.flyer_id WHERE ";
+		} else if(firstCategory.equals(",")) {
+			sqlGetFilteredFlyerList += "WHERE ";
+		} else if(!firstCategory.equals("") && order.equals("(SELECT COUNT(*) FROM tab WHERE tab.flyer_id = flyer.flyer_id)")) {
+			sqlGetFilteredFlyerList += "JOIN tab ON flyer.flyer_id = tab.flyer_id JOIN category ON flyer.flyer_id = category.flyer_id WHERE ";
+			if(categories.length == 1) {
+				sqlGetFilteredFlyerList += "category.category = '" + firstCategory + "' ";
+				System.out.println(firstCategory);
+			} else {
+				for(int i = 0; i < categories.length -1; i++) {
+					System.out.println("Category i: " + categories[i]);
+					sqlGetFilteredFlyerList += "category.category = '" + categories[i] + "' OR ";
+				}
+				sqlGetFilteredFlyerList += "category.category = '" + categories[categories.length - 1] + "' ";
+			}
+		} else if(!firstCategory.equals("")) {
+			sqlGetFilteredFlyerList += "JOIN category ON flyer.flyer_id = category.flyer_id WHERE ";
+			if(categories.length == 1) {
+				sqlGetFilteredFlyerList += "category.category = '" + firstCategory + "' ";
+				System.out.println(firstCategory);
+			} else {
+				for(int i = 0; i < categories.length -1; i++) {
+					System.out.println("Category i: " + categories[i]);
+					sqlGetFilteredFlyerList += "category.category = '" + categories[i] + "' OR ";
+				}
+				String insert = "";
+				if(categories.length <= 1) {
+					insert = firstCategory;
+				} else {
+					insert = categories[categories.length - 1];
+				}
+				sqlGetFilteredFlyerList += "category.category = '" + insert + "' ";
+			}
+			if(!firstCategory.equals("") && !userName.equals("") || !flyerName.equals("") || !company.equals("")) {
+				sqlGetFilteredFlyerList += " OR ";
+			}
+		} else if(order.equals("(SELECT COUNT(*) FROM tab WHERE tab.flyer_id = flyer.flyer_id)")){
+			sqlGetFilteredFlyerList += "JOIN tab ON flyer.flyer_id = tab.flyer_id WHERE ";
+		} else {
+			sqlGetFilteredFlyerList += "WHERE ";
+		}
+		if(!userName.equals("")) {
+			sqlGetFilteredFlyerList += "UPPER(flyer.user_name) = '" + userName + "' ";
+		} else if(userName.equals("")) {
+			sqlGetFilteredFlyerList += "flyer.user_name IS NOT NULL ";
+		}
+		if(!flyerName.equals("")) {
+			sqlGetFilteredFlyerList += conjunction + "UPPER(flyer.flyer_name) = '" + flyerName + "' ";
+		} else if(flyerName.equals("")) {
+			sqlGetFilteredFlyerList += " AND flyer.flyer_name IS NOT NULL ";
+		}
+		if(!company.equals("")) {
+			sqlGetFilteredFlyerList += conjunction + "UPPER(flyer.company) = '" + company + "' ";
+		} else if(company.equals("")) {
+			sqlGetFilteredFlyerList += "AND flyer.company IS NOT NULL ";
+		}
+		sqlGetFilteredFlyerList += "ORDER BY " + order + ";";
+		System.out.println("full sql statement: " + sqlGetFilteredFlyerList);
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlGetFilteredFlyerList);
+		while (results.next())
+		{
+			newRecommendations = (results.getInt("count"));
+		}
+		return newRecommendations; 
 	}
 
 	@Override
