@@ -12,9 +12,9 @@
 	<body>
 		<div class="container-fluid"
 			><div class="row"
-            	><div class="col-md-6"
+            	><div class="col-md-12 content"
             		><h1>Welcome to Flyers Corner!</h1
-            		><h2>Login or Register to Get Started!</h2
+            		><h2>We're Glad to Have You Back!</h2
         	   ></div
            ></div
      ></div>

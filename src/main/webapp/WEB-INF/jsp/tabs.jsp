@@ -4,9 +4,9 @@
     <head>
         <title>Your Tabs</title>
         <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-        
-        <link rel="stylesheet" type="text/css" href="css/styles-home.css"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">      
+        <link rel="stylesheet" type="text/css" href="css/headerStyle.css"/>
+        <link rel="stylesheet" type="text/css" href="css/tabs.css"/>
     </head>
     <c:import url="/WEB-INF/jsp/header.jsp"/>
     <body>
@@ -15,18 +15,17 @@
                 ><div class="col-xs-12 featured"
                     ><c:forEach var="tab" items="${tabs}" begin="0" step="1"
                     ><div class="row featured"
-                    	><div class="col-xs-12 featured"
-                    		><div class="row" id="titleRow"
-                    			><div class="col-xs-12"
-	                	   ><h4><c:out value="${tab.flyerName}"/></h4
-	                	   		></div><!-- END TAB TITLE COLUMN
-	                	 --></div><!-- END TAB TITLE ROW
-	                	 --><div class="row" id="redeem"
+                    	><div class="col-xs-12 featured tab"
+                    	><c:url var="redeemTab" value="/redeemTab"
+                    		><c:param name="flyerID" value="${tab.flyerID}"
+	                   /></c:url
+                    	><div class="ticket"><span class="circle"></span><a href="${redeemTab}">Redeem</a></div
+	                	 ><div class="row" id="redeem"
                     			><div class="col-xs-12" id="redeemBtn"
                     				><c:url var="redeemTab" value="/redeemTab"
                     					><c:param name="flyerID" value="${tab.flyerID}"
 	                	   	   	   /></c:url
-	                	   			><a href="${redeemTab}" class="btn btn-default"><strong>Redeem Tab</strong></a
+	                	   			><h3 id="flyer-name"><strong><c:out value="${tab.flyerName}"/></strong></h3
 	                	   		></div><!-- END TAB REDEEM COLUMN
 	                	 --></div><!-- END TAB REDEEM ROW
 	                	 --><div class="row" id="timeTable"

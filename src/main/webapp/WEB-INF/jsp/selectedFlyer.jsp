@@ -6,13 +6,13 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 		<link rel="stylesheet" type="text/css" href="css/flyer.css">
 	</head>
-	<c:if test="${notPreview}">
-		<c:import url="/WEB-INF/jsp/header.jsp"/>
-	</c:if>
 	<body>
-  <div class="container-fluid"
+  <div class="container-fluid" id="doc-container"
     ><div class="row page" id="page"
       ><div class="col-xs-12 page"
+      ><c:if test="${notPreview}">
+		<c:import url="/WEB-INF/jsp/header.jsp"/>
+	  </c:if
         ><div class="row" id="flyer-body"
       ><div class="col-xs-12" id="body-title"
         ><h1 id="company"><c:out value="${selectedFlyer.company}"/></h1

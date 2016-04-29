@@ -20,6 +20,27 @@ body {
 	height: 20%;
 }
 
+#header {
+	background-color: #205487;
+}
+
+#header h1, #header h4, #header h3, #header p {
+	color: white;
+}
+
+.points p {
+	font-size: 2em;
+	border: solid 1px white;
+}
+
+.points, .content {
+	text-align: center;
+}
+
+.content {
+	border: 2px solid black;
+}
+
 .btn {
 	margin: 0;
 	padding: 0;
@@ -36,6 +57,8 @@ body {
 
 iframe {
 	margin: auto;
+	overflow: hidden;
+	border: none;
 }
 
 .featured {
@@ -45,16 +68,6 @@ iframe {
 
 .btn-info {
 	text-align: center;
-}
-
-.headers h1{
-	font-family: 'Monofett', cursive;
-}
-
-.title h1 {
-	font-family: 'Monofett', cursive;
-	font-size: 12em;
-	color: red;
 }
 
 .rewards {

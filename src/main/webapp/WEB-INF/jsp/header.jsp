@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:if test="${not empty currentUser}">
 	<div class="container-fluid">
-		<div class="row">
+		<div class="row" id="header">
 			<div class="col-xs-2 logo">
         		<img class="img-circle img-responsive" src="img/logo.jpg">
         	</div>
@@ -21,7 +21,7 @@
 		</div>
 	</div>
 	
-	<nav class="navbar navbar-inverse">
+	<nav class="navbar navbar-inverse bs-docs-nav">
 		<div class="container-fluid">
 	   		<div class="navbar-header">
 	      		<a class="navbar-brand" href="#">Flyers Corner</a>
@@ -39,7 +39,7 @@
 	      		<li><a href="${toFlyerForm}">Publish a Flyer</a></li> 
 	    	</ul>
 	    	<ul class="nav navbar-nav navbar-right">
-	    		<c:url var="toTabs" value="/userFlyers"/>
+	    		<c:url var="toUserFlyers" value="/userFlyers"/>
 	      		<li><a href="${toUserFlyers}"><span class="glyphicons glyphicons-list-alt"></span> Your Published Flyers</a></li>
 	    		<c:url var="toTabs" value="/viewTabs"/>
 	      		<li><a href="${toTabs}"><span class="glyphicons glyphicons-ticket"></span> Your Tabs</a></li>
@@ -54,7 +54,7 @@
 
 <c:if test="${empty currentUser}">
 	<div class="container-fluid">
-		<div class="row">
+		<div class="row" id="header">
 			<div class="col-xs-2 logo">
         		<img class="img-circle img-responsive" src="img/logo.jpg">
         	</div>
@@ -65,7 +65,7 @@
 		</div>
 	</div>
         	
-	<nav class="navbar navbar-inverse">
+	<nav class="navbar navbar-inverse bs-docs-nav">
 	<div class="container-fluid">
    		<div class="navbar-header">
       		<a class="navbar-brand" href="#">Flyers Corner</a>

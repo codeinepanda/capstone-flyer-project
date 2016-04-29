@@ -96,6 +96,9 @@ public class JDBCFlyerDAO implements FlyerDAO {
 				}
 				sqlGetFilteredFlyerList += "category.category = '" + categories[categories.length - 1] + "' ";
 			}
+			if(!categories[0].equals("") && !userName.equals("") || !flyerName.equals("") || !company.equals("")) {
+				sqlGetFilteredFlyerList += " OR ";
+			}
 		} else if(order.equals("(SELECT COUNT(*) FROM tab WHERE tab.flyer_id = flyer.flyer_id)")){
 			sqlGetFilteredFlyerList += "JOIN tab ON flyer.flyer_id = tab.flyer_id WHERE ";
 		} else {
@@ -103,9 +106,17 @@ public class JDBCFlyerDAO implements FlyerDAO {
 		}
 		if(!userName.equals("")) {
 			sqlGetFilteredFlyerList += "UPPER(flyer.user_name) = '" + userName + "' ";
-		} else if(!flyerName.equals("")) {
+			if(!flyerName.equals("") || !company.equals("")) {
+				sqlGetFilteredFlyerList += " OR ";
+			}
+		}
+		if(!flyerName.equals("")) {
 			sqlGetFilteredFlyerList += "UPPER(flyer.flyer_name) = '" + flyerName + "' ";
-		} else if(!company.equals("")) {
+			if(!company.equals("")) {
+				sqlGetFilteredFlyerList += " OR ";
+			}
+		}
+		if(!company.equals("")) {
 			sqlGetFilteredFlyerList += "UPPER(flyer.company) = '" + company + "' ";
 		}
 		sqlGetFilteredFlyerList += "ORDER BY " + order + ";";

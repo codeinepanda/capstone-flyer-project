@@ -101,6 +101,20 @@ public class FlyerController {
 			return "selectedFlyer";
 		}
 		
+		@RequestMapping(path="/userFlyers", method=RequestMethod.GET)
+		public String showUserCreatedFlyers(Map<String, Object> model, HttpSession session) {
+			if(session.getAttribute("currentUser") != null) {
+				User currentUser = (User) session.getAttribute("currentUser");
+				ArrayList<Flyer> userFlyers = (ArrayList<Flyer>) flyerDAO.getAllFlyersByCreator(currentUser.getUsername());
+				model.put("filteredFlyers", userFlyers);
+				return "filteredFlyers";
+			} else {
+				String message = "Sorry, but you need to be a registered member to publish flyers. Ensure that you are logged in and try again.";
+				model.put("message", message);
+				return "permissionsError";
+			}
+		}
+		
 		@RequestMapping(path="/searchFlyers", method=RequestMethod.GET)
 		public String showFilterForm(Map<String, Object> model) {
 			ArrayList<String> categories = flyerDAO.getAllUniqueValuesFromCategory();
@@ -167,9 +181,9 @@ public class FlyerController {
 					User currentUser = (User) session.getAttribute("currentUser");
 					HashMap<String, String> userPreferences;
 					if(userDAO.preferencesExist(currentUser.getUsername())) {
-						userDAO.updateUserPreferences(currentUser.getUsername(), company, author, category);
+						userDAO.updateUserPreferences(currentUser.getUsername(), company.toUpperCase(), author.toUpperCase(), category.toUpperCase());
 					} else {
-					userDAO.createUserPreferences(currentUser.getUsername(), company, author, category);
+					userDAO.createUserPreferences(currentUser.getUsername(), company.toUpperCase(), author.toUpperCase(), category.toUpperCase());
 					}
 					userPreferences = userDAO.getUserPreferences(currentUser.getUsername());
 					session.setAttribute("userPreferences", userPreferences);
@@ -303,6 +317,7 @@ public class FlyerController {
 				ArrayList<Tab> unredeemedTabs = tabDAO.getTabsByHolder(currentUser.getUsername());
 				model.put("tabs", unredeemedTabs);
 				redemptionPoints = tabDAO.getNumAllowableTabs(currentUser.getUsername());
+				model.remove("points");
 				session.setAttribute("points", redemptionPoints);
 				return "tabs";
 			} else {
@@ -354,7 +369,7 @@ public class FlyerController {
 				System.out.println("User Found");
 				User currentUser = userDAO.returnUserByUsername(display);
 				int redemptionPoints = tabDAO.getNumAllowableTabs(currentUser.getUsername());
-				session.setAttribute("points", redemptionPoints);
+				model.put("points", redemptionPoints);
 				model.put("currentUser", currentUser);
 				return "dashboard";
 			}

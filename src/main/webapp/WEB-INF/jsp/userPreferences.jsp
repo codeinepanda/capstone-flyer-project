@@ -5,6 +5,7 @@
         <title>User Preferences</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="css/register.css">
+        <link rel="stylesheet" type="text/css" href="css/headerStyle.css"/>
     </head>
     <c:import url="/WEB-INF/jsp/header.jsp"/>
     <body>
@@ -25,7 +26,7 @@
                                 <section id="company">
                                 	<label>Company Name: </label>
                                 	<select multiple name="company">
-                                		<option value="any" selected="selected">Any</option>
+                                		<option value="" selected="selected">Any</option>
                                 		<c:forEach var="company" items="${companies}">
                                 			<option value="${company}"><c:out value="${company}"/></option>
                                 		</c:forEach>
@@ -36,7 +37,7 @@
                                 <section id="author">
                                 	<label>Flyer Author: </label>
                                 	<select multiple name="author">
-                                		<option value="any" selected="selected">Any</option>
+                                		<option value="" selected="selected">Any</option>
                                 		<c:forEach var="author" items="${authors}">
                                 			<option value="${author}"><c:out value="${author}"/></option>
                                 		</c:forEach>
@@ -50,7 +51,7 @@
                                 	to your preferences, you may. We will add flyers of that category to your recommendations as soon as they
                                 	become available.</p>
                                 	<select multiple name="categories">
-                                		<option value="any" selected="selected">Any</option>
+                                		<option value="" selected="selected">Any</option>
                                 		<c:forEach var="category" items="${categories}">
                                 			<option value="${category}"><c:out value="${category}"/></option>
                                 		</c:forEach>

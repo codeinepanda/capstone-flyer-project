@@ -5,8 +5,8 @@
         <title>Search Results</title>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-        
         <link rel="stylesheet" type="text/css" href="css/styles-home.css"/>
+        <link rel="stylesheet" type="text/css" href="css/headerStyle.css"/>
     </head>
     <c:import url="/WEB-INF/jsp/header.jsp"/>
     <body>
@@ -42,8 +42,8 @@
 	                	   		/><c:param name="category" value="${flyer.categories}"
 	                	   		/><c:param name="isRetired" value="${flyer.retired}"
 	                	   /></c:url
-	                	   ><a href="${navigateTo}" class="btn btn-block btn-info">View This Flyer</a
-	                	   ><iframe src="${flyerPreview}" width="650" height="650"
+	                	   ><a href="${navigateTo}" class="btn btn-info" style="width: 950px">View This Flyer</a
+	                	   ><iframe src="${flyerPreview}" scrolling="no" width="1000" height="550"
 	                	   ></iframe
                 		></div
                    ></div
